@@ -13,33 +13,36 @@ const { supabaseUrl, supabaseKey } = supabaseConfig;
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-export const fetchUsersData = createAsyncThunk("data/getUsers", async () => {
-	const { data } = await supabase.from("users").select();
-	console.log(data);
-	return data;
-});
+export const fetchFriendsData = createAsyncThunk(
+	"data/getFriends",
+	async () => {
+		const { data } = await supabase.from("friends").select();
+		console.log(data);
+		return data;
+	}
+);
 
-export const usersSlice = createSlice({
-	name: "users",
+export const friendsSlice = createSlice({
+	name: "friends",
 	initialState,
 	reducers: {
-		setSelectedUser: (state, action) => {
+		setSelectedFriend: (state, action) => {
 			state.selectedPlayer = action.payload;
 		},
 	},
 	extraReducers: {
-		[fetchUsersData.pending]: (state) => {
+		[fetchFriendsData.pending]: (state) => {
 			state.loading = true;
 		},
-		[fetchUsersData.fulfilled]: (state, { payload }) => {
+		[fetchFriendsData.fulfilled]: (state, { payload }) => {
 			state.loading = false;
 			console.log(payload);
 			state.value = payload;
 		},
-		[fetchUsersData.rejected]: (state) => {
+		[fetchFriendsData.rejected]: (state) => {
 			state.loading = false;
 		},
 	},
 });
 
-export default usersSlice.reducer;
+export default friendsSlice.reducer;

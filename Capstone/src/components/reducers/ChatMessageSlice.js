@@ -13,33 +13,36 @@ const { supabaseUrl, supabaseKey } = supabaseConfig;
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-export const fetchUsersData = createAsyncThunk("data/getUsers", async () => {
-	const { data } = await supabase.from("users").select();
-	console.log(data);
-	return data;
-});
+export const fetchMessageData = createAsyncThunk(
+	"data/getMessages",
+	async () => {
+		const { data } = await supabase.from("ChatMessage").select();
+		console.log(data);
+		return data;
+	}
+);
 
-export const usersSlice = createSlice({
-	name: "users",
+export const ChatMessageSlice = createSlice({
+	name: "ChatMessage",
 	initialState,
 	reducers: {
-		setSelectedUser: (state, action) => {
+		setSelectedFriend: (state, action) => {
 			state.selectedPlayer = action.payload;
 		},
 	},
 	extraReducers: {
-		[fetchUsersData.pending]: (state) => {
+		[fetchMessageData.pending]: (state) => {
 			state.loading = true;
 		},
-		[fetchUsersData.fulfilled]: (state, { payload }) => {
+		[fetchMessageData.fulfilled]: (state, { payload }) => {
 			state.loading = false;
 			console.log(payload);
 			state.value = payload;
 		},
-		[fetchUsersData.rejected]: (state) => {
+		[fetchMessageData.rejected]: (state) => {
 			state.loading = false;
 		},
 	},
 });
 
-export default usersSlice.reducer;
+export default ChatMessageSlice.reducer;
