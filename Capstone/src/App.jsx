@@ -11,16 +11,16 @@ import LinkedGames from "./components/linkedGames";
 // import { useState, useEffect } from "react";
 
 function App() {
-	return (
-		<>
-			<Navbar />
-			<Users />
-			<Friends />
-			<Games />
-			<LinkedGames />
-			<ChatMessage />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      <Users />
+      <Friends />
+      <Games />
+      <LinkedGames />
+      <ChatMessage />
+    </>
+  );
 }
 
 export default App;
