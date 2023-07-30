@@ -4,6 +4,7 @@ import "./App.css";
 import ChatMessage from "./components/ChatMessage";
 import Friends from "./components/Friends";
 import Games from "./components/Games";
+import MaxsTestComponent from "./components/MaxsTestComponent";
 import Navbar from "./components/Navbar";
 import Users from "./components/Users";
 import LinkedGames from "./components/linkedGames";
@@ -19,6 +20,7 @@ function App() {
       <Games />
       <LinkedGames />
       <ChatMessage />
+      <MaxsTestComponent />
     </>
   );
 }
