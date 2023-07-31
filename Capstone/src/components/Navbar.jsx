@@ -1,4 +1,3 @@
-import React from "react";
 import avatar from "../assets/icons/image0copy.png";
 import ps5Icon from "../assets/icons/ps5.png";
 import homeIcon from "../assets/icons/home.png";
@@ -31,3 +30,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
+};
+
+export default Navbar;
