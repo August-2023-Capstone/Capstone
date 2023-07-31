@@ -1,6 +1,7 @@
 /** @format */
 
 import "./App.css";
+import AvatarModal from "./components/AvatarModal";
 import ChatMessage from "./components/ChatMessage";
 import CreateUserForm from "./components/CreateUserForm";
 import Friends from "./components/Friends";
@@ -13,19 +14,20 @@ import Carousel from "./components/Carousel";
 // import { useState, useEffect } from "react";
 
 function App() {
-	return (
-		<>
-			<Navbar />
-			<Users />
-			<Friends />
-			<Games />
-			<LinkedGames />
-			<ChatMessage />
-			<MaxsTestComponent />
-			<CreateUserForm />
-			{/* <Carousel /> */}
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      <Users />
+      <Friends />
+      <Games />
+      <LinkedGames />
+      <ChatMessage />
+      <MaxsTestComponent />
+      <Carousel />
+      <AvatarModal />
+      <CreateUserForm />
+    </>
+  );
 }
 
 export default App;
