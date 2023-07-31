@@ -3,47 +3,84 @@
 import React, { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import supabaseConfig from "../../../supabase";
+import CSS from "../app.css";
 
 function ChatMessage() {
-	const [ChatMessages, setChatMessage] = useState([]);
+	const [chatMessages, setChatMessages] = useState([]);
+	const [newMessage, setNewMessage] = useState("");
 	const { supabaseUrl, supabaseKey } = supabaseConfig;
 
 	const supabase = createClient(supabaseUrl, supabaseKey);
+
 	useEffect(() => {
-		const fetchUserFriendData = async () => {
-			const { data, error } = await supabase.from("ChatMessages").select();
-			console.log(data);
-			console.log(error);
-
-			if (error) {
-				// Handle the error if needed
-				console.error("Error fetching Chat Data:", error);
-			} else {
-				setChatMessage(data);
-			}
-		};
-
-		fetchUserFriendData();
+		fetchChatData();
 	}, []);
 
-	if (ChatMessages.length === 0) {
+	const fetchChatData = async () => {
+		try {
+			const { data, error } = await supabase.from("chatmessages").select();
+			if (error) {
+				console.error("Error fetching Chat Data:", error);
+			} else {
+				setChatMessages(data);
+			}
+		} catch (error) {
+			console.error("Error fetching Chat Data:", error);
+		}
+	};
+
+	const handleSendMessage = async (e) => {
+		e.preventDefault();
+		try {
+			// Get the current user ID or username from your authentication system
+			const currentUserID = 1; // Replace with the actual ID or username
+			const { data, error } = await supabase.from("chatmessages").insert([
+				{
+					senderID: currentUserID,
+					content: newMessage,
+					sendtime: new Date().toISOString(),
+				},
+				console.log(data),
+			]);
+			if (error) {
+				console.error("Error sending message:", error);
+			} else {
+				console.log("Message sent successfully:", data);
+				setNewMessage(""); // Clear the input field after sending the message
+				fetchChatData(); // Refresh the chat messages after sending a new message
+			}
+		} catch (error) {
+			console.error("Error sending message:", error);
+		}
+	};
+
+	if (chatMessages.length === 0) {
 		return <div>No Messages Found..</div>;
 	}
 
 	return (
-		<div>
+		<div className='chat-container'>
 			<h1>Messages:</h1>
 			<ul>
-				{ChatMessages.map((ChatMessage) => (
-					<li key={ChatMessage.id}>
-						<p>Message ID: {ChatMessage.messageID}</p>
-						<p>Sender ID: {ChatMessage.senderID}</p>
-						<p>Message: {ChatMessage.content}</p>
-						<p>Rseceive time: {ChatMessage.recievetime}</p>
-						<p>Send Time: {ChatMessage.sendtime}</p>
+				{chatMessages.map((chatMessage) => (
+					<li key={chatMessage.id}>
+						<p>Message ID: {chatMessage.messageID}</p>
+						<p>Sender ID: {chatMessage.senderID}</p>
+						<p>Message: {chatMessage.content}</p>
+						<p>Receive Time: {chatMessage.recievetime}</p>
+						<p>Send Time: {chatMessage.sendtime}</p>
 					</li>
 				))}
 			</ul>
+			<form className='message-box' onSubmit={handleSendMessage}>
+				<input
+					type='text'
+					value={newMessage}
+					onChange={(e) => setNewMessage(e.target.value)}
+					placeholder='Type your message...'
+				/>
+				<button type='submit'>Send Message</button>
+			</form>
 		</div>
 	);
 }

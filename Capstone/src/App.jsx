@@ -1,6 +1,7 @@
 /** @format */
 
 import "./App.css";
+import AvatarModal from "./components/AvatarModal";
 import ChatMessage from "./components/ChatMessage";
 import CreateUserForm from "./components/CreateUserForm";
 import Friends from "./components/Friends";
@@ -22,8 +23,9 @@ function App() {
       <LinkedGames />
       <ChatMessage />
       <MaxsTestComponent />
-      <CreateUserForm />
       <Carousel />
+      <AvatarModal />
+      <CreateUserForm />
     </>
   );
 }
