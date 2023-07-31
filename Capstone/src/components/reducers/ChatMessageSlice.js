@@ -16,14 +16,14 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export const fetchMessageData = createAsyncThunk(
 	"data/getMessages",
 	async () => {
-		const { data } = await supabase.from("ChatMessage").select();
+		const { data } = await supabase.from("chatmessages").select();
 		console.log(data);
 		return data;
 	}
 );
 
 export const ChatMessageSlice = createSlice({
-	name: "ChatMessage",
+	name: "chatmessages",
 	initialState,
 	reducers: {
 		setSelectedFriend: (state, action) => {

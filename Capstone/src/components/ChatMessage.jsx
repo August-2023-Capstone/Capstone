@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import supabaseConfig from "../../../supabase";
+import CSS from "../app.css";
 
 function ChatMessage() {
 	const [chatMessages, setChatMessages] = useState([]);
@@ -17,7 +18,7 @@ function ChatMessage() {
 
 	const fetchChatData = async () => {
 		try {
-			const { data, error } = await supabase.from("ChatMessages").select();
+			const { data, error } = await supabase.from("chatmessages").select();
 			if (error) {
 				console.error("Error fetching Chat Data:", error);
 			} else {
@@ -33,12 +34,13 @@ function ChatMessage() {
 		try {
 			// Get the current user ID or username from your authentication system
 			const currentUserID = 1; // Replace with the actual ID or username
-			const { data, error } = await supabase.from("ChatMessages").insert([
+			const { data, error } = await supabase.from("chatmessages").insert([
 				{
 					senderID: currentUserID,
 					content: newMessage,
 					sendtime: new Date().toISOString(),
 				},
+				console.log(data),
 			]);
 			if (error) {
 				console.error("Error sending message:", error);
@@ -57,7 +59,7 @@ function ChatMessage() {
 	}
 
 	return (
-		<div>
+		<div className='chat-container'>
 			<h1>Messages:</h1>
 			<ul>
 				{chatMessages.map((chatMessage) => (
