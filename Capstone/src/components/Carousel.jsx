@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GameCard from "./GameCard";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -34,17 +34,39 @@ const usersCurrentGames = [
     platform: "Playstation5,PC,Xbox",
   },
 ];
+
 const responsive = {
   0: { items: 1 },
   568: { items: 2 },
   1024: { items: 3 },
 };
+
 const Carousel = () => {
+  const [gameArray, setGameArray] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Make the API request
+        const response = await fetch(
+          "https://api.rawg.io/api/games?key=708a4757c9d748448c87455a3ecd365c&metacritic=90,100&ordering=-released&dates=2005-01-01,2023-07-01&tags=multiplayer&page_size=10"
+        );
+        const jsonData = await response.json();
+
+        // Step 4: Update the state with the fetched data
+        setGameArray(jsonData.results);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData(); // Call the fetchData function
+  }, []);
   return (
     <div className="carouselContainer">
       <AliceCarousel
         mouseTracking
-        items={usersCurrentGames.map((game) => (
+        items={gameArray.map((game) => (
           <GameCard key={game.name} game={game} />
         ))}
         responsive={responsive}
