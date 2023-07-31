@@ -174,3 +174,74 @@
 	flex-wrap: wrap;
 	gap: 10px;
 }
+/* Styling for the chat container */
+.chat-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+}
+
+/* Styling for the messages list */
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	max-width: 500px;
+	overflow-y: auto;
+}
+
+li {
+	padding: 10px;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	background-color: #f4f7f9;
+}
+
+/* Styling for the message sender, time, and content */
+li p {
+	margin: 0;
+}
+
+li p:nth-child(1) {
+	font-weight: bold;
+	color: #0073b1; /* LinkedIn Blue color */
+}
+
+li p:nth-child(2) {
+	font-size: 12px;
+	color: #767676;
+}
+
+/* Styling for the message input form */
+.message-box {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: 500px;
+	margin-top: 20px;
+}
+
+.message-box input[type="text"] {
+	flex: 1;
+	padding: 10px;
+	border: 1px solid #d1d1d1;
+	border-radius: 4px;
+}
+
+.message-box button[type="submit"] {
+	padding: 10px 20px;
+	background-color: #0073b1; /* LinkedIn Blue color */
+	color: white;
+	border: none;
+	border-radius: 4px;
+	margin-left: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.message-box button[type="submit"]:hover {
+	background-color: #005a8e; /* Slightly darker shade on hover */
+}

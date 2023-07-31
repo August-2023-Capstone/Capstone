@@ -72,7 +72,7 @@ function ChatMessage() {
 					</li>
 				))}
 			</ul>
-			<form onSubmit={handleSendMessage}>
+			<form className='message-box' onSubmit={handleSendMessage}>
 				<input
 					type='text'
 					value={newMessage}

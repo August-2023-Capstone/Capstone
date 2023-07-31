@@ -13,19 +13,19 @@ import Carousel from "./components/Carousel";
 // import { useState, useEffect } from "react";
 
 function App() {
-  return (
-    <>
-      <Navbar />
-      <Users />
-      <Friends />
-      <Games />
-      <LinkedGames />
-      <ChatMessage />
-      <MaxsTestComponent />
-      <CreateUserForm />
-      <Carousel />
-    </>
-  );
+	return (
+		<>
+			<Navbar />
+			<Users />
+			<Friends />
+			<Games />
+			<LinkedGames />
+			<ChatMessage />
+			<MaxsTestComponent />
+			<CreateUserForm />
+			{/* <Carousel /> */}
+		</>
+	);
 }
 
 export default App;
