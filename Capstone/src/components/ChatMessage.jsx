@@ -79,7 +79,7 @@ function ChatMessage() {
 					onChange={(e) => setNewMessage(e.target.value)}
 					placeholder='Type your message...'
 				/>
-				<button type='submit'>Send</button>
+				<button type='submit'>Send Message</button>
 			</form>
 		</div>
 	);
