@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 
 const usersCurrentGames = [
   {
@@ -33,15 +34,23 @@ const usersCurrentGames = [
   },
 ];
 
-const AddGameModal = () => {
+const AddGameModal = ({ closeModal }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
       <div className="bg-gray-800 text-white w-96 p-4 rounded-lg shadow-lg">
-        <div className="relative">
+        <div className="flex justify-center mb-4">
+          <button
+            onClick={closeModal}
+            className="text-white text-opacity-70 hover:text-opacity-100"
+          >
+            Close
+          </button>
+        </div>
+        <div className="relative mt-4">
           <input
             type="text"
             placeholder="Search 300+ Games"
-            className="w-full py-2 pl-10 pr-4 rounded-md bg-gray-700"
+            className="w-full py-2 pl-10 pr-4 rounded-md bg-gray-700 text-white"
           />
           <div className="absolute top-1/2 left-3 transform -translate-y-1/2">
             <svg
