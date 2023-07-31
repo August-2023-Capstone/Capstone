@@ -1,0 +1,110 @@
+/* GAME CARD CSS */
+@import "react-alice-carousel/lib/alice-carousel.css";
+
+.gameCard {
+  width: 250px;
+
+  background-color: #ddd;
+  border: 1px solid black;
+  display: block;
+
+  padding-top: 10px;
+
+  text-align: center;
+}
+.gameCardButton {
+  margin-left: 190px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: purple;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+}
+.gameCard img {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  width: 60%;
+}
+
+/* PROFILE PAGE CSS */
+
+/* Main container for the profile page */
+/* .profilePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+} */
+
+/* Navbar style */
+.navbar {
+  background-color: #747474;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+/* .content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+} */
+
+/* .friendsList h2 {
+  margin-top: 0;
+}
+
+.friendsList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.friendsList li {
+  margin: 5px 0;
+} */
+.carouselContainer {
+  border: 5px black solid;
+  max-width: 84%;
+  max-height: 100%;
+  margin-left: 60px;
+  padding-top: 30px;
+  padding-left: 60px;
+  background-color: #444444;
+  border-radius: 8px;
+}
+.content {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+
+  padding-top: 10px;
+}
+
+.gameCarousel {
+  grid-column: 1 / span 3; /* Place the carousel in the first three columns */
+}
+
+.friendsList {
+  background-color: #747474;
+  padding: 10px;
+  border-radius: 8px;
+  grid-column: 4; /* Place the friends list in the fourth column */
+}
+
+.friendsList h2 {
+  margin-top: 0;
+}
+
+.friendsList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.friendsList li {
+  margin: 5px 0;
+}
