@@ -1,6 +1,10 @@
 /** @format */
 
-import React, { useState } from "react";
+
+, { useState } from "react";
+
+import supabase from "../../../supabase";
+import Css from "../app.css";
 
 import supabase from "../../../supabase";
 import AvatarModal from "./AvatarModal";
@@ -36,7 +40,73 @@ const CreateUserForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+    
+  const handleLogin = async () => {
+		try {
+			const { email, password } = formData;
+			const supabase = createClient(
+				supabaseConfig.supabaseUrl,
+				supabaseConfig.supabaseKey
+			);
+			const { user, error } = await supabase.auth.signIn({ email, password });
+
+			if (error) {
+				console.error("Login error:", error.message);
+				// Handle error, show an error message, etc.
+			} else {
+				console.log("Logged in user:", user);
+				// Handle successful login, redirect to another page, etc.
+			}
+		} catch (error) {
+			console.error("Login error:", error.message);
+			// Handle error, show an error message, etc.
+		}
+	};
+    
+    const handleUpdateUser = async () => {
+		try {
+			const { data, error } = await supabase
+				.from("users")
+				.update({
+					platform: formData.platform,
+					gamertag: formData.gamertag,
+					timezone: formData.timezone,
+				})
+				.match({ id: userId }); // Replace 'userId' with the unique identifier of the user you want to update
+
+			if (error) {
+				console.error("Error updating user data:", error);
+				// Handle error, show an error message, etc.
+			} else {
+				console.log("User data updated successfully:", data);
+				// Handle success, show a success message, or navigate to a different page
+			}
+		} catch (error) {
+			console.error("Error updating user data:", error.message);
+			// Handle error, show an error message, etc.
+		}
+	};
+
+	const handleDeleteUser = async () => {
+		try {
+			const { data, error } = await supabase
+				.from("users")
+				.delete()
+				.match({ id: userId }); // Replace 'userId' with the unique identifier of the user you want to delete
+
+			if (error) {
+				console.error("Error deleting user:", error);
+				// Handle error, show an error message, etc.
+			} else {
+				console.log("User deleted successfully:", data);
+				// Handle success, show a success message, or navigate to a different page
+			}
+		} catch (error) {
+			console.error("Error deleting user:", error.message);
+			// Handle error, show an error message, etc.
+		}
+	};
+
 
   const handleSubmit = async () => {
     console.log(formData);
@@ -138,6 +208,7 @@ const CreateUserForm = () => {
       </button>
     </form>
   );
+
 };
 
 export default CreateUserForm;
