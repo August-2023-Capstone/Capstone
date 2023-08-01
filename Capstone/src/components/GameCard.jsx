@@ -3,7 +3,11 @@ import React from "react";
 const GameCard = ({ game }) => {
   return (
     <div className="gameCard">
-      <img src={game.background_image} alt={game.name} />
+      <img
+        className="w-full h-full object-cover"
+        src={game.background_image}
+        alt={game.name}
+      />
 
       <h2>{game.name}</h2>
       <p>
