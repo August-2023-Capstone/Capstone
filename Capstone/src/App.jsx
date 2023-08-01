@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import Users from "./components/Users";
 import LinkedGames from "./components/linkedGames";
 import Carousel from "./components/Carousel";
+import ProfilePage from "./components/ProfilePage";
 // import { useState, useEffect } from "react";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Carousel />
       <AvatarModal />
       <CreateUserForm />
+      <ProfilePage />
     </>
   );
 }
