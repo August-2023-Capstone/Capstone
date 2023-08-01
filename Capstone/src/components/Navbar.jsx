@@ -5,7 +5,7 @@ import homeIcon from "../assets/icons/home.png";
 import speechBubbleIcon from "../assets/icons/speechbubble.png";
 import usersIcon from "../assets/icons/users.png";
 import settingsIcon from "../assets/icons/settings.png";
-import AddGameModal from "../modals/AddGameModal";
+import AddGameModal from "../components/AddGameModal";
 
 const Navbar = () => {
   const [isModalOpen, setModalOpen] = useState(false);
