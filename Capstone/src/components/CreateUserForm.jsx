@@ -1,7 +1,7 @@
 /** @format */
 
 
-, { useState } from "react";
+import React, { useState } from "react";
 
 import supabase from "../../../supabase";
 import Css from "../app.css";
