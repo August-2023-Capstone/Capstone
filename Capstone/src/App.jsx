@@ -1,32 +1,26 @@
 /** @format */
 
 import "./App.css";
-import AvatarModal from "./components/AvatarModal";
-import ChatMessage from "./components/ChatMessage";
-import CreateUserForm from "./components/CreateUserForm";
-import Friends from "./components/Friends";
-import Games from "./components/Games";
-import MaxsTestComponent from "./components/MaxsTestComponent";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Users from "./components/Users";
-import LinkedGames from "./components/linkedGames";
-import Carousel from "./components/Carousel";
+import HomePage from "./components/HomePage";
+import UsersPage from "./components/UsersPage";
+import FriendSearchPage from "./components/FriendSearchPage";
+import ChatMessagePage from "./components/ChatMessagePage";
 // import { useState, useEffect } from "react";
 
 function App() {
   return (
-    <>
+    <Router>
       <Navbar />
-      <Users />
-      <Friends />
-      <Games />
-      <LinkedGames />
-      <ChatMessage />
-      <MaxsTestComponent />
-      <Carousel />
-      <AvatarModal />
-      <CreateUserForm />
-    </>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/users" element={<UsersPage />} />
+        <Route path="/settings" element={<FriendSearchPage />} />
+        <Route path="/chat" element={<ChatMessagePage />} />
+      </Routes>
+    </Router>
   );
 }
 

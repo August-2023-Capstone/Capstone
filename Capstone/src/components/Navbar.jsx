@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import avatar from "../assets/icons/image0copy.png";
 import ps5Icon from "../assets/icons/ps5.png";
 import homeIcon from "../assets/icons/home.png";
 import speechBubbleIcon from "../assets/icons/speechbubble.png";
 import usersIcon from "../assets/icons/users.png";
 import settingsIcon from "../assets/icons/settings.png";
-import AddGameModal from "../modals/AddGameModal";
+import AddGameModal from "./AddGameModal";
 
 const Navbar = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -29,14 +30,22 @@ const Navbar = () => {
         </span>
       </div>
       <div className="flex items-center">
-        <img src={homeIcon} alt="Home Icon" className="w-10 h-10 mr-4" />
-        <img
-          src={speechBubbleIcon}
-          alt="Speech Bubble Icon"
-          className="w-10 h-10 mr-4"
-        />
-        <img src={usersIcon} alt="Users Icon" className="w-10 h-10 mr-4" />
-        <img src={settingsIcon} alt="Settings Icon" className="w-10 h-10" />
+        <Link to="/" className="mr-4">
+          <img src={homeIcon} alt="Home Icon" className="w-10 h-10" />
+        </Link>
+        <Link to="/chat" className="mr-4">
+          <img
+            src={speechBubbleIcon}
+            alt="Speech Bubble Icon"
+            className="w-10 h-10"
+          />
+        </Link>
+        <Link to="/users" className="mr-4">
+          <img src={usersIcon} alt="Users Icon" className="w-10 h-10" />
+        </Link>
+        <Link to="/settings">
+          <img src={settingsIcon} alt="Settings Icon" className="w-10 h-10" />
+        </Link>
       </div>
       <a
         href="#"
