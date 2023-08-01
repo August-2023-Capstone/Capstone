@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import GameCard from "./GameCard";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
+// import AliceCarousel from "react-alice-carousel";
+// import "react-alice-carousel/lib/alice-carousel.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const usersCurrentGames = [
   {
     name: "League Of Legends",
@@ -62,16 +65,27 @@ const Carousel = () => {
 
     fetchData(); // Call the fetchData function
   }, []);
+
+  const settings = {
+    className: "carouselContainer",
+
+    centerMode: true,
+    infinite: true,
+
+    slidesToShow: 3,
+    speed: 500,
+  };
+
   return (
-    <div className="carouselContainer">
-      <AliceCarousel
-        mouseTracking
-        items={gameArray.map((game) => (
-          <GameCard key={game.name} game={game} />
+    <div>
+      <h2>Center Mode</h2>
+      <Slider {...settings}>
+        {gameArray.map((game) => (
+          <div key={game.name}>
+            <GameCard game={game} />
+          </div>
         ))}
-        responsive={responsive}
-        controlsStrategy="alternate"
-      />
+      </Slider>
     </div>
   );
 };

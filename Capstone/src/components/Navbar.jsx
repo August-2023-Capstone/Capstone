@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import avatar from "../assets/icons/image0copy.png";
@@ -8,14 +10,15 @@ import usersIcon from "../assets/icons/users.png";
 import settingsIcon from "../assets/icons/settings.png";
 import AddGameModal from "./AddGameModal";
 
+
 const Navbar = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
+	const [isModalOpen, setModalOpen] = useState(false);
+	const handleOpenModal = () => {
+		setModalOpen(true);
+	};
+	const handleCloseModal = () => {
+		setModalOpen(false);
+	};
 
   return (
     <nav className="bg-gray-800 p-8 flex items-center justify-between">
