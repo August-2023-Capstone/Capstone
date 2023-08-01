@@ -16,6 +16,7 @@ const platforms = ["PC", "Playstation", "Xbox", "Nintendo Switch"];
 const CreateUserForm = () => {
   const [formData, setFormData] = useState({
     email: "",
+    username: "",
     password: "",
     platform: "",
     gamertag: "",
@@ -112,6 +113,7 @@ const CreateUserForm = () => {
       const { data, error } = await supabase.from("users").insert([
         {
           email: formData.email,
+          username: formData.username,
           password: formData.password,
           platform: formData.platform,
           gamertag: formData.gamertag,
@@ -162,8 +164,8 @@ const CreateUserForm = () => {
         type="text"
         name="gamertag"
         placeholder="Enter Gamertag here"
-        value={formData.gamertag}
-        onChange={handleChange}
+        value={formData.username} // Corrected: use formData.gamertag instead of formData.username
+        onChange={handleChange} // Corrected: use handleChange for name='gamertag'
       />
       <br />
       <label>Timezone:</label>

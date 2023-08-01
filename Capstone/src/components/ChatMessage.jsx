@@ -9,13 +9,18 @@ function ChatMessage() {
 	const [chatMessages, setChatMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
 	const { supabaseUrl, supabaseKey } = supabaseConfig;
+	const [chatData, setChatData] = useState({
+		message: "",
+		recievetime: "",
+		sender_username: "",
+		receiver_username: "",
+	});
 
 	const supabase = createClient(supabaseUrl, supabaseKey);
 
 	// WebSocket connection and message handling (same as previous example)
 	console.log(chatMessages);
 	const handleSendMessage = async (e) => {
-		console.log("Sending message...");
 		e.preventDefault();
 		try {
 			// Get the current user ID or username from your authentication system
@@ -25,6 +30,7 @@ function ChatMessage() {
 			const message = {
 				senderID: currentUserID,
 				content: newMessage,
+				recievetime: new Date().toISOString(),
 				sendtime: new Date().toISOString(),
 			};
 			const socket = new WebSocket("ws://localhost:3000");
@@ -36,11 +42,12 @@ function ChatMessage() {
 			// Insert the new message into the chatmessages table
 			const { data, error } = await supabase.from("chatmessages").insert([
 				{
-					sender_id: currentUserID,
-					receiver_id: 2,
-					sender_username: "james",
-					receiver_username: "jon",
+					sender_id: 1, // Replace with the actual ID or username
+					receiver_id: 2, // Replace with the ID of the receiver user
+					sender_username: chatData.sender_username,
+					receiver_username: chatData.receiver_username,
 					message: newMessage,
+					recievetime: new Date().toISOString(),
 					sendtime: new Date().toISOString(),
 				},
 			]);
@@ -75,9 +82,9 @@ function ChatMessage() {
 		fetchChatData();
 	}, []);
 
-	if (chatMessages.length === 0) {
-		return <div>No Messages Found..</div>;
-	}
+	// if (chatMessages.length === 0) {
+	// 	return <div>No Messages Found..</div>;
+	// }
 
 	return (
 		<div className='chat-container'>
@@ -85,8 +92,8 @@ function ChatMessage() {
 			<ul>
 				{chatMessages.map((chatMessage) => (
 					<li key={chatMessage.id}>
-						<p>Message ID: {chatMessage.id}</p>
-						<p>Sender ID: {chatMessage.sender_id}</p>
+						<p>Reciever: {chatMessage.receiver_username}</p>
+						<p>Sender: {chatMessage.sender_username}</p>
 						<p>Message: {chatMessage.message}</p>
 						<p>Receive Time: {chatMessage.recievetime}</p>
 						<p>Send Time: {chatMessage.sendtime}</p>
