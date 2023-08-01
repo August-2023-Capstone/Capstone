@@ -11,25 +11,26 @@ import Navbar from "./components/Navbar";
 import Users from "./components/Users";
 import LinkedGames from "./components/linkedGames";
 import Carousel from "./components/Carousel";
-import ProfilePage from "./components/ProfilePage";
 // import { useState, useEffect } from "react";
 
 function App() {
-  return (
-    <>
-      <Navbar />
-      <Users />
-      <Friends />
-      <Games />
-      <LinkedGames />
-      <ChatMessage />
-      <MaxsTestComponent />
-      <Carousel />
-      <AvatarModal />
-      <CreateUserForm />
-      <ProfilePage />
-    </>
-  );
+	return (
+		<>
+			<Navbar />
+			<Users />
+			<Friends />
+			<Games />
+			<LinkedGames />
+			<div>
+				<h1>React Vite WebSocket Chat</h1>
+				<ChatMessage />
+			</div>
+			<MaxsTestComponent />
+			{/* <Carousel /> */}
+			<AvatarModal />
+			<CreateUserForm />
+		</>
+	);
 }
 
 export default App;
