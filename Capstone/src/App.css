@@ -6,33 +6,33 @@
 
 @import "react-alice-carousel/lib/alice-carousel.css";
 
-.gameCard {
-	width: 250px;
+/* .gameCard {
+  width: 250px;
 
-	background-color: #ddd;
-	border: 1px solid black;
-	display: block;
+  background-color: #ddd;
+  border: 1px solid black;
+  display: block;
 
-	padding-top: 10px;
+  padding-top: 10px;
 
-	text-align: center;
-}
+  text-align: center;
+} */
 .gameCardButton {
-	margin-left: 190px;
-	margin-bottom: 10px;
-	cursor: pointer;
-	background-color: purple;
-	color: white;
-	border: none;
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	font-size: 24px;
+  margin-left: 50px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: purple;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
 }
-.gameCard img {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-	width: 60%;
-}
+/* .gameCard img {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  width: 100%;
+} */
 
 /* PROFILE PAGE CSS */
 
@@ -46,11 +46,11 @@
 
 /* Navbar style */
 .navbar {
-	background-color: #747474;
-	color: white;
-	padding: 10px;
-	width: 100%;
-	text-align: center;
+  background-color: #747474;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
 }
 
 /* .content {
@@ -73,45 +73,45 @@
 .friendsList li {
   margin: 5px 0;
 } */
-.carouselContainer {
-	border: 5px black solid;
-	max-width: 84%;
-	max-height: 100%;
-	margin-left: 60px;
-	padding-top: 30px;
-	padding-left: 60px;
-	background-color: #444444;
-	border-radius: 8px;
-}
+/* .carouselContainer {
+  border: 5px black solid;
+  max-width: 100%;
+  max-height: 100%;
+  margin-left: 60px;
+  padding-top: 30px;
+  padding-left: 60px;
+  background-color: #444444;
+  border-radius: 8px;
+} */
 .content {
-	display: grid;
-	grid-template-columns: 3fr 1fr;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
 
-	padding-top: 10px;
+  padding-top: 10px;
 }
 
 .gameCarousel {
-	grid-column: 1 / span 3; /* Place the carousel in the first three columns */
+  grid-column: 1 / span 3; /* Place the carousel in the first three columns */
 }
 
 .friendsList {
-	background-color: #747474;
-	padding: 10px;
-	border-radius: 8px;
-	grid-column: 4; /* Place the friends list in the fourth column */
+  background-color: #747474;
+  padding: 10px;
+  border-radius: 8px;
+  grid-column: 4; /* Place the friends list in the fourth column */
 }
 
 .friendsList h2 {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .friendsList ul {
-	list-style: none;
-	padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .friendsList li {
-	margin: 5px 0;
+  margin: 5px 0;
 }
 
 /* Assuming the class name for the button container is "button-container" */
@@ -119,131 +119,131 @@
 /* Assuming the class name for the "Login" button is "login-button" */
 
 .button-container {
-	display: flex;
-	gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .signup-button,
 .login-button {
-	padding: 10px 20px;
-	font-size: 16px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .signup-button {
-	background-color: #0073b1; /* LinkedIn Blue color */
-	background-color: #ffffff; /* White background for Login button */
-	color: #0073b1; /* LinkedIn Blue color for text */
-	border: 1px solid #0073b1; /* Add a blue border for the Login button */
+  background-color: #0073b1; /* LinkedIn Blue color */
+  background-color: #ffffff; /* White background for Login button */
+  color: #0073b1; /* LinkedIn Blue color for text */
+  border: 1px solid #0073b1; /* Add a blue border for the Login button */
 }
 
 .login-button {
-	background-color: #ffffff; /* White background for Login button */
-	color: #0073b1; /* LinkedIn Blue color for text */
-	border: 1px solid #0073b1; /* Add a blue border for the Login button */
+  background-color: #ffffff; /* White background for Login button */
+  color: #0073b1; /* LinkedIn Blue color for text */
+  border: 1px solid #0073b1; /* Add a blue border for the Login button */
 }
 
 .signup-button:hover,
 .login-button:hover {
-	background-color: #005a8e; /* Slightly darker shade on hover */
+  background-color: #005a8e; /* Slightly darker shade on hover */
 }
 .Input-field {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .Input-field label {
-	display: block;
-	margin-bottom: 5px;
-	font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .Input-field input {
-	width: 150px; /* Adjust the width as needed */
-	padding: 8px;
-	font-size: 16px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
+  width: 150px; /* Adjust the width as needed */
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 /* Arrange the input fields side by side */
 .input-container {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 /* Styling for the chat container */
 .chat-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
 /* Styling for the messages list */
 ul {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-	width: 100%;
-	max-width: 500px;
-	overflow-y: auto;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 500px;
+  overflow-y: auto;
 }
 
 li {
-	padding: 10px;
-	border-radius: 8px;
-	margin-bottom: 10px;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-	background-color: #f4f7f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: #f4f7f9;
 }
 
 /* Styling for the message sender, time, and content */
 li p {
-	margin: 0;
+  margin: 0;
 }
 
 li p:nth-child(1) {
-	font-weight: bold;
-	color: #0073b1; /* LinkedIn Blue color */
+  font-weight: bold;
+  color: #0073b1; /* LinkedIn Blue color */
 }
 
 li p:nth-child(2) {
-	font-size: 12px;
-	color: #767676;
+  font-size: 12px;
+  color: #767676;
 }
 
 /* Styling for the message input form */
 .message-box {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	max-width: 500px;
-	margin-top: 20px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
 }
 
 .message-box input[type="text"] {
-	flex: 1;
-	padding: 10px;
-	border: 1px solid #d1d1d1;
-	border-radius: 4px;
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #d1d1d1;
+  border-radius: 4px;
 }
 
 .message-box button[type="submit"] {
-	padding: 10px 20px;
-	background-color: #0073b1; /* LinkedIn Blue color */
-	color: white;
-	border: none;
-	border-radius: 4px;
-	margin-left: 10px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  background-color: #0073b1; /* LinkedIn Blue color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .message-box button[type="submit"]:hover {
-	background-color: #005a8e; /* Slightly darker shade on hover */
+  background-color: #005a8e; /* Slightly darker shade on hover */
 }
 
 /* Add this CSS in your main component's CSS or in a separate CSS file */
@@ -342,4 +342,27 @@ li p:nth-child(2) {
   appearance: none;
   background-color: #fff;
   cursor: pointer;
+}
+.gameCard {
+  width: 250px;
+  background-color: #ddd;
+  border: 1px solid black;
+  display: block;
+
+  text-align: center;
+  margin: 5px; /* Add some margin between game cards */
+}
+
+.carouselContainer {
+  border: 5px black solid;
+  max-width: 70%;
+  max-height: 100%;
+  margin-left: 60px;
+  padding-top: 30px;
+  padding-left: 60px;
+  background-color: #444444;
+  border-radius: 8px;
+  display: flex; /* Use flexbox to align carousel items */
+  flex-wrap: wrap; /* Wrap items to the next row if necessary */
+  justify-content: center; /* Center the items horizontally */
 }
