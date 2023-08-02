@@ -4,8 +4,10 @@ import React, { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import supabaseConfig from "../../../supabase";
 import CSS from "../app.css";
+import ChatBox from "./ChatBox";
+import CloseButton from "../assets/icons/closebutton.png";
 
-function ChatMessage() {
+function ChatMessage({ toggleChat }) {
 	const [chatMessages, setChatMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
 	const { supabaseUrl, supabaseKey } = supabaseConfig;
@@ -82,13 +84,15 @@ function ChatMessage() {
 		fetchChatData();
 	}, []);
 
-	// if (chatMessages.length === 0) {
-	// 	return <div>No Messages Found..</div>;
-	// }
+	if (chatMessages.length === 0) {
+		return <div>No Messages Found..</div>;
+	}
 
 	return (
 		<div className='chat-container'>
-			<h1>Messages:</h1>
+			<button className='chat-close' onClick={toggleChat}>
+				<img className='Close-Icon' src={CloseButton} alt='Close Chat' />
+			</button>
 			<ul>
 				{chatMessages.map((chatMessage) => (
 					<li key={chatMessage.id}>

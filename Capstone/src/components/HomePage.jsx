@@ -1,6 +1,9 @@
+/** @format */
+
 import React from "react";
 import CreateUserForm from "./CreateUserForm";
 import Carousel from "./Carousel";
+
 import HomeCarouselOne from "./HomeCarouselOne";
 
 const HomePage = () => {
