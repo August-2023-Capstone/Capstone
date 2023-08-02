@@ -29,10 +29,6 @@
   height: 40px;
   font-size: 24px;
 }
-/* .gameCard img {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-  width: 100%;
-} */
 
 /* PROFILE PAGE CSS */
 
@@ -45,13 +41,13 @@
 } */
 
 /* Navbar style */
-.navbar {
+/* .navbar {
   background-color: #747474;
   color: white;
   padding: 10px;
   width: 100%;
   text-align: center;
-}
+} */
 
 /* .content {
   display: flex;
@@ -401,7 +397,10 @@ li p:nth-child(2) {
   text-align: center;
   margin: 5px; /* Add some margin between game cards */
 }
-
+.gameCard img {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  width: 100%;
+}
 .carouselContainer {
   border: 5px black solid;
   max-width: 70%;
@@ -414,4 +413,68 @@ li p:nth-child(2) {
   display: flex; /* Use flexbox to align carousel items */
   flex-wrap: wrap; /* Wrap items to the next row if necessary */
   justify-content: center; /* Center the items horizontally */
+}
+.HomeCarouselContainer {
+  /* border: 2px black solid; */
+  max-width: 70%;
+  max-height: 100%;
+
+  margin-left: 230px;
+  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-left: 60px;
+  background-color: #151515;
+  border-radius: 8px;
+  display: flex; /* Use flexbox to align carousel items */
+  flex-wrap: wrap; /* Wrap items to the next row if necessary */
+  justify-content: center; /* Center the items horizontally */
+}
+.HomeGameCard {
+  width: 250px;
+  background-color: #202020;
+  border: 1px solid black;
+  display: block;
+
+  text-align: center;
+  margin: 5px; /* Add some margin between game cards */
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+}
+.HomeGameCard img {
+  border-radius: 10px 10px 0 0;
+}
+.HomeGameCardButton {
+  font-weight: bolder;
+  font-size: larger;
+  margin-left: 200px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #373737;
+  color: white;
+  border: none;
+  border-radius: 10%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+.HomeGameCardTitle {
+  font-size: larger;
+  font-weight: 700;
+}
+.HomeGameCardInfo {
+  font-size: small;
+}
+.HomePage {
+  background-color: #151515;
+}
+.NewReleases {
+  color: white;
+  font-size: xxx-large;
+  font-weight: 900;
+  text-align: center;
+}
+.PlatformLogos {
+  width: 20px;
+  height: 20px;
 }
