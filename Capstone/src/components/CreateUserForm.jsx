@@ -140,6 +140,16 @@ const CreateUserForm = () => {
 				onChange={handleChange}
 			/>{" "}
 			<br />
+			<label>Username:</label>
+			<input
+				type='username'
+				name='username'
+				placeholder='Enter username here'
+				value={formData.username}
+				onChange={handleChange}
+			/>
+			<br />
+			<br />
 			<label>Password:</label>
 			<input
 				type='password'
@@ -164,7 +174,7 @@ const CreateUserForm = () => {
 				type='text'
 				name='gamertag'
 				placeholder='Enter Gamertag here'
-				value={formData.username} // Corrected: use formData.gamertag instead of formData.username
+				value={formData.gamertag} // Corrected: use formData.gamertag instead of formData.username
 				onChange={handleChange} // Corrected: use handleChange for name='gamertag'
 			/>
 			<br />
