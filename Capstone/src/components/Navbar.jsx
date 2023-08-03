@@ -10,18 +10,17 @@ import usersIcon from "../assets/icons/users.png";
 import settingsIcon from "../assets/icons/settings.png";
 import AddGameModal from "./AddGameModal";
 
-
 const Navbar = () => {
-	const [isModalOpen, setModalOpen] = useState(false);
-	const handleOpenModal = () => {
-		setModalOpen(true);
-	};
-	const handleCloseModal = () => {
-		setModalOpen(false);
-	};
+  const [isModalOpen, setModalOpen] = useState(false);
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   return (
-    <nav className="bg-gray-800 p-8 flex items-center justify-between">
+    <nav className="bg-zinc-700 p-8 flex items-center justify-between">
       <div className="flex items-center">
         <img src={avatar} alt="Logo" className="w-10 h-10 mr-4 rounded-full" />
         <span className="text-white mr-4">danielbaronreo@gmail.com</span>
