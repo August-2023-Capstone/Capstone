@@ -9,6 +9,7 @@ import settingsIcon from "../assets/icons/settings.png";
 import magnify from "../assets/icons/magnify.png";
 import x from "../assets/icons/x.png";
 
+
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -69,6 +70,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-[#151515] p-4 flex items-center justify-between">
+
       <div className="flex items-center">
         <span className="text-white text-3xl font-bold flex-grow-0 mr-4">
           SQUAD FINDER

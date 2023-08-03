@@ -38,15 +38,14 @@ const usersCurrentGames = [
   },
 ];
 
-// const responsive = {
-//   0: { items: 1 },
-//   568: { items: 2 },
-//   1024: { items: 3 },
-// };
+const responsive = {
+  0: { items: 1 },
+  568: { items: 2 },
+  1024: { items: 3 },
+};
 
 const Carousel = () => {
   const [gameArray, setGameArray] = useState([]);
-  const [slidesToShow, setSlidesToShow] = useState(3);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,8 +56,8 @@ const Carousel = () => {
         );
         const jsonData = await response.json();
 
+        // Step 4: Update the state with the fetched data
         setGameArray(jsonData.results);
-        setSlidesToShow(Math.min(jsonData.results.length, 3));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -66,57 +65,20 @@ const Carousel = () => {
 
     fetchData(); // Call the fetchData function
   }, []);
-  const CustomPrevArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-      <button
-        className={`${className} custom-prev-arrow`}
-        style={{ ...style, left: "10px" }}
-        onClick={onClick}
-      >
-        Previous
-      </button>
-    );
-  };
 
-  const CustomNextArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-      <button
-        className={`${className} custom-next-arrow`}
-        style={{ ...style, right: "10px" }}
-        onClick={onClick}
-      >
-        Next
-      </button>
-    );
-  };
   const settings = {
     className: "carouselContainer",
+
+    centerMode: true,
     infinite: true,
-    slidesToShow: slidesToShow,
-    slidesToScroll: 1, // Scroll one card at a time
+
+    slidesToShow: 3,
     speed: 500,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: Math.min(gameArray.length, 2),
-        },
-      },
-      {
-        breakpoint: 568,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
   };
 
   return (
     <div>
+      <h2>Center Mode</h2>
       <Slider {...settings}>
         {gameArray.map((game) => (
           <div key={game.name}>
