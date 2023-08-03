@@ -13,17 +13,36 @@ function ChatMessage({ toggleChat }) {
 	const { supabaseUrl, supabaseKey } = supabaseConfig;
 	const [chatData, setChatData] = useState({
 		message: "",
-		recievetime: "",
+		receivetime: "",
 		sender_username: "",
 		receiver_username: "",
 	});
+	const [showModal, setShowModal] = useState(false); // State for the modal visibility
+	const [usersData, setUsersData] = useState([]); // State for storing users data
+
+	const handleKeyDown = (e) => {
+		if (e.keyCode === 13) {
+			// 13 is the key code for the "Enter" key
+			handleSendMessage(e);
+		}
+	};
 
 	const supabase = createClient(supabaseUrl, supabaseKey);
 
-	// WebSocket connection and message handling (same as previous example)
-	console.log(chatMessages);
+	const showEmptyMessageModal = () => {
+		setShowModal(true);
+		setTimeout(() => {
+			setShowModal(false);
+		}, 2000); // Modal will fade away after 2 seconds (adjust the duration as needed)
+	};
+
 	const handleSendMessage = async (e) => {
 		e.preventDefault();
+		// Check if the newMessage is empty or only contains whitespace
+		if (!newMessage.trim()) {
+			showEmptyMessageModal(); // Show the modal for empty message
+			return;
+		}
 		try {
 			// Get the current user ID or username from your authentication system
 			const currentUserID = 1; // Replace with the actual ID or username
@@ -53,6 +72,7 @@ function ChatMessage({ toggleChat }) {
 					sendtime: new Date().toISOString(),
 				},
 			]);
+			console.log(data);
 
 			if (error) {
 				console.error("Error sending message:", error);
@@ -80,13 +100,34 @@ function ChatMessage({ toggleChat }) {
 		}
 	};
 
+	const fetchUsersData = async () => {
+		try {
+			const { data, error } = await supabase.from("users").select();
+			if (error) {
+				console.error("Error fetching Users Data:", error);
+			} else {
+				console.log("Fetched Users Data:", data);
+				setUsersData(data);
+			}
+		} catch (error) {
+			console.error("Error fetching Users Data:", error);
+		}
+	};
+
 	useEffect(() => {
 		fetchChatData();
+		fetchUsersData(); // Fetch users data on mount
 	}, []);
 
 	if (chatMessages.length === 0) {
 		return <div>No Messages Found..</div>;
 	}
+
+	// Function to get username based on user ID
+	const getUsernameById = (userId) => {
+		const user = usersData.find((user) => user.id === userId);
+		return user ? user.username : "Unknown User";
+	};
 
 	return (
 		<div className='chat-container'>
@@ -95,9 +136,15 @@ function ChatMessage({ toggleChat }) {
 			</button>
 			<ul>
 				{chatMessages.map((chatMessage) => (
-					<li key={chatMessage.id}>
-						<p>Reciever: {chatMessage.receiver_username}</p>
-						<p>Sender: {chatMessage.sender_username}</p>
+					<li
+						key={chatMessage.id}
+						className={
+							chatMessage.sender_id === 1
+								? "sender-message"
+								: "receiver-message"
+						}>
+						<p>Receiver: {getUsernameById(chatMessage.receiver_id)}</p>
+						<p>Sender: {getUsernameById(chatMessage.sender_id)}</p>
 						<p>Message: {chatMessage.message}</p>
 						<p>Receive Time: {chatMessage.recievetime}</p>
 						<p>Send Time: {chatMessage.sendtime}</p>
@@ -105,15 +152,19 @@ function ChatMessage({ toggleChat }) {
 				))}
 			</ul>
 			<div>
-				<input
-					type='text'
-					value={newMessage}
-					onChange={(e) => setNewMessage(e.target.value)}
-					placeholder='Type your message...'
-				/>
-				<button type='button' onClick={handleSendMessage}>
-					Send Message
-				</button>
+				{showModal && <div className='modal'>Please enter a message!</div>}
+				<div>
+					<input
+						type='text'
+						value={newMessage}
+						onChange={(e) => setNewMessage(e.target.value)}
+						onKeyDown={handleKeyDown} // Add the onKeyDown event listener
+						placeholder='Type your message...'
+					/>
+					<button type='button' onClick={handleSendMessage}>
+						Send Message
+					</button>
+				</div>
 			</div>
 		</div>
 	);
