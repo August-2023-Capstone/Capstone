@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import GameCard from "./GameCard";
-// import AliceCarousel from "react-alice-carousel";
-// import "react-alice-carousel/lib/alice-carousel.css";
+import HomeGameCard from "./HomeGameCard";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -38,13 +37,7 @@ const usersCurrentGames = [
   },
 ];
 
-// const responsive = {
-//   0: { items: 1 },
-//   568: { items: 2 },
-//   1024: { items: 3 },
-// };
-
-const Carousel = () => {
+const HomeCarouselOne = () => {
   const [gameArray, setGameArray] = useState([]);
   const [slidesToShow, setSlidesToShow] = useState(3);
 
@@ -92,7 +85,7 @@ const Carousel = () => {
     );
   };
   const settings = {
-    className: "carouselContainer",
+    className: "HomeCarouselContainer",
     infinite: true,
     slidesToShow: slidesToShow,
     slidesToScroll: 1, // Scroll one card at a time
@@ -107,7 +100,7 @@ const Carousel = () => {
         },
       },
       {
-        breakpoint: 568,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
         },
@@ -120,7 +113,7 @@ const Carousel = () => {
       <Slider {...settings}>
         {gameArray.map((game) => (
           <div key={game.name}>
-            <GameCard game={game} />
+            <HomeGameCard game={game} />
           </div>
         ))}
       </Slider>
@@ -128,4 +121,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default HomeCarouselOne;
