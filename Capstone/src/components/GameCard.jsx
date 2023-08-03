@@ -4,11 +4,6 @@ import XboxLogo from "../assets/Logos/XboxLogo.png";
 import WindowsLogo from "../assets/Logos/WindowsLogo.png";
 
 const GameCard = ({ game }) => {
-  const platformIcons = {
-    PC: WindowsLogo,
-    Playstation: PlaystationLogo,
-  };
-
   return (
     <div className="gameCard">
       <img

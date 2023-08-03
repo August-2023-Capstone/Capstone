@@ -28,13 +28,6 @@ const HomeGameCard = ({ game }) => {
       <h2 className="HomeGameCardTitle">{game.name}</h2>
       <div className="HomeGameCardInfo">
         <p>
-          Genre:{" "}
-          {game.genres.map((genre) => (
-            <span key={genre.id}>{genre.name}, </span>
-          ))}
-        </p>
-        <p>
-          Platform:{" "}
           {game.platforms.map((platform) => (
             <img
               className="PlatformLogos"
@@ -42,6 +35,11 @@ const HomeGameCard = ({ game }) => {
               src={`${platformImages[platform.platform.name]}`}
               alt={platform.platform.name}
             />
+          ))}
+        </p>
+        <p>
+          {game.genres.map((genre) => (
+            <span key={genre.id}>{genre.name}, </span>
           ))}
         </p>
       </div>
