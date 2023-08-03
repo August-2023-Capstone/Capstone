@@ -31,7 +31,7 @@ const AddGameModal = ({ closeModal }) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75 z-30">
       <div className="bg-gray-800 text-white w-96 p-4 rounded-lg shadow-lg h-3/4 overflow-y-auto">
         <div className="flex justify-center mb-4">
           <button
