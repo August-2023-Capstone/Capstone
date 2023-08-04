@@ -70,9 +70,9 @@ const Navbar = () => {
   return (
     <nav className="bg-[#151515] p-4 flex items-center justify-between">
       <div className="flex items-center">
-        <span className="text-white text-3xl font-bold flex-grow-0 mr-4">
+        <Link to="/" className="text-white text-3xl font-bold flex-grow-0 mr-4">
           SQUAD FINDER
-        </span>
+        </Link>
         <div className="relative">
           <img
             src={magnify}
@@ -136,9 +136,9 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex items-center">
-        <Link to="/" className="mr-4">
+        {/* <Link to="/" className="mr-4">
           <img src={homeIcon} alt="Home Icon" className="w-10 h-10" />
-        </Link>
+        </Link> */}
         <Link to="/chat" className="mr-4">
           <img
             src={speechBubbleIcon}
@@ -146,7 +146,7 @@ const Navbar = () => {
             className="w-10 h-10"
           />
         </Link>
-        <Link to="/users" className="mr-4">
+        <Link to="/profile" className="mr-4">
           <img src={avatar} alt="Logo" className="w-10 h-10 rounded-full" />
         </Link>
         <Link to="/settings">

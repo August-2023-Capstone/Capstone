@@ -20,23 +20,24 @@ const HomeGameCard = ({ game }) => {
   return (
     <div className="HomeGameCard">
       <img
-        className="w-full h-full object-cover"
+        className=" HomeGameCardImage w-full h-full object-cover"
         src={game.background_image}
         alt={game.name}
       />
-
+      <div className="PlatformLogosContainer">
+        {game.platforms.map((platform) => (
+          <img
+            className="PlatformLogos"
+            key={platform.platform.id}
+            src={`${platformImages[platform.platform.name]}`}
+            alt={platform.platform.name}
+          />
+        ))}
+      </div>
       <h2 className="HomeGameCardTitle">{game.name}</h2>
+
       <div className="HomeGameCardInfo">
-        <p>
-          {game.platforms.map((platform) => (
-            <img
-              className="PlatformLogos"
-              key={platform.platform.id}
-              src={`${platformImages[platform.platform.name]}`}
-              alt={platform.platform.name}
-            />
-          ))}
-        </p>
+        <br />
         <p>
           {game.genres.map((genre) => (
             <span key={genre.id}>{genre.name}, </span>
