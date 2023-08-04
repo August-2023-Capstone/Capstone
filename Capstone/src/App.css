@@ -880,6 +880,7 @@ li p:nth-child(2) {
 }
 .ProfileGameCardContainer {
   display: flex;
+  padding-left: 230px;
 }
 .profilePage {
   background-color: #151515;
@@ -926,7 +927,7 @@ li p:nth-child(2) {
 
   gap: 5px;
   padding-top: 10px;
-  padding-left: 400px;
+  padding-left: 375px;
 }
 .ProfileGamertag {
   background-color: #202020;
