@@ -1,24 +1,42 @@
 /** @format */
-
-import React from "react";
-import CreateUserForm from "./CreateUserForm";
-import Carousel from "./Carousel";
-
+import React, { useState, useEffect } from "react";
 import HomeCarouselOne from "./HomeCarouselOne";
 import ChatBox from "./ChatBox";
+import Login from "./Login";
 
 const HomePage = () => {
-	return (
-		<div className='HomePage'>
-			{/* <CreateUserForm />  
-      <Carousel /> */}
-			<h2 className='NewReleases'>New and trending</h2>
-			<HomeCarouselOne />
-			<h2 className='NewReleases'>Recently released</h2>
-			<HomeCarouselOne />
-			<ChatBox />
-		</div>
-	);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const userIsLoggedIn = false;
+      if (!userIsLoggedIn) {
+        setShowLoginModal(true);
+      }
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="HomePage">
+      <h2 className="NewReleases">New and trending</h2>
+      <HomeCarouselOne />
+      <h2 className="NewReleases">Recently released</h2>
+      <HomeCarouselOne />
+      <ChatBox />
+      {showLoginModal && (
+        <div
+          onClick={() => setShowLoginModal(false)}
+          className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex items-center justify-center z-10"
+        >
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <Login />
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default HomePage;
