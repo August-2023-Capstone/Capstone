@@ -94,26 +94,6 @@
   grid-column: 1 / span 3; /* Place the carousel in the first three columns */
 }
 
-.friendsList {
-  background-color: #747474;
-  padding: 10px;
-  border-radius: 8px;
-  grid-column: 4; /* Place the friends list in the fourth column */
-}
-
-.friendsList h2 {
-  margin-top: 0;
-}
-
-.friendsList ul {
-  list-style: none;
-  padding: 0;
-}
-
-.friendsList li {
-  margin: 5px 0;
-}
-
 /* Assuming the class name for the button container is "button-container" */
 /* Assuming the class name for the "Sign Up" button is "signup-button" */
 /* Assuming the class name for the "Login" button is "login-button" */
@@ -506,16 +486,7 @@ li p:nth-child(2) {
 .friendsList li {
   margin: 5px 0;
 } */
-/* .carouselContainer {
-  border: 5px black solid;
-  max-width: 100%;
-  max-height: 100%;
-  margin-left: 60px;
-  padding-top: 30px;
-  padding-left: 60px;
-  background-color: #444444;
-  border-radius: 8px;
-} */
+
 .content {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -525,26 +496,6 @@ li p:nth-child(2) {
 
 .gameCarousel {
   grid-column: 1 / span 3; /* Place the carousel in the first three columns */
-}
-
-.friendsList {
-  background-color: #747474;
-  padding: 10px;
-  border-radius: 8px;
-  grid-column: 4; /* Place the friends list in the fourth column */
-}
-
-.friendsList h2 {
-  margin-top: 0;
-}
-
-.friendsList ul {
-  list-style: none;
-  padding: 0;
-}
-
-.friendsList li {
-  margin: 5px 0;
 }
 
 /* Assuming the class name for the button container is "button-container" */
@@ -926,4 +877,97 @@ li p:nth-child(2) {
 }
 .PlatformLogosContainer {
   display: flex;
+}
+.ProfileGameCardContainer {
+  display: flex;
+  padding-left: 230px;
+}
+.profilePage {
+  background-color: #151515;
+  min-height: 100vh;
+}
+.ProfileGameCard {
+  width: 170px;
+  background-color: #202020;
+  border: 1px solid black;
+  display: block;
+
+  text-align: center;
+  margin: 5px; /* Add some margin between game cards */
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+}
+.ProfileGameCardImage {
+  border-radius: 10px 10px 0 0;
+}
+.ProfileGameCardButton {
+  font-weight: bolder;
+  font-size: larger;
+  margin-left: 130px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #373737;
+  color: white;
+  border: none;
+  border-radius: 10%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+.ProfileGameCardTitle {
+  font-size: larger;
+  font-weight: 700;
+}
+.ProfileGameCardInfo {
+  font-size: small;
+}
+.ProfileData {
+  display: flex;
+
+  gap: 5px;
+  padding-top: 10px;
+  padding-left: 375px;
+}
+.ProfileGamertag {
+  background-color: #202020;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+.ProfileTimezone {
+  background-color: #202020;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+.ProfilePlatform {
+  background-color: #202020;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+.friendsList {
+  background-color: #202020;
+  padding: 10px;
+  border-radius: 8px;
+  grid-column: 4; /* Place the friends list in the fourth column */
+  min-height: 100vh;
+}
+
+.friendsList h2 {
+  margin-top: 0;
+  font-size: larger;
+  font-weight: 500;
+  color: white;
+}
+
+.friendsList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.friendsList li {
+  margin: 5px 0;
+  background-color: #373737;
 }
