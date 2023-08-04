@@ -2,18 +2,23 @@ import React from "react";
 
 import "../App.css";
 
-import Carousel from "./Carousel";
 import FriendsList from "./FriendsList";
+import ProfileData from "./ProfileData";
+
+import ProfileGameCards from "./ProfileGameCards";
 
 const ProfilePage = () => {
   return (
     <div className="profilePage">
-      <div className="content">
-        <div className="gameCarousel">
-          <Carousel />
-        </div>
-        <div className="friendsList">
-          <FriendsList />
+      <div>
+        <ProfileData />
+        <div className="content">
+          <div>
+            <ProfileGameCards />
+          </div>
+          <div className="friendsList">
+            <FriendsList />
+          </div>
         </div>
       </div>
     </div>
