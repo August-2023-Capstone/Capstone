@@ -18,17 +18,21 @@
   text-align: center;
 } */
 .gameCardButton {
-	margin-left: 50px;
-	margin-bottom: 10px;
-	cursor: pointer;
-	background-color: purple;
-	color: white;
-	border: none;
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	font-size: 24px;
+  margin-left: 50px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: purple;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
 }
+/* .gameCard img {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  width: 100%;
+} */
 
 /* PROFILE PAGE CSS */
 
@@ -41,13 +45,12 @@
 } */
 
 /* Navbar style */
-
 .navbar {
-	background-color: #747474;
-	color: white;
-	padding: 10px;
-	width: 100%;
-	text-align: center;
+  background-color: #747474;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
 }
 
 /* .content {
@@ -81,34 +84,34 @@
   border-radius: 8px;
 } */
 .content {
-	display: grid;
-	grid-template-columns: 3fr 1fr;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
 
-	padding-top: 10px;
+  padding-top: 10px;
 }
 
 .gameCarousel {
-	grid-column: 1 / span 3; /* Place the carousel in the first three columns */
+  grid-column: 1 / span 3; /* Place the carousel in the first three columns */
 }
 
 .friendsList {
-	background-color: #747474;
-	padding: 10px;
-	border-radius: 8px;
-	grid-column: 4; /* Place the friends list in the fourth column */
+  background-color: #747474;
+  padding: 10px;
+  border-radius: 8px;
+  grid-column: 4; /* Place the friends list in the fourth column */
 }
 
 .friendsList h2 {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .friendsList ul {
-	list-style: none;
-	padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .friendsList li {
-	margin: 5px 0;
+  margin: 5px 0;
 }
 
 /* Assuming the class name for the button container is "button-container" */
@@ -116,362 +119,811 @@
 /* Assuming the class name for the "Login" button is "login-button" */
 
 .button-container {
-	display: flex;
-	gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .signup-button,
 .login-button {
-	padding: 10px 20px;
-	font-size: 16px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .signup-button {
-	background-color: #0073b1; /* LinkedIn Blue color */
-	background-color: #ffffff; /* White background for Login button */
-	color: #0073b1; /* LinkedIn Blue color for text */
-	border: 1px solid #0073b1; /* Add a blue border for the Login button */
+  background-color: #0073b1; /* LinkedIn Blue color */
+  background-color: #ffffff; /* White background for Login button */
+  color: #0073b1; /* LinkedIn Blue color for text */
+  border: 1px solid #0073b1; /* Add a blue border for the Login button */
 }
 
 .login-button {
-	background-color: #ffffff; /* White background for Login button */
-	color: #0073b1; /* LinkedIn Blue color for text */
-	border: 1px solid #0073b1; /* Add a blue border for the Login button */
+  background-color: #ffffff; /* White background for Login button */
+  color: #0073b1; /* LinkedIn Blue color for text */
+  border: 1px solid #0073b1; /* Add a blue border for the Login button */
 }
 
 .signup-button:hover,
 .login-button:hover {
-	background-color: #005a8e; /* Slightly darker shade on hover */
+  background-color: #005a8e; /* Slightly darker shade on hover */
 }
 .Input-field {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .Input-field label {
-	display: block;
-	margin-bottom: 5px;
-	font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .Input-field input {
-	width: 150px; /* Adjust the width as needed */
-	padding: 8px;
-	font-size: 16px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
+  width: 150px; /* Adjust the width as needed */
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 /* Arrange the input fields side by side */
 .input-container {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 /* Styling for the chat container */
 .chat-container {
-	display: flex;
-	flex-direction: row;
-	height: fit-content;
-	width: fit-content;
-	background-color: #f1f1f1;
-	border-radius: 10px;
-	overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Styling for the messages list */
+/* Style for the messages list */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 500px;
+  overflow-y: auto;
+}
+
+li {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: grey;
+  color: whitesmoke;
+}
+
+/* Styling for the message sender, time, and content */
+li p {
+  margin: 0;
+}
+
+li p:nth-child(1) {
+  font-weight: bold;
+  color: #7289da; /* Discord Blue color */
+}
+
+li p:nth-child(2) {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Styling for the message input form */
+.message-box {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.message-box input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.message-box button[type="submit"] {
+  padding: 8px 15px;
+  background-color: #007bff; /* Discord Blue color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.message-box button[type="submit"]:hover {
+  background-color: #0056b3; /* Slightly darker shade on hover */
+}
+
+/* Add this CSS in your main component's CSS or in a separate CSS file */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.avatar-modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+}
+
+.avatar-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.avatar-option {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 80px;
+}
+
+.avatar-option:hover {
+  background-color: #f5f5f5;
+}
+
+.avatar-option.selected {
+  border-color: #007bff;
+}
+
+.avatar-option img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  margin-left: 10px;
+  background-color: purple;
+}
+
+.createUserForm {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #747474;
+  margin-top: 30px;
+}
+.createUserForm Label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.createUserForm input,
+.createUserForm select,
+.createUserForm button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.createUserForm button:hover {
+  background-color: #e7625f; /* Change the background color on hover */
+}
+.createUserForm select {
+  appearance: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.chat-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: gray;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+/* Styling for the list of messages */
+.message-list {
+  list-style: none;
+  padding: 0;
+}
+
+.message-list li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Styling for the message input box and send button */
+.message-box {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.message-box input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.message-box button {
+  margin-left: 10px;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.message-box button:hover {
+  background-color: #0056b3;
+}
+.gameCard {
+  width: 250px;
+  background-color: #ddd;
+  border: 1px solid black;
+  display: block;
+
+  text-align: center;
+  margin: 5px; /* Add some margin between game cards */
+}
+
+.carouselContainer {
+  border: 5px black solid;
+  max-width: 70%;
+  max-height: 100%;
+  margin-left: 60px;
+  padding-top: 30px;
+  padding-left: 60px;
+  background-color: #444444;
+  border-radius: 8px;
+  display: flex; /* Use flexbox to align carousel items */
+  flex-wrap: wrap; /* Wrap items to the next row if necessary */
+  justify-content: center; /* Center the items horizontally */
+}
+.Chat-Icon {
+  width: 50px;
+}
+
+.chat-close {
+  display: flex;
+  justify-content: flex-end;
+  width: 70px;
+}
+
+.Chat-Box-Popup {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Close-Icon {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+/**
+ * GAME CARD CSS
+ *
+ * @format
+ */
+
+@import "react-alice-carousel/lib/alice-carousel.css";
+
+/* .gameCard {
+  width: 250px;
+
+  background-color: #ddd;
+  border: 1px solid black;
+  display: block;
+
+  padding-top: 10px;
+
+  text-align: center;
+} */
+.gameCardButton {
+  margin-left: 50px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: purple;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+}
+
+/* PROFILE PAGE CSS */
+
+/* Main container for the profile page */
+/* .profilePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+} */
+
+/* Navbar style */
+
+.navbar {
+  background-color: #747474;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+/* .content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+} */
+
+/* .friendsList h2 {
+  margin-top: 0;
+}
+
+.friendsList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.friendsList li {
+  margin: 5px 0;
+} */
+/* .carouselContainer {
+  border: 5px black solid;
+  max-width: 100%;
+  max-height: 100%;
+  margin-left: 60px;
+  padding-top: 30px;
+  padding-left: 60px;
+  background-color: #444444;
+  border-radius: 8px;
+} */
+.content {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+
+  padding-top: 10px;
+}
+
+.gameCarousel {
+  grid-column: 1 / span 3; /* Place the carousel in the first three columns */
+}
+
+.friendsList {
+  background-color: #747474;
+  padding: 10px;
+  border-radius: 8px;
+  grid-column: 4; /* Place the friends list in the fourth column */
+}
+
+.friendsList h2 {
+  margin-top: 0;
+}
+
+.friendsList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.friendsList li {
+  margin: 5px 0;
+}
+
+/* Assuming the class name for the button container is "button-container" */
+/* Assuming the class name for the "Sign Up" button is "signup-button" */
+/* Assuming the class name for the "Login" button is "login-button" */
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.signup-button,
+.login-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button {
+  background-color: #0073b1; /* LinkedIn Blue color */
+  background-color: #ffffff; /* White background for Login button */
+  color: #0073b1; /* LinkedIn Blue color for text */
+  border: 1px solid #0073b1; /* Add a blue border for the Login button */
+}
+
+.login-button {
+  background-color: #ffffff; /* White background for Login button */
+  color: #0073b1; /* LinkedIn Blue color for text */
+  border: 1px solid #0073b1; /* Add a blue border for the Login button */
+}
+
+.signup-button:hover,
+.login-button:hover {
+  background-color: #005a8e; /* Slightly darker shade on hover */
+}
+.Input-field {
+  margin-bottom: 10px;
+}
+
+.Input-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.Input-field input {
+  width: 150px; /* Adjust the width as needed */
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Arrange the input fields side by side */
+.input-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+/* Styling for the chat container */
+.chat-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #eee;
 }
 
 /* Styling for the messages list */
 /* Style for the messages list */
 
+/* Styling for the message sender, time, and content */
+li p {
+  margin: 0;
+}
+
+li p:nth-child(1) {
+  font-weight: bold;
+  color: #7289da; /* Discord Blue color */
+}
+
+li p:nth-child(2) {
+  font-size: 12px;
+  color: #888;
+}
+
 /* Styling for the message input form */
 .message-box {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	max-width: 500px;
-	margin-top: 20px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
 }
 
 .message-box input[type="text"] {
-	flex: 1;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 8px 0 0 8px;
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px 0 0 8px;
 }
 
 .message-box button[type="submit"] {
-	padding: 10px 20px;
-	background-color: #7289da; /* Discord Blue color */
-	color: white;
-	border: none;
-	border-radius: 0 8px 8px 0;
-	margin-left: 10px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  background-color: #7289da; /* Discord Blue color */
+  color: white;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .message-box button[type="submit"]:hover {
-	background-color: #5865a3; /* Slightly darker shade on hover */
+  background-color: #5865a3; /* Slightly darker shade on hover */
 }
+*/ */
 
 /* Add this CSS in your main component's CSS or in a separate CSS file */
 .modal-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
 }
 
 .avatar-modal {
-	background-color: #fff;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
 }
 
 .avatar-options {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .avatar-option {
-	cursor: pointer;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 8px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	width: 80px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 80px;
 }
 
 .avatar-option:hover {
-	background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .avatar-option.selected {
-	border-color: #007bff;
+  border-color: #007bff;
 }
 
 .avatar-option img {
-	width: 60px;
-	height: 60px;
-	object-fit: cover;
-	border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .modal-buttons {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 .modal-buttons button {
-	margin-left: 10px;
-	background-color: purple;
+  margin-left: 10px;
+  background-color: purple;
 }
 
 .createUserForm {
-	max-width: 400px;
-	margin: 0 auto;
-	padding: 20px;
-	border: 1px solid #ccc;
-	border-radius: 8px;
-	background-color: #747474;
-	margin-top: 30px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #747474;
+  margin-top: 30px;
 }
 .createUserForm Label {
-	display: block;
-	margin-bottom: 5px;
-	font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 .createUserForm input,
 .createUserForm select,
 .createUserForm button {
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 15px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 .createUserForm button:hover {
-	background-color: #e7625f; /* Change the background color on hover */
+  background-color: #e7625f; /* Change the background color on hover */
 }
 .createUserForm select {
-	appearance: none;
-	background-color: #fff;
-	cursor: pointer;
+  appearance: none;
+  background-color: #fff;
+  cursor: pointer;
 }
 
 .chat-container {
-	max-width: 600px;
-	margin: 0 auto;
-	padding: 20px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+
+  border-radius: 5px;
 }
 
 /* Styling for the list of messages */
 .message-list {
-	list-style: none;
-	padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .message-list li {
-	margin-bottom: 10px;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 /* Styling for the message input box and send button */
 .message-box {
-	display: flex;
-	align-items: center;
-	margin-top: 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .message-box input {
-	flex: 1;
-	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .message-box button {
-	margin-left: 10px;
-	padding: 8px 15px;
-	background-color: #007bff;
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
+  margin-left: 10px;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .message-box button:hover {
-	background-color: #0056b3;
+  background-color: #0056b3;
 }
 .gameCard {
-	width: 250px;
-	background-color: #ddd;
-	border: 1px solid black;
-	display: block;
+  width: 250px;
+  background-color: #ddd;
+  border: 1px solid black;
+  display: block;
 
-	text-align: center;
-	margin: 5px; /* Add some margin between game cards */
+  text-align: center;
+  margin: 5px; /* Add some margin between game cards */
 }
 .gameCard img {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-	width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  width: 100%;
 }
 .carouselContainer {
-	border: 5px black solid;
-	max-width: 70%;
-	max-height: 100%;
-	margin-left: 60px;
-	padding-top: 30px;
-	padding-left: 60px;
-	background-color: #444444;
-	border-radius: 8px;
-	display: flex; /* Use flexbox to align carousel items */
-	flex-wrap: wrap; /* Wrap items to the next row if necessary */
-	justify-content: center; /* Center the items horizontally */
+  border: 5px black solid;
+  max-width: 70%;
+  max-height: 100%;
+  margin-left: 60px;
+  padding-top: 30px;
+  padding-left: 60px;
+  background-color: #444444;
+  border-radius: 8px;
+  display: flex; /* Use flexbox to align carousel items */
+  flex-wrap: wrap; /* Wrap items to the next row if necessary */
+  justify-content: center; /* Center the items horizontally */
 }
 .Chat-Icon {
-	width: 50px;
+  width: 50px;
 }
 
 .chat-close {
-	display: flex;
-	justify-content: flex-end;
-	width: 70px;
+  display: flex;
+  justify-content: flex-end;
+  width: 70px;
 }
 
 .Chat-Box-Popup {
-	display: flex;
-	justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
+
 .Close-Icon {
-	width: 20px;
-	transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
-
-.Close-Icon:hover {
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add glow effect on hover */
-}
-
 .HomeCarouselContainer {
-	/* border: 2px black solid; */
-	max-width: 70%;
-	max-height: 100%;
+  /* border: 2px black solid; */
+  max-width: 70%;
+  max-height: 100%;
 
-	margin-left: 230px;
-	margin-bottom: 20px;
-	padding-top: 30px;
-	padding-left: 60px;
-	background-color: #151515;
-	border-radius: 8px;
-	display: flex; /* Use flexbox to align carousel items */
-	flex-wrap: wrap; /* Wrap items to the next row if necessary */
-	justify-content: center; /* Center the items horizontally */
+  margin-left: 200px;
+  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-left: 60px;
+  background-color: #151515;
+  border-radius: 8px;
+  display: flex; /* Use flexbox to align carousel items */
+  flex-wrap: wrap; /* Wrap items to the next row if necessary */
+  justify-content: center; /* Center the items horizontally */
 }
 .HomeGameCard {
-	width: 200px;
-	background-color: #202020;
-	border: 1px solid black;
-	display: block;
+  width: 170px;
+  background-color: #202020;
+  border: 1px solid black;
+  display: block;
 
-	text-align: center;
-	margin: 5px; /* Add some margin between game cards */
-	border-radius: 10px;
-	color: white;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  text-align: center;
+  margin: 5px; /* Add some margin between game cards */
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
 }
-.HomeGameCard img {
-	border-radius: 10px 10px 0 0;
+.HomeGameCardImage {
+  border-radius: 10px 10px 0 0;
 }
 .HomeGameCardButton {
-	font-weight: bolder;
-	font-size: larger;
-	margin-left: 150px;
-	margin-bottom: 10px;
-	cursor: pointer;
-	background-color: #373737;
-	color: white;
-	border: none;
-	border-radius: 10%;
-	width: 30px;
-	height: 30px;
-	text-align: center;
+  font-weight: bolder;
+  font-size: larger;
+  margin-left: 130px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #373737;
+  color: white;
+  border: none;
+  border-radius: 10%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
 }
 .HomeGameCardTitle {
-	font-size: larger;
-	font-weight: 700;
+  font-size: larger;
+  font-weight: 700;
 }
 .HomeGameCardInfo {
-	font-size: small;
+  font-size: small;
 }
 .HomePage {
-	background-color: #151515;
+  background-color: #151515;
 }
 .NewReleases {
-	color: white;
-	font-size: xxx-large;
-	font-weight: 900;
-	text-align: center;
+  color: white;
+  font-size: xxx-large;
+  font-weight: 900;
+  text-align: center;
 }
 .PlatformLogos {
-	width: 20px;
-	height: 20px;
+  width: 18px;
+  height: 18px;
+  padding-left: 3px;
+  padding-top: 3px;
+}
+.PlatformLogosContainer {
+  display: flex;
 }

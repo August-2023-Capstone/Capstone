@@ -8,10 +8,6 @@ import FriendsList from "./FriendsList";
 const ProfilePage = () => {
   return (
     <div className="profilePage">
-      <div className="navbar">
-        {/* Navbar content */}
-        <h1>Daniels navbar will go here</h1>
-      </div>
       <div className="content">
         <div className="gameCarousel">
           <Carousel />
