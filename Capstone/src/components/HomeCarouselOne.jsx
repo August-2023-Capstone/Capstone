@@ -39,7 +39,7 @@ const usersCurrentGames = [
 
 const HomeCarouselOne = () => {
   const [gameArray, setGameArray] = useState([]);
-  const [slidesToShow, setSlidesToShow] = useState(4);
+  const [slidesToShow, setSlidesToShow] = useState(5);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +51,7 @@ const HomeCarouselOne = () => {
         const jsonData = await response.json();
 
         setGameArray(jsonData.results);
-        setSlidesToShow(Math.min(jsonData.results.length, 4));
+        setSlidesToShow(Math.min(jsonData.results.length, 5));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -64,7 +64,7 @@ const HomeCarouselOne = () => {
     return (
       <button
         className={`${className} custom-prev-arrow`}
-        style={{ ...style, left: "10px" }}
+        style={{ ...style, left: "40px" }}
         onClick={onClick}
       >
         Previous
@@ -77,7 +77,7 @@ const HomeCarouselOne = () => {
     return (
       <button
         className={`${className} custom-next-arrow`}
-        style={{ ...style, right: "10px" }}
+        style={{ ...style, right: "1px" }}
         onClick={onClick}
       >
         Next
