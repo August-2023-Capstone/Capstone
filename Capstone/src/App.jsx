@@ -9,12 +9,14 @@ import UsersPage from "./components/UsersPage";
 import FriendSearchPage from "./components/FriendSearchPage";
 import ChatMessagePage from "./components/ChatMessagePage";
 import ProfilePage from "./components/ProfilePage";
+import TestLogIn2 from "./components/TestLogIn2";
 // import { useState, useEffect } from "react";
 
 function App() {
   return (
     <Router>
       <Navbar />
+      {/* <TestLogIn2 /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/users" element={<UsersPage />} />
