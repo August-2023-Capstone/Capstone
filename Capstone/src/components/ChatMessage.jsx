@@ -1,14 +1,16 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 import supabaseConfig from "../../../supabase";
-import CSS from "../app.css";
+import CSS from "../MessageBox.css";
 import ChatBox from "./ChatBox";
 import CloseButton from "../assets/icons/closebutton.png";
+import ChatUsers from "./ChatUsers";
 
 function ChatMessage({ toggleChat }) {
 	const [chatMessages, setChatMessages] = useState([]);
+	const [showCloseButton, setShowCloseButton] = useState(true);
 	const [newMessage, setNewMessage] = useState("");
 	const { supabaseUrl, supabaseKey } = supabaseConfig;
 	const [chatData, setChatData] = useState({
@@ -17,6 +19,78 @@ function ChatMessage({ toggleChat }) {
 		sender_username: "",
 		receiver_username: "",
 	});
+	const inputRef = useRef(null); // Add this line to define the inputRef
+	const scrolledToBottomRef = useRef(true); // Use true initially to scroll to bottom on first load
+	const isScrollingRef = useRef(false); // Ref to track if the user is actively scrolling
+
+	// Function to scroll to the bottom of the page on page load or component re-render
+	useEffect(() => {
+		scrollToBottomOnce(); // Call the function only once
+
+		const handleScroll = () => {
+			const chatContainer = inputRef.current;
+			if (chatContainer) {
+				const isScrolledToBottom =
+					chatContainer.scrollTop + chatContainer.clientHeight ===
+					chatContainer.scrollHeight;
+
+				if (isScrolledToBottom) {
+					scrolledToBottomRef.current = true; // Update scrolledToBottomRef when the user scrolls to the bottom
+				} else {
+					scrolledToBottomRef.current = false; // User is actively scrolling, set it to false
+					isScrollingRef.current = true; // Set isScrollingRef to true when the user starts scrolling
+				}
+			}
+		};
+
+		setShowCloseButton(false);
+
+		// Attach the scroll event listener to the chat container
+		if (inputRef.current) {
+			inputRef.current.addEventListener("scroll", handleScroll);
+		}
+
+		return () => {
+			// Clean up the event listener on unmount
+			if (inputRef.current) {
+				inputRef.current.removeEventListener("scroll", handleScroll);
+			}
+		};
+	}, []);
+
+	useEffect(() => {
+		// Scroll to the bottom when chatMessages state is updated
+		if (!isScrollingRef.current) {
+			scrollToBottom();
+		}
+	}, [chatMessages]);
+
+	useEffect(() => {
+		// If the user was actively scrolling and chat messages updated,
+		// we need to scroll to bottom after a small delay to prevent
+		// auto-scrolling down while the user is still scrolling up
+		if (isScrollingRef.current) {
+			setTimeout(() => {
+				scrollToBottom();
+				isScrollingRef.current = false; // Reset isScrollingRef after the delay
+			}, 200);
+		}
+	}, [chatMessages]);
+
+	// Move the scrollToBottom function outside the component
+	const scrollToBottom = () => {
+		if (inputRef.current) {
+			inputRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+		}
+	};
+
+	// Function to scroll to the bottom of the chat container once
+	const scrollToBottomOnce = () => {
+		if (inputRef.current) {
+			inputRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+		}
+	};
+
 	const [showModal, setShowModal] = useState(false); // State for the modal visibility
 	const [usersData, setUsersData] = useState([]); // State for storing users data
 
@@ -63,10 +137,10 @@ function ChatMessage({ toggleChat }) {
 			// Insert the new message into the chatmessages table
 			const { data, error } = await supabase.from("chatmessages").insert([
 				{
-					sender_id: 1, // Replace with the actual ID or username
+					sender_id: currentUserID,
 					receiver_id: 2, // Replace with the ID of the receiver user
-					sender_username: chatData.sender_username,
-					receiver_username: chatData.receiver_username,
+					sender_username: getUsernameById(currentUserID), // Use getUsernameById to get the sender username
+					receiver_username: getUsernameById(2), // Use getUsernameById to get the receiver username
 					message: newMessage,
 					recievetime: new Date().toISOString(),
 					sendtime: new Date().toISOString(),
@@ -80,6 +154,7 @@ function ChatMessage({ toggleChat }) {
 				console.log("Message sent successfully:", data);
 				setNewMessage(""); // Clear the input field after sending the message
 				fetchChatData(); // Refresh the chat messages after sending a new message
+				scrollToInputField(); // Scroll to the input field after sending a new message
 			}
 		} catch (error) {
 			console.error("Error sending message:", error);
@@ -129,44 +204,56 @@ function ChatMessage({ toggleChat }) {
 		return user ? user.username : "Unknown User";
 	};
 
+	// Function to scroll to the input field
+	const scrollToInputField = () => {
+		if (inputRef.current) {
+			inputRef.current.scrollIntoView({ behavior: "smooth", block: "bottom" });
+		}
+	};
+
 	return (
-		<div className='chat-container'>
-			<button className='chat-close' onClick={toggleChat}>
-				<img className='Close-Icon' src={CloseButton} alt='Close Chat' />
-			</button>
-			<ul>
-				{chatMessages.map((chatMessage) => (
-					<li
-						key={chatMessage.id}
-						className={
-							chatMessage.sender_id === 1
-								? "sender-message"
-								: "receiver-message"
-						}>
-						<p>Receiver: {getUsernameById(chatMessage.receiver_id)}</p>
-						<p>Sender: {getUsernameById(chatMessage.sender_id)}</p>
-						<p>Message: {chatMessage.message}</p>
-						<p>Receive Time: {chatMessage.recievetime}</p>
-						<p>Send Time: {chatMessage.sendtime}</p>
-					</li>
-				))}
-			</ul>
-			<div>
-				{showModal && <div className='modal'>Please enter a message!</div>}
-				<div>
-					<input
-						type='text'
-						value={newMessage}
-						onChange={(e) => setNewMessage(e.target.value)}
-						onKeyDown={handleKeyDown} // Add the onKeyDown event listener
-						placeholder='Type your message...'
-					/>
-					<button type='button' onClick={handleSendMessage}>
-						Send Message
-					</button>
+		<>
+			<div className='chat-container'>
+				<div className='chat-users'>
+					<ChatUsers />
+				</div>
+				<div className='chat-messages'>
+					<ul ref={inputRef}>
+						{/* Add the ref here */}
+						{chatMessages.map((chatMessage) => (
+							<li
+								key={chatMessage.id}
+								className={
+									chatMessage.sender_id === 1
+										? "sender-message"
+										: "receiver-message"
+								}>
+								<p>Receiver: {getUsernameById(chatMessage.receiver_id)}</p>
+								<p>Sender: {getUsernameById(chatMessage.sender_id)}</p>
+								<p>Message: {chatMessage.message}</p>
+								<p>Receive Time: {chatMessage.recievetime}</p>
+								<p>Send Time: {chatMessage.sendtime}</p>
+							</li>
+						))}
+					</ul>
+					<div>
+						{showModal && <div className='modal'>Please enter a message!</div>}
+						<div>
+							<input
+								type='text'
+								value={newMessage}
+								onChange={(e) => setNewMessage(e.target.value)}
+								onKeyDown={handleKeyDown} // Add the onKeyDown event listener
+								placeholder='Type your message...'
+							/>
+							<button type='button' onClick={handleSendMessage}>
+								Send Message
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

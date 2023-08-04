@@ -1,0 +1,37 @@
+/**
+ * ChatBox.css
+ *
+ * @format
+ */
+
+/* Styling for the chat icon */
+.Chat-Icon {
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+
+/* Styling for the chat popup container */
+.Chat-Box-Popup {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 50px; /* Set the width to make it small */
+	height: 50px; /* Set the height to make it small */
+	z-index: 999;
+}
+
+/* Styling for the expanded chat container */
+.chat-popup {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 350px;
+	max-height: 700px;
+	background-color: #f0f0f0;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	z-index: 999;
+	overflow: hidden;
+}

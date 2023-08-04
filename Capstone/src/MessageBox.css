@@ -1,0 +1,65 @@
+/** @format */
+
+.chat-container {
+	display: flex;
+	flex-direction: row;
+	height: fit-content;
+	min-width: 100vw; /* Adjust the minimum width as needed */
+	background-color: #f1f1f1;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+/* Styling for the chat users list */
+.chat-users-container {
+	flex: 1;
+}
+
+.chat-users {
+	flex: 1;
+	padding: 20px;
+	background-color: #f1f1f1;
+	border-right: 1px solid #ccc;
+	overflow-y: auto;
+}
+
+/* Styling for the chat messages */
+.chat-messages {
+	flex: 3;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	overflow-y: auto;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	max-width: 500px;
+	overflow-y: auto;
+}
+
+li {
+	padding: 10px;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	background-color: #f0f0f0;
+}
+
+/* Styling for the message sender, time, and content */
+li p {
+	margin: 0;
+}
+
+li p:nth-child(1) {
+	font-weight: bold;
+	color: #7289da; /* Discord Blue color */
+}
+
+li p:nth-child(2) {
+	font-size: 12px;
+	color: #888;
+}
