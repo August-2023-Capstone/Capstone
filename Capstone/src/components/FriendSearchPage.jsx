@@ -20,7 +20,6 @@ const GamerList = () => {
   const gamerInfoList = [
     { name: "Gamer 1", status: "Online" },
     { name: "Gamer 2", status: "Offline" },
-    // ... add more gamer info
   ];
 
   return (

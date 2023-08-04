@@ -1,18 +1,18 @@
 /** @format */
-
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import avatar from "../assets/icons/image0copy.png";
-import homeIcon from "../assets/icons/home.png";
 import speechBubbleIcon from "../assets/icons/speechbubble.png";
 import settingsIcon from "../assets/icons/settings.png";
 import magnify from "../assets/icons/magnify.png";
 import x from "../assets/icons/x.png";
+import Login from "./Login";
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const dropdownRef = useRef(null);
 
@@ -102,7 +102,7 @@ const Navbar = () => {
             >
               {searchResults.map((game) => (
                 <Link
-                  to={`/game/${game.id}`} // Replace with the actual link
+                  to={`/game/${game.id}`}
                   key={game.name}
                   className="block p-2 hover:bg-[#444444] flex items-center"
                 >
@@ -136,9 +136,6 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex items-center">
-        {/* <Link to="/" className="mr-4">
-          <img src={homeIcon} alt="Home Icon" className="w-10 h-10" />
-        </Link> */}
         <Link to="/chat" className="mr-4">
           <img
             src={speechBubbleIcon}
@@ -152,6 +149,22 @@ const Navbar = () => {
         <Link to="/settings">
           <img src={settingsIcon} alt="Settings Icon" className="w-10 h-10" />
         </Link>
+        <button
+          onClick={() => setShowLoginModal(true)}
+          className="text-white mr-4"
+        >
+          Login
+        </button>
+        {showLoginModal && (
+          <div
+            onClick={() => setShowLoginModal(false)}
+            className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex items-center justify-center z-10"
+          >
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <Login />
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
