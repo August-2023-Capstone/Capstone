@@ -8,16 +8,27 @@
 .chat-users-container {
 	flex: 1;
 	display: flex;
-	flex-direction: column; /* Ensure the chat users are stacked vertically */
-	overflow: hidden; /* Hide any overflowing content */
+	flex-direction: column;
+	overflow: hidden;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* Styling for each user in the list */
+.chat-users-container .user {
+	display: flex;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc; /* Add a bottom border for the divider */
+}
+
+/* Styling for the chat users */
 .chat-users {
 	flex: 1;
 	padding: 10px;
 	background-color: #f1f1f1;
-	border-right: 1px solid #ccc;
-	overflow-y: auto; /* Add vertical scroll for overflowing content */
+	border-right: 3px solid #ccc;
+	overflow-y: auto;
+	align-self: flex-start; /* Align to the top */
 }
 
 /* Avatar for each user (you can use an image or custom avatar icon) */
