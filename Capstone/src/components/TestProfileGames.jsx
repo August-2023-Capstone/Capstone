@@ -6,14 +6,26 @@ const TestProfileGames = () => {
 
   useEffect(() => {
     const fetchProfileGames = async () => {
-      const { data, error } = await supabase.from("games").select();
+      const { data, error } = await supabase.from("linked_games").select(
+        `
+          games (
+            id,
+            name,
+            genre,
+            art,
+            platform
+          )
+          `
+      );
 
       console.log(data);
 
       if (error) {
         console.error("Error fetching data:", error);
       } else {
-        setProfileGames(data);
+        // The 'games' property within each object contains an array of game data
+        const gamesData = data.map((item) => item.games);
+        setProfileGames(gamesData);
       }
     };
 
@@ -24,12 +36,12 @@ const TestProfileGames = () => {
   return (
     <div>
       <h1>Games List</h1>
-      {profileGames.map((profile) => (
-        <div key={profile.id}>
-          <p>gamertag: {profile.gamertag}</p>
-          <p>Timezone: {profile.timezone}</p>
-          <p>Platform: {profile.platform}</p>
-          {/* Add other profile properties as needed */}
+      {profileGames.map((game) => (
+        <div key={game.id}>
+          <h3>{game.name}</h3>
+          <p>Genre: {game.genre}</p>
+          <p>Platform: {game.platform}</p>
+          <img src={game.art} alt={game.name} />
         </div>
       ))}
     </div>
