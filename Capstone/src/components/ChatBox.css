@@ -12,26 +12,25 @@
 }
 
 /* Styling for the chat popup container */
-.Chat-Box-Popup {
+/* .Chat-Box-Popup {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
-	width: 50px; /* Set the width to make it small */
-	height: 50px; /* Set the height to make it small */
-	z-index: 999;
-}
+	width: 400px; 
+	max-height: 800px; 
+} */
 
 /* Styling for the expanded chat container */
 .chat-popup {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
-	width: 350px;
-	max-height: 700px;
-	background-color: #f0f0f0;
+	width: 400px; /* Decreased the width slightly */
+	max-height: 600px; /* Decreased the max height */
+	background-color: #0a0a0a;
 	border: 1px solid #ccc;
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	z-index: 999;
-	overflow: hidden;
+	overflow-y: auto; /* Added overflow-y to enable scrolling */
 }
