@@ -4,8 +4,67 @@ import Playstation from "../assets/Logos/PlaystationLogo.png";
 import Windows from "../assets/Logos/WindowsLogo.png";
 import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
+import supabase from "../../../supabase";
 
 const HomeGameCard = ({ game }) => {
+  const handleAddToDatabase = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    // Prepare the data for insertion into the games table
+    const gameData = {
+      name: game.name,
+      genre: game.genres,
+      art: game.background_image,
+      platform: game.platforms,
+      // Other properties as needed
+    };
+
+    // Insert the data into the games table
+    const { error: gameInsertError } = await supabase
+      .from("games")
+      .insert(gameData);
+
+    if (gameInsertError) {
+      console.error("Error inserting game data:", gameInsertError);
+    } else {
+      console.log("Game data inserted successfully");
+
+      // Find the ID of the inserted game by name
+      const { data: gameSelectData, error: gameSelectError } = await supabase
+        .from("games")
+        .select("id")
+        .eq("name", game.name)
+        .single();
+
+      if (gameSelectError) {
+        console.error("Error selecting game data:", gameSelectError);
+      } else {
+        console.log("Game selected successfully:", gameSelectData);
+
+        // Insert a row into the linked_games table
+        const linkedGameData = {
+          user_id: user.id,
+          game_id: gameSelectData.id,
+        };
+
+        const { error: linkedGameInsertError } = await supabase
+          .from("linked_games")
+          .insert([linkedGameData]);
+
+        if (linkedGameInsertError) {
+          console.error(
+            "Error inserting linked game data:",
+            linkedGameInsertError
+          );
+        } else {
+          console.log("Linked game data inserted successfully");
+        }
+      }
+    }
+  };
+
   const platformImages = {
     PC: Windows,
     Xbox: Xbox,
@@ -44,7 +103,9 @@ const HomeGameCard = ({ game }) => {
           ))}
         </p>
       </div>
-      <button className="HomeGameCardButton">+</button>
+      <button className="HomeGameCardButton" onClick={handleAddToDatabase}>
+        +
+      </button>
     </div>
   );
 };
