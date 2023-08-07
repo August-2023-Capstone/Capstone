@@ -1,11 +1,14 @@
 /** @format */
 
 import React, { useState } from "react";
+import Select from "react-select";
+import PlatformSelect from "./PlatformSelect";
 
 import supabase from "../../../supabase";
-import Css from "../app.css";
+import Css from "../App.css";
 
 import AvatarModal from "./AvatarModal";
+import AddGameModal from "./AddGameModal";
 const timezones = [
   "Eastern (UTC-5)",
   "Central (UTC-6)",
@@ -18,7 +21,7 @@ const CreateUserForm = () => {
     email: "",
     username: "",
     password: "",
-    platform: "",
+    platform: [],
     gamertag: "",
     timezone: "",
   });
@@ -39,6 +42,15 @@ const CreateUserForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+  const [showGameModal, setShowGameModal] = useState(false);
+  const openModal = () => {
+    setShowGameModal(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setShowGameModal(false);
   };
   const handleLogin = async () => {
     try {
@@ -128,46 +140,34 @@ const CreateUserForm = () => {
       // Handle error, show an error message, etc.
     }
   };
+  const platformOptions = [
+    { value: "PC", label: "PC" },
+    { value: "Playstation", label: "Playstation" },
+    { value: "Xbox", label: "Xbox" },
+    { value: "Nintendo Switch", label: "Nintendo Switch" },
+  ];
+  const selectedPlatformOptions = platformOptions.filter((option) =>
+    formData.platform.includes(option.value)
+  );
 
-
+  const handlePlatformChange = (selectedValues) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      platform: selectedValues.map((option) => option.value),
+    }));
+  };
   return (
     <form className="createUserForm">
-      <label>Email:</label>
-      <input
-        type="email"
-        name="email"
-        placeholder="Enter Email here"
-        value={formData.email}
-        onChange={handleChange}
-      />{" "}
-      <br />
-      <label>Password:</label>
-      <input
-        type="password"
-        name="password"
-        placeholder="Enter password here"
-        value={formData.password}
-        onChange={handleChange}
-      />
-      <br />
-      <label>Platform:</label>
-      <select name="platform" value={formData.platform} onChange={handleChange}>
-        <option value="">Choose your platform</option>
-        {platforms.map((platform) => (
-          <option key={platform} value={platform}>
-            {platform}
-          </option>
-        ))}
-      </select>
-      <br />
-      <label>Gamertag:</label>
-      <input
-        type="text"
-        name="gamertag"
-        placeholder="Enter Gamertag here"
-        value={formData.username} // Corrected: use formData.gamertag instead of formData.username
-        onChange={handleChange} // Corrected: use handleChange for name='gamertag'
-      />
+      <div>
+        <label>Platform:</label>
+        <Select
+          options={platformOptions}
+          isMulti
+          value={selectedPlatformOptions}
+          onChange={handlePlatformChange}
+          components={{ Option: PlatformSelect }}
+        />
+      </div>
       <br />
       <label>Timezone:</label>
       <select name="timezone" value={formData.timezone} onChange={handleChange}>
@@ -178,6 +178,12 @@ const CreateUserForm = () => {
           </option>
         ))}
       </select>
+      <button className="OpenModalButton" type="button" onClick={openModal}>
+        Add Games
+      </button>
+
+      {/* Show the AddGameModal when showModal is true */}
+      {showGameModal && <AddGameModal closeModal={closeModal} />}
       <br />
       <label>Choose your avatar:</label>
       <div className="selected-avatar">
@@ -189,6 +195,7 @@ const CreateUserForm = () => {
           />
         )}
       </div>
+
       <button className="AvatarButton" type="button" onClick={handleOpenModal}>
         Select Avatar
       </button>
