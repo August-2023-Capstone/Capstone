@@ -1,10 +1,9 @@
 import React from "react";
-import "../App.css";
 
-const PlatformSelect = ({ innerProps, label, isSelected }) => (
-  <div className="customOption" {...innerProps}>
-    <label className="customLabel">
-      <input type="checkbox" checked={isSelected} className="customCheckbox" />
+const PlatformSelect = ({ label, isSelected, onChange }) => (
+  <div>
+    <label>
+      <input type="checkbox" checked={isSelected} onChange={onChange} />
       {label}
     </label>
   </div>
