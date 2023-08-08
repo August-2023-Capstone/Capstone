@@ -295,10 +295,20 @@ li p:nth-child(2) {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #747474;
-  margin-top: 30px;
+  background-color: #202020;
 }
+.form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #202020;
+}
+
 .createUserForm Label {
+  display: flex;
+  align-items: baseline;
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
@@ -306,6 +316,8 @@ li p:nth-child(2) {
 .createUserForm input,
 .createUserForm select,
 .createUserForm button {
+  display: flex;
+  align-items: baseline;
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
