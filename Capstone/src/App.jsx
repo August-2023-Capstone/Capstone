@@ -16,6 +16,7 @@ import TestLogIn2 from "./components/TestLogIn2";
 function App() {
   return (
     <Router>
+      <Navbar />
       {/* <TestLogIn2 /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
