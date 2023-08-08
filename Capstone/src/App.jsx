@@ -12,6 +12,7 @@ import ProfilePage from "./components/ProfilePage";
 import TestLogIn2 from "./components/TestLogIn2";
 import CreateUserForm from "./components/CreateUserForm";
 import TestPlatformToggle from "./components/TestPlatformToggle";
+import TestProfileGames from "./components/TestProfileGames";
 
 // import { useState, useEffect } from "react";
 
@@ -19,9 +20,10 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <TestPlatformToggle />
+      <TestProfileGames />
+      {/* <TestPlatformToggle />
       <TestLogIn2 />
-      <CreateUserForm />
+      <CreateUserForm /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/users" element={<UsersPage />} />
