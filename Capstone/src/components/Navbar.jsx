@@ -7,14 +7,32 @@ import settingsIcon from "../assets/icons/settings.png";
 import magnify from "../assets/icons/magnify.png";
 import x from "../assets/icons/x.png";
 import Login from "./Login";
+import Logout from "./Logout";
+import supabase from "../../../supabase";
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-
+  const [session, setSession] = useState(null);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     if (searchTerm.trim() === "") {
@@ -149,12 +167,16 @@ const Navbar = () => {
         <Link to="/settings">
           <img src={settingsIcon} alt="Settings Icon" className="w-10 h-10" />
         </Link>
-        <button
-          onClick={() => setShowLoginModal(true)}
-          className="text-white mr-4"
-        >
-          Login
-        </button>
+        {session ? (
+          <Logout onClick={() => setSession(null)} />
+        ) : (
+          <button
+            onClick={() => setShowLoginModal(true)}
+            className="text-white hover:bg-[#444444] px-6 py-2 rounded"
+          >
+            Login
+          </button>
+        )}
         {showLoginModal && (
           <div
             onClick={() => setShowLoginModal(false)}

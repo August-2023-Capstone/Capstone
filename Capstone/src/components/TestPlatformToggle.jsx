@@ -39,12 +39,18 @@ const TestPlatformToggle = () => {
 
   return (
     <div>
-      <button onClick={() => togglePlatform("playstation")}>
+      <button type="button" onClick={() => togglePlatform("playstation")}>
         Toggle Playstation
       </button>
-      <button onClick={() => togglePlatform("xbox")}>Toggle Xbox</button>
-      <button onClick={() => togglePlatform("switch")}>Toggle Switch</button>
-      <button onClick={() => togglePlatform("pc")}>Toggle PC</button>
+      <button type="button" onClick={() => togglePlatform("xbox")}>
+        Toggle Xbox
+      </button>
+      <button type="button" onClick={() => togglePlatform("switch")}>
+        Toggle Switch
+      </button>
+      <button type="button" onClick={() => togglePlatform("pc")}>
+        Toggle PC
+      </button>
     </div>
   );
 };
