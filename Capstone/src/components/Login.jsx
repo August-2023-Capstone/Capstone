@@ -40,10 +40,8 @@ const Login = () => {
         />
       </div>
     );
-  } else {
-    console.log(session);
-    return <div>Logged in!</div>;
   }
+  return null;
 };
 
 export default Login;
