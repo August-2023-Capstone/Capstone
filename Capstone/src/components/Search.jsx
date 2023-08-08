@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import magnify from "../assets/icons/magnify.png";
 import x from "../assets/icons/x.png";
+import supabase from "../../../supabase";
+import AddGameButton from "./AddGameButton";
 
-const SearchBar = () => {
+const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -80,9 +82,8 @@ const SearchBar = () => {
           style={{ zIndex: 10 }}
         >
           {searchResults.map((game) => (
-            <Link
-              to={`/game/${game.id}`}
-              key={game.name}
+            <div
+              key={game.id}
               className="block p-2 hover:bg-[#444444] flex items-center"
             >
               <img
@@ -108,7 +109,9 @@ const SearchBar = () => {
                   ))}
                 </p>
               </div>
-            </Link>
+
+              <AddGameButton game={game} />
+            </div>
           ))}
         </div>
       )}
@@ -116,4 +119,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default Search;
