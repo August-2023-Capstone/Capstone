@@ -27,7 +27,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/users" element={<UsersPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/settings" element={<FriendSearchPage />} />
+        <Route path="/friend_search" element={<FriendSearchPage />} />
         <Route path="/chat" element={<ChatMessagePage />} />
       </Routes>
     </Router>
