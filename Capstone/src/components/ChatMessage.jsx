@@ -279,15 +279,17 @@ function ChatMessage({ toggleChat }) {
 
 	const fetchProfileData = async () => {
 		try {
+			const userId = "8f692d6b-ad89-401c-aac3-bb6cf2eb10e3"; // Replace with the correct UUID value
 			const { data, error } = await supabase
 				.from("profiles")
-				.select()
-				.eq("id", 2);
+				.select("gamertag")
+				.eq("id", userId)
+				.single();
 			if (error) {
 				console.error("Error fetching profiles Data:", error);
 			} else {
 				console.log("Fetched profiles Data:", data);
-				setProfilesData(data);
+				setProfilesData([data]); // Note the use of an array to match your usage in fetchChatData
 			}
 		} catch (error) {
 			console.error("Error fetching profiles Data:", error);
