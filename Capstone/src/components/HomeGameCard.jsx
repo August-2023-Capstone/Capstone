@@ -22,16 +22,16 @@ const HomeGameCard = ({ game }) => {
     };
 
     // Insert the data into the games table
-    const { error: gameInsertError } = await supabase
+    const { error: gameInsertError, data: gameInsertData } = await supabase
       .from("games")
-      .insert(gameData);
+      .upsert(gameData, { onConflict: ["name"] }); // Upsert with conflict handling
 
     if (gameInsertError) {
       console.error("Error inserting game data:", gameInsertError);
     } else {
-      console.log("Game data inserted successfully");
+      console.log("Game data inserted or updated successfully");
 
-      // Find the ID of the inserted game by name
+      // Get the game's ID whether it's newly inserted or already exists
       const { data: gameSelectData, error: gameSelectError } = await supabase
         .from("games")
         .select("id")
