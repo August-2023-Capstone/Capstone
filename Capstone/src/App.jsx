@@ -20,7 +20,6 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <TestProfileGames />
       {/* <TestPlatformToggle />
       <TestLogIn2 />
       <CreateUserForm /> */}
