@@ -64,7 +64,7 @@ const AddGameButton = ({ game }) => {
   return (
     <button
       onClick={handleAddToDatabase}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      className="bg-[#444444] hover:bg-[#373737] text-white font-bold py-1 px-3 rounded-sm text-xs mb-2"
     >
       Add to Database
     </button>
