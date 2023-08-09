@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HomeGameCard from "./HomeGameCard";
+import TestHomeGameCard from "./TestHomeGameCard";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -113,7 +113,7 @@ const HomeCarouselOne = () => {
       <Slider {...settings}>
         {gameArray.map((game) => (
           <div key={game.name}>
-            <HomeGameCard game={game} />
+            <TestHomeGameCard game={game} />
           </div>
         ))}
       </Slider>

@@ -5,6 +5,7 @@ import Windows from "../assets/Logos/WindowsLogo.png";
 import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
 import supabase from "../../../supabase";
+import AddGameButton from "./AddGameButton";
 
 const HomeGameCard = ({ game }) => {
   const handleAddToDatabase = async () => {
@@ -95,7 +96,7 @@ const HomeGameCard = ({ game }) => {
       </div>
       <h2 className="HomeGameCardTitle">{game.name}</h2>
 
-      <div className="HomeGameCardInfo">
+      <div className="HomeGameCardInfo mb-2">
         <br />
         <p>
           {game.genres.map((genre) => (
@@ -103,9 +104,7 @@ const HomeGameCard = ({ game }) => {
           ))}
         </p>
       </div>
-      <button className="HomeGameCardButton" onClick={handleAddToDatabase}>
-        +
-      </button>
+      <AddGameButton game={game} />
     </div>
   );
 };
