@@ -1,24 +1,24 @@
 /** @format */
 
 import React, { useState, useEffect, useRef } from "react";
-import { createClient } from "@supabase/supabase-js";
-import supabaseConfig from "../../../supabase";
 import CSS from "../MessageBox.css";
 import ChatBox from "./ChatBox";
 import CloseButton from "../assets/icons/closebutton.png";
 import ChatUsers from "./ChatUsers";
+import supabase from "../../../supabase";
 
 function ChatMessage({ toggleChat }) {
 	const [chatMessages, setChatMessages] = useState([]);
 	const [showCloseButton, setShowCloseButton] = useState(true);
+	const [session, setSession] = useState(null);
 	const [newMessage, setNewMessage] = useState("");
-	const { supabaseUrl, supabaseKey } = supabaseConfig;
 	const [chatData, setChatData] = useState({
 		message: "",
 		receivetime: "",
 		sender_username: "",
 		receiver_username: "",
 	});
+
 	const inputRef = useRef(null); // Add this line to define the inputRef
 	const scrolledToBottomRef = useRef(true); // Use true initially to scroll to bottom on first load
 	const isScrollingRef = useRef(false); // Ref to track if the user is actively scrolling
@@ -59,6 +59,31 @@ function ChatMessage({ toggleChat }) {
 	}, []);
 
 	useEffect(() => {
+		console.log("Entering useEffect"); // Debugging line
+
+		// Get initial session and set it in the state
+		supabase.auth.getSession().then(({ data: { session } }) => {
+			console.log("Setting initial session:", session); // Debugging line
+			setSession(session);
+			console.log(session);
+		});
+
+		// Set up subscription to listen for authentication state changes
+		const {
+			data: { subscription },
+		} = supabase.auth.onAuthStateChange((_event, session) => {
+			console.log("Updating session:", session); // Debugging line
+			setSession(session);
+		});
+
+		// Clean up the subscription when the component unmounts
+		return () => {
+			console.log("Unsubscribing from subscription"); // Debugging line
+			subscription.unsubscribe(); // Unsubscribe from the authentication state changes
+		};
+	}, []);
+
+	useEffect(() => {
 		// Scroll to the bottom when chatMessages state is updated
 		if (!isScrollingRef.current) {
 			scrollToBottom();
@@ -93,6 +118,7 @@ function ChatMessage({ toggleChat }) {
 
 	const [showModal, setShowModal] = useState(false); // State for the modal visibility
 	const [usersData, setUsersData] = useState([]); // State for storing users data
+	const [profilesData, setProfilesData] = useState([]);
 
 	const handleKeyDown = (e) => {
 		if (e.keyCode === 13) {
@@ -100,8 +126,6 @@ function ChatMessage({ toggleChat }) {
 			handleSendMessage(e);
 		}
 	};
-
-	const supabase = createClient(supabaseUrl, supabaseKey);
 
 	const showEmptyMessageModal = () => {
 		setShowModal(true);
@@ -119,42 +143,64 @@ function ChatMessage({ toggleChat }) {
 		}
 		try {
 			// Get the current user ID or username from your authentication system
-			const currentUserID = 1; // Replace with the actual ID or username
+			const currentUserID = session.user.id; // Assuming this returns the UUID
 
-			// Send the new message to the WebSocket server
-			const message = {
-				senderID: currentUserID,
-				content: newMessage,
-				recievetime: new Date().toISOString(),
-				sendtime: new Date().toISOString(),
-			};
-			const socket = new WebSocket("ws://localhost:3000");
-			socket.onopen = () => {
-				socket.send(JSON.stringify(message));
-				socket.close();
-			};
+			// Fetch sender and receiver gamertags
+			const [senderGamertagResponse, receiverGamertagResponse] =
+				await Promise.all([
+					supabase
+						.from("profiles")
+						.select("gamertag")
+						.eq("id", currentUserID)
+						.single(),
+					supabase.from("profiles").select("gamertag").eq("id", 2).single(), // Replace with the ID of the receiver user
+				]);
 
-			// Insert the new message into the chatmessages table
-			const { data, error } = await supabase.from("chatmessages").insert([
-				{
-					sender_id: currentUserID,
-					receiver_id: 2, // Replace with the ID of the receiver user
-					sender_username: getUsernameById(currentUserID), // Use getUsernameById to get the sender username
-					receiver_username: getUsernameById(2), // Use getUsernameById to get the receiver username
-					message: newMessage,
+			if (!senderGamertagResponse.error && !receiverGamertagResponse.error) {
+				const senderGamertag = senderGamertagResponse.data
+					? senderGamertagResponse.data.gamertag
+					: "Unknown Sender Gamertag";
+				const receiverGamertag = receiverGamertagResponse.data
+					? receiverGamertagResponse.data.gamertag
+					: "Unknown Receiver Gamertag";
+
+				// Send the new message to the WebSocket server
+				const message = {
+					senderID: currentUserID,
+					content: newMessage,
+					senderGamertag: senderGamertag,
+					receiverGamertag: receiverGamertag,
 					recievetime: new Date().toISOString(),
 					sendtime: new Date().toISOString(),
-				},
-			]);
-			console.log(data);
+				};
+				const socket = new WebSocket("ws://localhost:3000");
+				socket.onopen = () => {
+					socket.send(JSON.stringify(message));
+					socket.close();
+				};
 
-			if (error) {
-				console.error("Error sending message:", error);
-			} else {
-				console.log("Message sent successfully:", data);
-				setNewMessage(""); // Clear the input field after sending the message
-				fetchChatData(); // Refresh the chat messages after sending a new message
-				scrollToInputField(); // Scroll to the input field after sending a new message
+				// Insert the new message into the chatmessages table
+				const { data, error } = await supabase.from("chatmessages").insert([
+					{
+						sender_id: currentUserID,
+						receiver_id: 2, // Replace with the ID of the receiver user
+						sender_gamertag: senderGamertag,
+						receiver_gamertag: receiverGamertag,
+						message: newMessage,
+						recievetime: new Date().toISOString(),
+						sendtime: new Date().toISOString(),
+					},
+				]);
+				console.log(data);
+
+				if (error) {
+					console.error("Error sending message:", error);
+				} else {
+					console.log("Message sent successfully:", data);
+					setNewMessage(""); // Clear the input field after sending the message
+					fetchChatData(); // Refresh the chat messages after sending a new message
+					scrollToInputField(); // Scroll to the input field after sending a new message
+				}
 			}
 		} catch (error) {
 			console.error("Error sending message:", error);
@@ -167,8 +213,50 @@ function ChatMessage({ toggleChat }) {
 			if (error) {
 				console.error("Error fetching Chat Data:", error);
 			} else {
-				console.log("Fetched Chat Data:", data); // Add this log to check the data
-				setChatMessages(data);
+				// Fetch gamertags for sender and receiver and merge them into chatMessages data
+				const updatedChatMessages = await Promise.all(
+					data.map(async (chatMessage) => {
+						const senderProfile = profilesData.find(
+							(profile) => profile.id === chatMessage.sender_id
+						);
+						const receiverProfile = profilesData.find(
+							(profile) => profile.id === chatMessage.receiver_id
+						);
+
+						if (senderProfile && receiverProfile) {
+							// Fetch the gamertags from the profiles table based on sender and receiver UUIDs
+							const senderGamertagResponse = await supabase
+								.from("profiles")
+								.select("gamertag")
+								.eq("id", chatMessage.sender_id)
+								.single();
+							const receiverGamertagResponse = await supabase
+								.from("profiles")
+								.select("gamertag")
+								.eq("id", chatMessage.receiver_id)
+								.single();
+
+							if (
+								!senderGamertagResponse.error &&
+								!receiverGamertagResponse.error
+							) {
+								return {
+									...chatMessage,
+									sender_gamertag: senderGamertagResponse.data
+										? senderGamertagResponse.data.gamertag
+										: "Unknown Sender Gamertag",
+									receiver_gamertag: receiverGamertagResponse.data
+										? receiverGamertagResponse.data.gamertag
+										: "Unknown Receiver Gamertag",
+								};
+							}
+						}
+
+						return chatMessage;
+					})
+				);
+
+				setChatMessages(updatedChatMessages);
 			}
 		} catch (error) {
 			console.error("Error fetching Chat Data:", error);
@@ -177,7 +265,7 @@ function ChatMessage({ toggleChat }) {
 
 	const fetchUsersData = async () => {
 		try {
-			const { data, error } = await supabase.from("users").select();
+			const { data, error } = await supabase.from("users").select(); // Replace "users" with the actual table name
 			if (error) {
 				console.error("Error fetching Users Data:", error);
 			} else {
@@ -189,8 +277,26 @@ function ChatMessage({ toggleChat }) {
 		}
 	};
 
+	const fetchProfileData = async () => {
+		try {
+			const { data, error } = await supabase
+				.from("profiles")
+				.select()
+				.eq("id", 2);
+			if (error) {
+				console.error("Error fetching profiles Data:", error);
+			} else {
+				console.log("Fetched profiles Data:", data);
+				setProfilesData(data);
+			}
+		} catch (error) {
+			console.error("Error fetching profiles Data:", error);
+		}
+	};
+
 	useEffect(() => {
 		fetchChatData();
+		fetchProfileData();
 		fetchUsersData(); // Fetch users data on mount
 	}, []);
 
@@ -211,49 +317,64 @@ function ChatMessage({ toggleChat }) {
 		}
 	};
 
+	// ...
+
 	return (
-		<>
-			<div className='chat-container'>
-				<div className='chat-users'>
-					<ChatUsers />
-				</div>
-				<div className='chat-messages'>
-					<ul ref={inputRef}>
-						{/* Add the ref here */}
-						{chatMessages.map((chatMessage) => (
-							<li
-								key={chatMessage.id}
-								className={
-									chatMessage.sender_id === 1
-										? "sender-message"
-										: "receiver-message"
-								}>
-								<p>Receiver: {getUsernameById(chatMessage.receiver_id)}</p>
-								<p>Sender: {getUsernameById(chatMessage.sender_id)}</p>
-								<p>Message: {chatMessage.message}</p>
-								<p>Receive Time: {chatMessage.recievetime}</p>
-								<p>Send Time: {chatMessage.sendtime}</p>
-							</li>
-						))}
-					</ul>
+		<div className='chat-container'>
+			<div className='chat-users'>
+				<ChatUsers />
+			</div>
+			<div className='chat-messages'>
+				<ul ref={inputRef}>
+					{chatMessages.map((chatMessage) => (
+						<li
+							key={chatMessage.id}
+							className={
+								chatMessage.sender_id === (session?.user?.id || null)
+									? "sender-message"
+									: "receiver-message"
+							}>
+							<p>
+								{chatMessage.sender_id === (session?.user?.id || null)
+									? `Sender: You`
+									: `Sender: ${
+											getUsernameById(chatMessage.sender_id) || "Loading..."
+									  }`}
+								{chatMessage.sender_id !== (session?.user?.id || null) &&
+									chatMessage.sender_gamertag && (
+										<> (Gamertag: {chatMessage.sender_gamertag})</>
+									)}
+							</p>
+							<p>
+								{chatMessage.receiver_id === (session?.user?.id || null)
+									? "Receiver: You"
+									: `Receiver: ${
+											getUsernameById(chatMessage.receiver_id) || "Loading..."
+									  }`}
+							</p>
+							<p>Message: {chatMessage.message}</p>
+							<p>Receive Time: {chatMessage.recievetime}</p>
+							<p>Send Time: {chatMessage.sendtime}</p>
+						</li>
+					))}
+				</ul>
+				<div>
+					{showModal && <div className='modal'>Please enter a message!</div>}
 					<div>
-						{showModal && <div className='modal'>Please enter a message!</div>}
-						<div>
-							<input
-								type='text'
-								value={newMessage}
-								onChange={(e) => setNewMessage(e.target.value)}
-								onKeyDown={handleKeyDown} // Add the onKeyDown event listener
-								placeholder='Type your message...'
-							/>
-							<button type='button' onClick={handleSendMessage}>
-								Send Message
-							</button>
-						</div>
+						<input
+							type='text'
+							value={newMessage}
+							onChange={(e) => setNewMessage(e.target.value)}
+							onKeyDown={handleKeyDown}
+							placeholder='Type your message...'
+						/>
+						<button type='button' onClick={handleSendMessage}>
+							Send Message
+						</button>
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 
