@@ -11,8 +11,15 @@ const TestProfileGames = () => {
 
   useEffect(() => {
     const fetchProfileGames = async () => {
-      const { data, error } = await supabase.from("linked_games").select(
-        `
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      console.log(user.id);
+      const { data, error } = await supabase
+        .from("linked_games")
+        .select(
+          `
           games (
             id,
             name,
@@ -21,7 +28,8 @@ const TestProfileGames = () => {
             platform
           )
           `
-      );
+        )
+        .eq("user_id", user.id);
 
       console.log(data);
 
