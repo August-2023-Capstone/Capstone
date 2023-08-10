@@ -23,6 +23,7 @@ function App() {
       {/* <TestPlatformToggle />
       <TestLogIn2 />
       <CreateUserForm /> */}
+      {/* <TestProfileGames /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/users" element={<UsersPage />} />

@@ -7,27 +7,30 @@ const AddGameButton = ({ game }) => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
+    const platformNames = game.platforms.map(
+      (platform) => platform.platform.name
+    );
 
     // Prepare the data for insertion into the games table
     const gameData = {
       name: game.name,
-      genre: game.genres,
+      genre: game.genres.map((genre) => genre.name), // Extract genre names
       art: game.background_image,
-      platform: game.platforms,
+      platform: platformNames,
       // Other properties as needed
     };
 
     // Insert the data into the games table
-    const { error: gameInsertError } = await supabase
+    const { error: gameInsertError, data: gameInsertData } = await supabase
       .from("games")
-      .insert(gameData);
+      .upsert(gameData, { onConflict: ["name"] }); // Upsert with conflict handling
 
     if (gameInsertError) {
       console.error("Error inserting game data:", gameInsertError);
     } else {
-      console.log("Game data inserted successfully");
+      console.log("Game data inserted or updated successfully");
 
-      // Find the ID of the inserted game by name
+      // Get the game's ID whether it's newly inserted or already exists
       const { data: gameSelectData, error: gameSelectError } = await supabase
         .from("games")
         .select("id")

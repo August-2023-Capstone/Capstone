@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import supabase from "../../../supabase";
+import NintendoSwitch from "../assets/Logos/NintendoSwitchLogo.png";
+import Playstation from "../assets/Logos/PlaystationLogo.png";
+import Windows from "../assets/Logos/WindowsLogo.png";
+import Xbox from "../assets/Logos/XboxLogo.png";
+import iOS from "../assets/Logos/AppleLogo.png";
 
 const TestProfileGames = () => {
   const [profileGames, setProfileGames] = useState([]);
@@ -33,15 +38,33 @@ const TestProfileGames = () => {
   }, []);
   console.log(profileGames);
 
+  const extractArrayFromString = (stringWithArray) => {
+    try {
+      return JSON.parse(stringWithArray);
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return [];
+    }
+  };
+
   return (
-    <div>
-      <h1>Games List</h1>
+    <div className="ProfileGameCardContainer">
       {profileGames.map((game) => (
-        <div key={game.id}>
-          <h3>{game.name}</h3>
-          <p>Genre: {game.genre}</p>
-          <p>Platform: {game.platform}</p>
-          <img src={game.art} alt={game.name} />
+        <div key={game.id} className="ProfileGameCard">
+          <img
+            className="ProfileGameCardImage"
+            src={game.art}
+            alt={game.name}
+          />
+          <h2 className="ProfileGameCardTitle">{game.name}</h2>
+          <p className="ProfileGameCardInfo">
+            Genre: {extractArrayFromString(game.genre).join(", ")}
+          </p>
+          <p className="ProfileGameCardInfo">
+            Platform: {extractArrayFromString(game.platform).join(", ")}
+          </p>
+
+          <button className="ProfileGameCardButton">-</button>
         </div>
       ))}
     </div>

@@ -892,6 +892,9 @@ li p:nth-child(2) {
 }
 .ProfileGameCardContainer {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
   padding-left: 230px;
 }
 .profilePage {
@@ -899,13 +902,16 @@ li p:nth-child(2) {
   min-height: 100vh;
 }
 .ProfileGameCard {
-  width: 170px;
+  /* Your card styling */
+  width: calc(20% - 5px); /* Adjust the width and gap to fit 5 cards in a row */
+  margin-bottom: 20px;
+
   background-color: #202020;
   border: 1px solid black;
   display: block;
 
   text-align: center;
-  margin: 5px; /* Add some margin between game cards */
+
   border-radius: 10px;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
@@ -916,7 +922,7 @@ li p:nth-child(2) {
 .ProfileGameCardButton {
   font-weight: bolder;
   font-size: larger;
-  margin-left: 130px;
+  margin-left: 120px;
   margin-bottom: 10px;
   cursor: pointer;
   background-color: #373737;

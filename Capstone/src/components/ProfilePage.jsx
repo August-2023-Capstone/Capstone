@@ -6,6 +6,7 @@ import FriendsList from "./FriendsList";
 import ProfileData from "./ProfileData";
 
 import ProfileGameCards from "./ProfileGameCards";
+import TestProfileGames from "./TestProfileGames";
 
 const ProfilePage = () => {
   return (
@@ -14,7 +15,7 @@ const ProfilePage = () => {
         <ProfileData />
         <div className="content">
           <div>
-            <ProfileGameCards />
+            <TestProfileGames />
           </div>
           <div className="friendsList">
             <FriendsList />

@@ -11,13 +11,16 @@ const HomeGameCard = ({ game }) => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
+    const platformNames = game.platforms.map(
+      (platform) => platform.platform.name
+    );
 
     // Prepare the data for insertion into the games table
     const gameData = {
       name: game.name,
-      genre: game.genres,
+      genre: game.genres.map((genre) => genre.name), // Extract genre names
       art: game.background_image,
-      platform: game.platforms,
+      platform: platformNames,
       // Other properties as needed
     };
 
