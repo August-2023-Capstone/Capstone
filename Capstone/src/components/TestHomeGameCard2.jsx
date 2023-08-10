@@ -5,16 +5,9 @@ import Windows from "../assets/Logos/WindowsLogo.png";
 import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
 import supabase from "../../../supabase";
-import { useNavigate } from "react-router-dom";
+import AddGameButton from "./AddGameButton";
 
 const HomeGameCard = ({ game }) => {
-  const navigate = useNavigate();
-
-  const handleImageClick = () => {
-    // Navigate to the FriendSearchPage and pass the game name as a parameter
-    navigate(`/friend_search?gameName=${encodeURIComponent(game.name)}`);
-  };
-
   const handleAddToDatabase = async () => {
     const {
       data: { user },
@@ -86,17 +79,11 @@ const HomeGameCard = ({ game }) => {
   };
   return (
     <div className="HomeGameCard">
-      <a
-        href="#" // Replace with the appropriate link if needed
-        className="HomeGameCardImageAnchor"
-        onClick={handleImageClick}
-      >
-        <img
-          className="HomeGameCardImage w-full h-full object-cover"
-          src={game.background_image}
-          alt={game.name}
-        />
-      </a>
+      <img
+        className=" HomeGameCardImage w-full h-full object-cover"
+        src={game.background_image}
+        alt={game.name}
+      />
       <div className="PlatformLogosContainer">
         {game.platforms.map((platform) => (
           <img
@@ -109,7 +96,7 @@ const HomeGameCard = ({ game }) => {
       </div>
       <h2 className="HomeGameCardTitle">{game.name}</h2>
 
-      <div className="HomeGameCardInfo">
+      <div className="HomeGameCardInfo mb-2">
         <br />
         <p>
           {game.genres.map((genre) => (
@@ -117,9 +104,7 @@ const HomeGameCard = ({ game }) => {
           ))}
         </p>
       </div>
-      <button className="HomeGameCardButton" onClick={handleAddToDatabase}>
-        +
-      </button>
+      <AddGameButton game={game} />
     </div>
   );
 };

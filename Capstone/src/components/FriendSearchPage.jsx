@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import supabase from "../../../supabase";
+import GameDetails from "./GameDetails";
+import GamePlayers from "./GamePlayers";
 
 const FriendSearchPage = () => {
   const location = useLocation();
@@ -66,13 +68,16 @@ const FriendSearchPage = () => {
   }, [gameName]);
 
   return (
-    <div>
-      <h1>Linked Users' Profiles for {gameName}</h1>
-      <ul>
-        {linkedUsersProfiles.map((profile) => (
-          <li key={profile.id}>{profile.gamertag}</li>
-        ))}
-      </ul>
+    <div className="bg-[#151515] flex">
+      <div className="w-1/4">
+        <GameDetails />
+      </div>
+      <div className="flex-grow flex">
+        <GamePlayers
+          linkedUsersProfiles={linkedUsersProfiles}
+          gameName={gameName}
+        />
+      </div>
     </div>
   );
 };
