@@ -6,7 +6,16 @@ const ProfileData = () => {
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      const { data, error } = await supabase.from("profiles").select();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      console.log(user.id);
+      const { data, error } = await supabase
+        .from("profiles")
+        .select()
+        .eq("id", user.id);
+      console.log(data);
       if (error) {
         console.error("Error fetching data:", error);
       } else {
