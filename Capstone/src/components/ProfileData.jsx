@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import supabase from "../../../supabase";
+import CreateUserForm from "./CreateUserForm";
 
 const ProfileData = () => {
   const [profileData, setProfileData] = useState([]);
+  const [showCreateUserForm, setShowCreateUserForm] = useState(false);
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -20,6 +22,9 @@ const ProfileData = () => {
         console.error("Error fetching data:", error);
       } else {
         setProfileData(data);
+        if (data.length > 0 && data[0].gamertag === null) {
+          setShowCreateUserForm(true);
+        }
       }
     };
 
@@ -39,6 +44,7 @@ const ProfileData = () => {
           {/* Add other profile properties as needed */}
         </div>
       ))}
+      {showCreateUserForm && <CreateUserForm />}
     </div>
   );
 };
