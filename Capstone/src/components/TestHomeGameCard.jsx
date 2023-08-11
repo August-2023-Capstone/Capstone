@@ -6,6 +6,7 @@ import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
 import supabase from "../../../supabase";
 import { useNavigate } from "react-router-dom";
+import AddGameButton from "./AddGameButton";
 
 const HomeGameCard = ({ game }) => {
   const navigate = useNavigate();
@@ -84,6 +85,7 @@ const HomeGameCard = ({ game }) => {
     "Nintendo Switch": NintendoSwitch,
     iOS: iOS,
   };
+
   return (
     <div className="HomeGameCard">
       <a
@@ -117,9 +119,7 @@ const HomeGameCard = ({ game }) => {
           ))}
         </p>
       </div>
-      <button className="HomeGameCardButton" onClick={handleAddToDatabase}>
-        +
-      </button>
+      <AddGameButton game={game} />
     </div>
   );
 };

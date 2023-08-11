@@ -7,14 +7,16 @@ const GamePlayers = ({ linkedUsersProfiles, gameName }) => {
         <h1 className="text-2xl font-semibold mb-4 text-center">
           {gameName} Players
         </h1>
-        <ul>
+        <ul className="grid grid-cols-1 gap-4">
           {linkedUsersProfiles.map((profile) => (
-            <li key={profile.id} className="bg-[#444444] text-white rounded">
-              <div>
-                <p>Gamertag: {profile.gamertag}</p>
-                <p>Timezone: {profile.timezone}</p>
-                <p>Platform: {profile.platform}</p>
-              </div>
+            <li
+              key={profile.id}
+              className="bg-[#444444] text-white rounded p-4"
+            >
+              <p>
+                {profile.gamertag} | Timezone: {profile.timezone} | Platform:{" "}
+                {profile.platform}
+              </p>
             </li>
           ))}
         </ul>
