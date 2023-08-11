@@ -7,6 +7,8 @@ import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import UsersPage from "./components/UsersPage";
 import FriendSearchPage from "./components/FriendSearchPage";
+import TestFriendSearchPage from "./components/TestFriendSearchPage";
+
 import ChatMessagePage from "./components/ChatMessagePage";
 import ProfilePage from "./components/ProfilePage";
 import TestLogIn2 from "./components/TestLogIn2";
@@ -28,7 +30,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/users" element={<UsersPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/friend_search" element={<FriendSearchPage />} />
+        <Route path="/friend_search" element={<TestFriendSearchPage />} />
         <Route path="/chat" element={<ChatMessagePage />} />
       </Routes>
     </Router>
