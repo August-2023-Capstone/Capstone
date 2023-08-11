@@ -1,4 +1,3 @@
-import React from "react";
 import NintendoSwitch from "../assets/Logos/NintendoSwitchLogo.png";
 import Playstation from "../assets/Logos/PlaystationLogo.png";
 import Windows from "../assets/Logos/WindowsLogo.png";
@@ -8,7 +7,7 @@ import supabase from "../../../supabase";
 import { useNavigate } from "react-router-dom";
 import AddGameButton from "./AddGameButton";
 
-const HomeGameCard = ({ game }) => {
+const HomeGameCard = ({ game, session }) => {
   const navigate = useNavigate();
 
   const handleImageClick = () => {
@@ -119,7 +118,7 @@ const HomeGameCard = ({ game }) => {
           ))}
         </p>
       </div>
-      <AddGameButton game={game} />
+      {session && <AddGameButton game={game} />}
     </div>
   );
 };
