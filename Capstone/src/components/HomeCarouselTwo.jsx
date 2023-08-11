@@ -46,7 +46,7 @@ const HomeCarouselOne = () => {
       try {
         // Make the API request
         const response = await fetch(
-          "https://api.rawg.io/api/games?key=708a4757c9d748448c87455a3ecd365c&ordering=-added&dates=2023-01-01,2023-07-01&tags=multiplayer&page_size=24"
+          "https://api.rawg.io/api/games?key=708a4757c9d748448c87455a3ecd365c&metacritic=90,100&ordering=-metacritic&dates=2016-01-01,2023-07-01&tags=multiplayer&page_size=24"
         );
         const jsonData = await response.json();
 

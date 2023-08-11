@@ -1,6 +1,9 @@
 /** @format */
 import React, { useState, useEffect } from "react";
 import HomeCarouselOne from "./HomeCarouselOne";
+import HomeCarouselTwo from "./HomeCarouselTwo";
+import HomeCarouselThree from "./HomeCarouselThree";
+
 import ChatBox from "./ChatBox";
 import Login from "./Login";
 
@@ -20,10 +23,14 @@ const HomePage = () => {
 
   return (
     <div className="HomePage">
-      <h2 className="NewReleases">New and trending</h2>
-      <HomeCarouselOne />
-      <h2 className="NewReleases">Recently released</h2>
-      <HomeCarouselOne />
+      <div className="HomeContainer">
+        <h2 className="HomepageHeader">NEW AND TRENDING</h2>
+        <HomeCarouselOne />
+        <h2 className="HomepageHeader">TOP RATED</h2>
+        <HomeCarouselTwo />
+        <h2 className="HomepageHeader">RECENTLY RELEASED</h2>
+        <HomeCarouselThree />
+      </div>
       <ChatBox />
       {showLoginModal && (
         <div
