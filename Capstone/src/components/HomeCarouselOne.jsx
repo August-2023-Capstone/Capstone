@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TestHomeGameCard from "./TestHomeGameCard";
+import supabase from "../../../supabase";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -40,7 +41,22 @@ const usersCurrentGames = [
 const HomeCarouselOne = () => {
   const [gameArray, setGameArray] = useState([]);
   const [slidesToShow, setSlidesToShow] = useState(6);
+  const [session, setSession] = useState(null);
+  console.log({ session });
 
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -113,7 +129,7 @@ const HomeCarouselOne = () => {
       <Slider {...settings}>
         {gameArray.map((game) => (
           <div key={game.name}>
-            <TestHomeGameCard game={game} />
+            <TestHomeGameCard game={game} session={session} />
           </div>
         ))}
       </Slider>

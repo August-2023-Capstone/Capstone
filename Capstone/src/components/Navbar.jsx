@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import avatar from "../assets/icons/image0copy.png";
 import speechBubbleIcon from "../assets/icons/speechbubble.png";
-import settingsIcon from "../assets/icons/settings.png";
 import Login from "./Login";
 import Logout from "./Logout";
 import supabase from "../../../supabase";
@@ -47,9 +46,6 @@ const Navbar = () => {
         </Link>
         <Link to="/profile" className="mr-4">
           <img src={avatar} alt="Logo" className="w-10 h-10 rounded-full" />
-        </Link>
-        <Link to="/settings">
-          <img src={settingsIcon} alt="Settings Icon" className="w-10 h-10" />
         </Link>
         {session ? (
           <Logout onClick={() => setSession(null)} />
