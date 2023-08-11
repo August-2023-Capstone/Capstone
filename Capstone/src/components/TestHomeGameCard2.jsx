@@ -1,20 +1,13 @@
+import React from "react";
 import NintendoSwitch from "../assets/Logos/NintendoSwitchLogo.png";
 import Playstation from "../assets/Logos/PlaystationLogo.png";
 import Windows from "../assets/Logos/WindowsLogo.png";
 import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
 import supabase from "../../../supabase";
-import { useNavigate } from "react-router-dom";
 import AddGameButton from "./AddGameButton";
 
-const HomeGameCard = ({ game, session }) => {
-  const navigate = useNavigate();
-
-  const handleImageClick = () => {
-    // Navigate to the FriendSearchPage and pass the game name as a parameter
-    navigate(`/friend_search?gameName=${encodeURIComponent(game.name)}`);
-  };
-
+const HomeGameCard = ({ game }) => {
   const handleAddToDatabase = async () => {
     const {
       data: { user },
@@ -84,20 +77,13 @@ const HomeGameCard = ({ game, session }) => {
     "Nintendo Switch": NintendoSwitch,
     iOS: iOS,
   };
-
   return (
     <div className="HomeGameCard">
-      <a
-        href="#" // Replace with the appropriate link if needed
-        className="HomeGameCardImageAnchor"
-        onClick={handleImageClick}
-      >
-        <img
-          className="HomeGameCardImage w-full h-full object-cover"
-          src={game.background_image}
-          alt={game.name}
-        />
-      </a>
+      <img
+        className=" HomeGameCardImage w-full h-full object-cover"
+        src={game.background_image}
+        alt={game.name}
+      />
       <div className="PlatformLogosContainer">
         {game.platforms.map((platform) => (
           <img
@@ -110,7 +96,7 @@ const HomeGameCard = ({ game, session }) => {
       </div>
       <h2 className="HomeGameCardTitle">{game.name}</h2>
 
-      <div className="HomeGameCardInfo">
+      <div className="HomeGameCardInfo mb-2">
         <br />
         <p>
           {game.genres.map((genre) => (
@@ -118,7 +104,7 @@ const HomeGameCard = ({ game, session }) => {
           ))}
         </p>
       </div>
-      {session && <AddGameButton game={game} />}
+      <AddGameButton game={game} />
     </div>
   );
 };

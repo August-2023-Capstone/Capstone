@@ -19,18 +19,20 @@ import TestProfileGames from "./components/TestProfileGames";
 function App() {
   return (
     <Router>
-      <Navbar />
-      {/* <TestPlatformToggle />
+      <div className="bg-[#151515] min-h-screen">
+        <Navbar />
+        {/* <TestPlatformToggle />
       <TestLogIn2 />
       <CreateUserForm /> */}
-      {/* <TestProfileGames /> */}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/users" element={<UsersPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/friend_search" element={<FriendSearchPage />} />
-        <Route path="/chat" element={<ChatMessagePage />} />
-      </Routes>
+        {/* <TestProfileGames /> */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/users" element={<UsersPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/friend_search" element={<FriendSearchPage />} />
+          <Route path="/chat" element={<ChatMessagePage />} />
+        </Routes>
+      </div>
     </Router>
   );
 }
