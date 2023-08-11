@@ -93,7 +93,7 @@ const HomeGameCard = ({ game, session }) => {
         onClick={handleImageClick}
       >
         <img
-          className="HomeGameCardImage w-full h-full object-cover"
+          className="HomeGameCardImage"
           src={game.background_image}
           alt={game.name}
         />

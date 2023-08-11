@@ -7,6 +7,8 @@ import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import UsersPage from "./components/UsersPage";
 import FriendSearchPage from "./components/FriendSearchPage";
+import TestFriendSearchPage from "./components/TestFriendSearchPage";
+
 import ChatMessagePage from "./components/ChatMessagePage";
 import ProfilePage from "./components/ProfilePage";
 import TestLogIn2 from "./components/TestLogIn2";

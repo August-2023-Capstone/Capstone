@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import magnify from "../assets/icons/magnify.png";
 import x from "../assets/icons/x.png";
 import supabase from "../../../supabase";
@@ -11,6 +11,7 @@ const Search = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const dropdownRef = useRef(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -38,10 +39,25 @@ const Search = () => {
 
     const delayDebounceFn = setTimeout(() => {
       fetchGames();
-    }, 1000);
+    }, 500);
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setSearchResults([]);
+      }
+    };
 
-    return () => clearTimeout(delayDebounceFn);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      clearTimeout(delayDebounceFn);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [searchTerm]);
+
+  const handleGameImageClick = (game) => {
+    // Navigate to the FriendSearchPage with the clicked game's name as parameter
+    navigate(`/friend_search?gameName=${encodeURIComponent(game.name)}`);
+  };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -86,11 +102,20 @@ const Search = () => {
               key={game.id}
               className="block p-2 hover:bg-[#444444] flex items-center"
             >
-              <img
+              <a
+                href="#" // Replace with the appropriate link if needed
                 className="w-20 h-20 object-cover mr-4"
-                src={game.background_image}
-                alt={game.name}
-              />
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleGameImageClick(game);
+                }}
+              >
+                <img
+                  className="w-full h-full"
+                  src={game.background_image}
+                  alt={game.name}
+                />
+              </a>
 
               <div>
                 <h2 className="text-lg font-semibold">{game.name}</h2>

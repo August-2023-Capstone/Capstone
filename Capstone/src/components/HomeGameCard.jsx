@@ -82,7 +82,7 @@ const HomeGameCard = ({ game }) => {
   return (
     <div className="HomeGameCard">
       <img
-        className=" HomeGameCardImage w-full h-full object-cover"
+        className="HomeGameCardImage"
         src={game.background_image}
         alt={game.name}
       />

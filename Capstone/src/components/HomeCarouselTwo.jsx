@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import TestHomeGameCard from "./TestHomeGameCard";
-import supabase from "../../../supabase";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -41,28 +40,13 @@ const usersCurrentGames = [
 const HomeCarouselOne = () => {
   const [gameArray, setGameArray] = useState([]);
   const [slidesToShow, setSlidesToShow] = useState(6);
-  const [session, setSession] = useState(null);
-  console.log({ session });
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Make the API request
         const response = await fetch(
-          "https://api.rawg.io/api/games?key=708a4757c9d748448c87455a3ecd365c&ordering=-added&dates=2023-01-01,2023-07-01&tags=multiplayer&page_size=24"
+          "https://api.rawg.io/api/games?key=708a4757c9d748448c87455a3ecd365c&metacritic=90,100&ordering=-metacritic&dates=2016-01-01,2023-07-01&tags=multiplayer&page_size=24"
         );
         const jsonData = await response.json();
 
@@ -129,7 +113,7 @@ const HomeCarouselOne = () => {
       <Slider {...settings}>
         {gameArray.map((game) => (
           <div key={game.name}>
-            <TestHomeGameCard game={game} session={session} />
+            <TestHomeGameCard game={game} />
           </div>
         ))}
       </Slider>
