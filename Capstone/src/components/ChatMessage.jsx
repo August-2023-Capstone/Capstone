@@ -9,6 +9,7 @@ import ChatUsers from "./ChatUsers";
 import supabase from "../../../supabase";
 
 function ChatMessage({ toggleChat }) {
+
 	const [chatMessages, setChatMessages] = useState([]);
 	const [showModal, setShowModal] = useState(false); // State for the modal visibility
 	const [loggedInUserData, setLoggedInUserData] = useState({}); // State for storing users data
