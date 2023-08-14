@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import supabase from "../../../supabase";
+import RemoveGameButton from "./RemoveGameButton";
+import { useNavigate } from "react-router-dom";
 import NintendoSwitch from "../assets/Logos/NintendoSwitchLogo.png";
 import Playstation from "../assets/Logos/PlaystationLogo.png";
 import Windows from "../assets/Logos/WindowsLogo.png";
@@ -8,6 +10,12 @@ import iOS from "../assets/Logos/AppleLogo.png";
 
 const TestProfileGames = () => {
   const [profileGames, setProfileGames] = useState([]);
+  const navigate = useNavigate();
+
+  const handleImageClick = (game) => {
+    // Navigate to the FriendSearchPage and pass the game name as a parameter
+    navigate(`/friend_search?gameName=${encodeURIComponent(game.name)}`);
+  };
 
   useEffect(() => {
     const fetchProfileGames = async () => {
@@ -74,11 +82,17 @@ const TestProfileGames = () => {
     <div className="ProfileGameCardContainer">
       {profileGames.map((game) => (
         <div key={game.id} className="ProfileGameCard">
-          <img
-            className="ProfileGameCardImage"
-            src={game.art}
-            alt={game.name}
-          />
+          <a
+            href="#" // Replace with the appropriate link if needed
+            className="ProfileGameCardImageAnchor"
+            onClick={() => handleImageClick(game)}
+          >
+            <img
+              className="ProfileGameCardImage"
+              src={game.art}
+              alt={game.name}
+            />
+          </a>
           <h2 className="ProfileGameCardTitle">{game.name}</h2>
           <p className="ProfileGameCardInfo">
             Genre: {extractArrayFromString(game.genre).join(", ")}
@@ -86,8 +100,7 @@ const TestProfileGames = () => {
           <p className="ProfileGameCardInfo">
             Platform: {extractArrayFromString(game.platform).join(", ")}
           </p>
-
-          <button className="ProfileGameCardButton">-</button>
+          <RemoveGameButton game={game} />
         </div>
       ))}
     </div>
