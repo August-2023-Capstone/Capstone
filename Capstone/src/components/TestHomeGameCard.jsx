@@ -3,6 +3,7 @@ import Playstation from "../assets/Logos/PlaystationLogo.png";
 import Windows from "../assets/Logos/WindowsLogo.png";
 import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
+import NintendoDS from "../assets/Logos/NintendoDS.png";
 import supabase from "../../../supabase";
 import { useNavigate } from "react-router-dom";
 import AddGameButton from "./AddGameButton";

@@ -48,7 +48,22 @@ const TestProfileGames = () => {
 
   const extractArrayFromString = (stringWithArray) => {
     try {
-      return JSON.parse(stringWithArray);
+      const parsedArray = JSON.parse(stringWithArray);
+
+      if (Array.isArray(parsedArray)) {
+        return parsedArray.map((item) => {
+          if (typeof item === "string") {
+            return item;
+          } else if (item.name) {
+            return item.name;
+          } else if (item.platform && item.platform.name) {
+            return item.platform.name;
+          }
+          return "Unknown";
+        });
+      } else {
+        return ["Unknown"];
+      }
     } catch (error) {
       console.error("Error parsing JSON:", error);
       return [];
