@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import supabase from "../../../supabase";
+import AcceptDeclineButtons from "./AcceptDeclineButtons";
 
 const FriendList = () => {
 	const [friendIds, setFriendIds] = useState([]);
@@ -103,6 +104,8 @@ const FriendList = () => {
 			</ul>
 		</div>
 	);
+  
 };
+
 
 export default FriendList;
