@@ -49,7 +49,7 @@ const FriendSearchPage = () => {
         // Query the profiles table to get gamertags based on user_id's
         const { data: profilesData, error: profilesError } = await supabase
           .from("profiles")
-          .select("gamertag")
+          .select("gamertag, id, timezone, platform")
           .in("id", linkedUserIds);
 
         if (profilesError) {
@@ -58,7 +58,7 @@ const FriendSearchPage = () => {
         }
 
         setLinkedUsersProfiles(profilesData);
-        console.log(linkedUsersProfiles);
+        console.log(profilesData);
       } catch (error) {
         console.error("Error:", error);
       }

@@ -57,6 +57,7 @@ const HomeCarouselOne = () => {
 
     return () => subscription.unsubscribe();
   }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
