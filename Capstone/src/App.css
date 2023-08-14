@@ -903,6 +903,7 @@ li p:nth-child(2) {
   justify-content: space-between;
 
   padding-left: 230px;
+  padding-top: 40px;
 }
 .profilePage {
   background-color: #151515;
@@ -949,34 +950,44 @@ li p:nth-child(2) {
 }
 .ProfileData {
   display: flex;
-
-  gap: 5px;
-  padding-top: 10px;
-  padding-left: 375px;
-}
-.ProfileGamertag {
-  background-color: #202020;
-  color: white;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
   padding: 20px;
-  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  border: white 2px solid;
 }
-.ProfileTimezone {
-  background-color: #202020;
-  color: white;
-  padding: 20px;
-  border-radius: 8px;
+.profileDataMiddleContainer {
+  display: block;
 }
+.ProfileGamertag,
+.ProfileTimezone,
 .ProfilePlatform {
+  display: flex; /* Use flex to align items horizontally */
+  align-items: center; /* Center items vertically */
   background-color: #202020;
   color: white;
   padding: 20px;
   border-radius: 8px;
+  margin-bottom: 20px;
+  max-width: 300px;
+}
+.editProfileIcon {
+  padding-top: 170px;
+}
+.profileAvatar {
+  width: 100px;
+  height: 100px; /* Set the desired height for the avatar */
+  border-radius: 50%; /* Make the avatar circular */
+  border: 2px white solid;
+  object-fit: cover; /* Prevent distortion of the image */
 }
 .friendsList {
   background-color: #202020;
   padding: 10px;
   border-radius: 8px;
-  grid-column: 4; /* Place the friends list in the fourth column */
+  grid-column: 4;
   min-height: 100vh;
 }
 
