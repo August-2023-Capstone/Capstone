@@ -252,13 +252,18 @@ function ChatMessage({ toggleChat }) {
             {showModal && <div className="modal">Please enter a message!</div>}
             <div>
               <input
+                className="messagesInput"
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 onKeyDown={handleKeyDown} // Add the onKeyDown event listener
                 placeholder="Type your message..."
               />
-              <button type="button" onClick={handleSendMessage}>
+              <button
+                className="sendMessageButton"
+                type="button"
+                onClick={handleSendMessage}
+              >
                 Send Message
               </button>
             </div>
