@@ -1,16 +1,44 @@
 /** @format */
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import avatar from "../assets/icons/image0copy.png";
+import placeholderAvatar from "../assets/icons/image0copy.png";
 import speechBubbleIcon from "../assets/icons/speechbubble.png";
 import Login from "./Login";
 import Logout from "./Logout";
 import supabase from "../../../supabase";
 import Search from "./Search";
+import Avatar1 from "../assets/Avatars/Avatar1.png";
+import Avatar2 from "../assets/Avatars/Avatar2.png";
+import Avatar3 from "../assets/Avatars/Avatar3.png";
+import Avatar4 from "../assets/Avatars/Avatar4.png";
+import Avatar5 from "../assets/Avatars/Avatar5.png";
+import Avatar6 from "../assets/Avatars/Avatar6.png";
+import Avatar7 from "../assets/Avatars/Avatar7.png";
+import Avatar8 from "../assets/Avatars/Avatar8.png";
+import Avatar9 from "../assets/Avatars/Avatar9.png";
+import Avatar10 from "../assets/Avatars/Avatar10.png";
+import Avatar11 from "../assets/Avatars/Avatar11.png";
+import Avatar12 from "../assets/Avatars/Avatar12.png";
+
+const avatarOptions = {
+  Avatar1,
+  Avatar2,
+  Avatar3,
+  Avatar4,
+  Avatar5,
+  Avatar6,
+  Avatar7,
+  Avatar8,
+  Avatar9,
+  Avatar10,
+  Avatar11,
+  Avatar12,
+};
 
 const Navbar = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [session, setSession] = useState(null);
+  const [userAvatar, setUserAvatar] = useState(null); // State to store user's avatar image
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -28,6 +56,26 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    async function fetchUserProfile() {
+      if (session) {
+        const { data: user, error } = await supabase
+          .from("profiles")
+          .select("avatar")
+          .eq("id", session.user.id)
+          .single();
+
+        if (error) {
+          console.error("Error fetching user profile:", error);
+        } else {
+          setUserAvatar(avatarOptions[user?.avatar]);
+        }
+      }
+    }
+
+    fetchUserProfile();
+  }, [session]);
+
   return (
     <nav className="bg-[#151515] p-4 flex items-center justify-between">
       <div className="flex items-center">
@@ -37,16 +85,24 @@ const Navbar = () => {
         <Search />
       </div>
       <div className="flex items-center">
-        <Link to="/chat" className="mr-4">
-          <img
-            src={speechBubbleIcon}
-            alt="Speech Bubble Icon"
-            className="w-10 h-10"
-          />
-        </Link>
-        <Link to="/profile" className="mr-4">
-          <img src={avatar} alt="Logo" className="w-10 h-10 rounded-full" />
-        </Link>
+        {session && (
+          <Link to="/chat" className="mr-4">
+            <img
+              src={speechBubbleIcon}
+              alt="Speech Bubble Icon"
+              className="w-10 h-10"
+            />
+          </Link>
+        )}
+        {session && (
+          <Link to="/profile" className="mr-4">
+            <img
+              src={userAvatar}
+              alt="Avatar"
+              className="w-10 h-10 rounded-full"
+            />
+          </Link>
+        )}
         {session ? (
           <Logout onClick={() => setSession(null)} />
         ) : (

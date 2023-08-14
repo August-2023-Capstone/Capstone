@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Avatar1 from "../assets/Avatars/Avatar1.png";
 import Avatar2 from "../assets/Avatars/Avatar2.png";
 import Avatar3 from "../assets/Avatars/Avatar3.png";
@@ -11,6 +11,7 @@ import Avatar9 from "../assets/Avatars/Avatar9.png";
 import Avatar10 from "../assets/Avatars/Avatar10.png";
 import Avatar11 from "../assets/Avatars/Avatar11.png";
 import Avatar12 from "../assets/Avatars/Avatar12.png";
+import supabase from "../../../supabase";
 
 const avatarOptions = [
   { value: "Avatar1", label: "option 1", image: Avatar1 },
@@ -34,9 +35,30 @@ const AvatarModal = ({ onClose, onSave }) => {
     setSelectedAvatar(selectedOption);
   };
 
-  const handleSaveAvatar = () => {
-    onSave(selectedAvatar);
-    onClose();
+  const handleSaveAvatar = async (event) => {
+    event.preventDefault(); // Prevent form submission
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    // Update the 'avatar' column in the 'profiles' table
+    try {
+      if (user.id && selectedAvatar) {
+        const { error } = await supabase
+          .from("profiles")
+          .update({ avatar: selectedAvatar.value })
+          .eq("id", user.id);
+
+        if (error) {
+          console.error("Error updating avatar:", error);
+        } else {
+          onSave(selectedAvatar);
+          onClose();
+        }
+      }
+    } catch (error) {
+      console.error("Error updating avatar:", error);
+    }
   };
 
   return (
