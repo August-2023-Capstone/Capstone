@@ -37,6 +37,7 @@ const Login = () => {
               },
             },
           }}
+          providers={[]}
         />
       </div>
     );
