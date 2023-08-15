@@ -29,6 +29,7 @@
 	border-right: 3px solid #ccc;
 	overflow-y: auto;
 	align-self: flex-start; /* Align to the top */
+	height: 100vh;
 }
 
 /* Avatar for each user (you can use an image or custom avatar icon) */
