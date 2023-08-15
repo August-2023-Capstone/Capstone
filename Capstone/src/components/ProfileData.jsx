@@ -18,7 +18,7 @@ const ProfileData = () => {
         .from("profiles")
         .select()
         .eq("id", user.id);
-      console.log(data);
+
       if (error) {
         console.error("Error fetching data:", error);
       } else {
@@ -31,7 +31,13 @@ const ProfileData = () => {
 
     fetchProfileData();
   }, []);
+  const handleEditIconClick = () => {
+    setShowCreateUserForm(true);
+  };
 
+  const handleCloseModal = () => {
+    setShowCreateUserForm(false);
+  };
   return (
     <div>
       {/* <h1>Profiles List</h1> */}
@@ -44,12 +50,23 @@ const ProfileData = () => {
 
             <p className="ProfilePlatform">Platform: {profile.platform}</p>
           </div>
-          <img src={edit} alt="" className="editProfileIcon" />
-
+          <img
+            src={edit}
+            alt=""
+            className="editProfileIcon"
+            onClick={handleEditIconClick}
+          />
           {/* Add other profile properties as needed */}
         </div>
       ))}
-      {showCreateUserForm && <CreateUserForm />}
+      {profileData.length > 0 && profileData[0].gamertag === null && (
+        <div className="modalBackground">
+          <div className="modalContent">
+            <CreateUserForm />
+            <button onClick={handleCloseModal}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

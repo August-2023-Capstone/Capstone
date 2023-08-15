@@ -296,7 +296,7 @@ const CreateUserForm = () => {
           handleSubmit();
         }}
       >
-        Create User
+        Update user info
       </button>
     </form>
   );

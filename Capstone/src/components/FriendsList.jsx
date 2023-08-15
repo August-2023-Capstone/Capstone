@@ -95,7 +95,7 @@ const FriendList = () => {
   }, [friendIds]);
 
   return (
-    <div>
+    <div className="friendsListContainer">
       <h1>Friend List</h1>
       <ul>
         {friendProfiles.map((profile) => (
