@@ -16,6 +16,7 @@ import CreateUserForm from "./components/CreateUserForm";
 import TestPlatformToggle from "./components/TestPlatformToggle";
 import TestProfileGames from "./components/TestProfileGames";
 import HomeGameCard from "./components/HomeGameCard";
+import TestOtherProfilePage from "./components/TestOtherProfilePage";
 
 // import { useState, useEffect } from "react";
 

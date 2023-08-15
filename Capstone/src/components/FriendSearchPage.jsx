@@ -133,7 +133,7 @@ const FriendSearchPage = () => {
   return (
     <div className="bg-[#151515] flex">
       <div className="w-1/4">
-        <GameDetails />
+        <GameDetails gameName={gameName} />
       </div>
       <div className="flex-grow flex">
         <GamePlayers
