@@ -88,17 +88,25 @@ const HomeGameCard = ({ game, session }) => {
 
   return (
     <div className="HomeGameCard">
-      <a
-        href="#" // Replace with the appropriate link if needed
-        className="HomeGameCardImageAnchor"
-        onClick={handleImageClick}
-      >
+      {session ? (
+        <a
+          href="#"
+          className="HomeGameCardImageAnchor"
+          onClick={handleImageClick}
+        >
+          <img
+            className="HomeGameCardImage"
+            src={game.background_image}
+            alt={game.name}
+          />
+        </a>
+      ) : (
         <img
           className="HomeGameCardImage"
           src={game.background_image}
           alt={game.name}
         />
-      </a>
+      )}
       <div className="PlatformLogosContainer">
         {game.platforms.map((platform) => (
           <img

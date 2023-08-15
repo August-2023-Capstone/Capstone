@@ -82,7 +82,7 @@ const Navbar = () => {
         <Link to="/" className="text-white text-3xl font-bold flex-grow-0 mr-4">
           SQUAD FINDER
         </Link>
-        <Search />
+        <Search session={session} />
       </div>
       <div className="flex items-center">
         {session && (
