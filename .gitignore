@@ -1,2 +1,3 @@
-supabase.js
 node_modules
+# Local Netlify folder
+.netlify

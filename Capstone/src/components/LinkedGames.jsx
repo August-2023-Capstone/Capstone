@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import supabaseConfig from "../../../supabase";
+import supabaseConfig from "../../supabase";
 
 function LinkedGames() {
   const [linkedGames, setLinkedGames] = useState([]);

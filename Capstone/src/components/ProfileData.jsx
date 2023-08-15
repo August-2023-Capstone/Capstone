@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 import CreateUserForm from "./CreateUserForm";
 import Avatar1 from "../assets/Avatars/Avatar1.png";
 import edit from "../assets/icons/edit.png";

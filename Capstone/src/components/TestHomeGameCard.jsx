@@ -3,8 +3,8 @@ import Playstation from "../assets/Logos/PlaystationLogo.png";
 import Windows from "../assets/Logos/WindowsLogo.png";
 import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
-import NintendoDS from "../assets/Logos/NintendoDS.png";
-import supabase from "../../../supabase";
+import NintendoDS from "../assets/Logos/nintendoDS.png";
+import supabase from "../../supabase";
 import { useNavigate } from "react-router-dom";
 import AddGameButton from "./AddGameButton";
 
@@ -88,17 +88,25 @@ const HomeGameCard = ({ game, session }) => {
 
   return (
     <div className="HomeGameCard">
-      <a
-        href="#" // Replace with the appropriate link if needed
-        className="HomeGameCardImageAnchor"
-        onClick={handleImageClick}
-      >
+      {session ? (
+        <a
+          href="#"
+          className="HomeGameCardImageAnchor"
+          onClick={handleImageClick}
+        >
+          <img
+            className="HomeGameCardImage"
+            src={game.background_image}
+            alt={game.name}
+          />
+        </a>
+      ) : (
         <img
           className="HomeGameCardImage"
           src={game.background_image}
           alt={game.name}
         />
-      </a>
+      )}
       <div className="PlatformLogosContainer">
         {game.platforms.map((platform) => (
           <img

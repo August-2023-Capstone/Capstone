@@ -3,6 +3,8 @@ import React from "react";
 import "../App.css";
 
 import FriendsList from "./FriendsList";
+import TestFriendsList from "./TestFriendsList";
+
 import ProfileData from "./ProfileData";
 
 import ProfileGameCards from "./ProfileGameCards";
@@ -18,7 +20,7 @@ const ProfilePage = () => {
             <TestProfileGames />
           </div>
           <div className="friendsList">
-            <FriendsList />
+            <TestFriendsList />
           </div>
         </div>
       </div>

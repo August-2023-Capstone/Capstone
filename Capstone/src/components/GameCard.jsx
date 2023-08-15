@@ -1,5 +1,5 @@
 import React from "react";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 
 const GameCard = ({ game }) => {
   const handleAddToDatabase = async () => {

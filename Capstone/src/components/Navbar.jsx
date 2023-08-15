@@ -5,7 +5,7 @@ import placeholderAvatar from "../assets/icons/image0copy.png";
 import speechBubbleIcon from "../assets/icons/speechbubble.png";
 import Login from "./Login";
 import Logout from "./Logout";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 import Search from "./Search";
 import Avatar1 from "../assets/Avatars/Avatar1.png";
 import Avatar2 from "../assets/Avatars/Avatar2.png";
@@ -82,7 +82,7 @@ const Navbar = () => {
         <Link to="/" className="text-white text-3xl font-bold flex-grow-0 mr-4">
           SQUAD FINDER
         </Link>
-        <Search />
+        <Search session={session} />
       </div>
       <div className="flex items-center">
         {session && (

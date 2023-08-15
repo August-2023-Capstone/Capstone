@@ -1,13 +1,12 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
-import PlatformSelect from "./PlatformSelect";
-import supabase from "../../../supabase";
+import Switch from "react-switch";
+import supabase from "../../supabase";
 import AvatarModal from "./AvatarModal";
 import AddGameModal from "./AddGameModal";
 
-import TestPlatformToggle from "./TestPlatformToggle";
 const timezones = [
   "Eastern (UTC-5)",
   "Central (UTC-6)",
@@ -17,13 +16,48 @@ const timezones = [
 
 const CreateUserForm = () => {
   const [formData, setFormData] = useState({
-    email: "",
-    username: "",
-    password: "",
-    platform: [],
+    platform: {
+      pc: false,
+      playstation: false,
+      xbox: false,
+      switch: false,
+    },
     gamertag: "",
     timezone: "",
   });
+
+  useEffect(() => {
+    async function fetchUserProfile() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("pc, playstation, xbox, switch, gamertag, timezone")
+          .eq("id", user.id)
+          .single();
+
+        if (error) {
+          console.error("Error fetching user profile:", error);
+        } else {
+          setFormData((prevData) => ({
+            ...prevData,
+            platform: {
+              pc: data.pc,
+              playstation: data.playstation,
+              xbox: data.xbox,
+              switch: data.switch,
+            },
+            gamertag: data.gamertag,
+            timezone: data.timezone,
+          }));
+        }
+      }
+    }
+
+    fetchUserProfile();
+  }, []); // Empty dependency array means this effect runs once after the component mounts
   //Modal stuff
   const [showModal, setShowModal] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
@@ -51,95 +85,7 @@ const CreateUserForm = () => {
   const closeModal = () => {
     setShowGameModal(false);
   };
-  // const handleLogin = async () => {
-  //   try {
-  //     const { email, password } = formData;
-  //     const supabase = createClient(
-  //       supabaseConfig.supabaseUrl,
-  //       supabaseConfig.supabaseKey
-  //     );
-  //     const { user, error } = await supabase.auth.signIn({ email, password });
 
-  //     if (error) {
-  //       console.error("Login error:", error.message);
-  //       // Handle error, show an error message, etc.
-  //     } else {
-  //       console.log("Logged in user:", user);
-  //       // Handle successful login, redirect to another page, etc.
-  //     }
-  //   } catch (error) {
-  //     console.error("Login error:", error.message);
-  //     // Handle error, show an error message, etc.
-  //   }
-  // };
-
-  //   const handleUpdateUser = async () => {
-
-  //     try {
-  //       const { data, error } = await supabase
-  //         .from("users")
-  //         .update({
-  //           platform: formData.platform,
-  //           gamertag: formData.gamertag,
-  //           timezone: formData.timezone,
-  //         })
-  //         .match({ id: userId }); // Replace 'userId' with the unique identifier of the user you want to update
-
-  //       if (error) {
-  //         console.error("Error updating user data:", error);
-  //         // Handle error, show an error message, etc.
-  //       } else {
-  //         console.log("User data updated successfully:", data);
-  //         // Handle success, show a success message, or navigate to a different page
-  //       }
-  //     } catch (error) {
-  //       console.error("Error updating user data:", error.message);
-  //       // Handle error, show an error message, etc.
-  //     }
-  //   };
-
-  // const handleDeleteUser = async () => {
-  //   try {
-  //     const { data, error } = await supabase
-  //       .from("users")
-  //       .delete()
-  //       .match({ id: userId }); // Replace 'userId' with the unique identifier of the user you want to delete
-
-  //     if (error) {
-  //       console.error("Error deleting user:", error);
-  //       // Handle error, show an error message, etc.
-  //     } else {
-  //       console.log("User deleted successfully:", data);
-  //       // Handle success, show a success message, or navigate to a different page
-  //     }
-  //   } catch (error) {
-  //     console.error("Error deleting user:", error.message);
-  //     // Handle error, show an error message, etc.
-  //   }
-  // };
-
-  const handleSubmit = async () => {
-    console.log(formData);
-    try {
-      // Send a POST request to your backend route
-      const { data, error } = await supabase.from("users").insert([
-        {
-          email: formData.email,
-          username: formData.username,
-          password: formData.password,
-          platform: formData.platform,
-          gamertag: formData.gamertag,
-          timezone: formData.timezone,
-        },
-      ]);
-      console.log(data);
-      console.log(error);
-      // Handle success, show a success message, or navigate to a different page
-    } catch (error) {
-      console.error("Error creating user:", error);
-      // Handle error, show an error message, etc.
-    }
-  };
   const platformOptions = [
     { value: "pc", label: "PC" },
     { value: "playstation", label: "Playstation" },
@@ -176,13 +122,60 @@ const CreateUserForm = () => {
     if (updateError) {
       console.error("Error updating platform value:", updateError);
     } else {
-      console.log("Platform value updated successfully");
+      // Update the form data state
+      setFormData((prevData) => ({
+        ...prevData,
+        platform: {
+          ...prevData.platform,
+          [platform]: updatedValue,
+        },
+      }));
     }
   };
 
-  const handleplatformChange = async (e) => {
-    const { name } = e.target;
-    togglePlatform(name); // Use the platform name as the parameter
+  const handlePlatformChange = async (platform) => {
+    try {
+      // Fetch the user's profile data
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const userId = user.id;
+
+      // Fetch the current platform value
+      const { data, error } = await supabase
+        .from("profiles")
+        .select(platform)
+        .eq("id", userId)
+        .single();
+
+      if (error) {
+        console.error("Error fetching platform data:", error);
+        return;
+      }
+
+      // Toggle the platform value
+      const updatedValue = !data[platform];
+      const { error: updateError } = await supabase
+        .from("profiles")
+        .update({ [platform]: updatedValue })
+        .eq("id", userId);
+
+      if (updateError) {
+        console.error("Error updating platform value:", updateError);
+      } else {
+        // Update the form data state
+        setFormData((prevData) => ({
+          ...prevData,
+          platform: {
+            ...prevData.platform,
+            [platform]: updatedValue,
+          },
+        }));
+      }
+    } catch (error) {
+      console.error("Error handling platform change:", error);
+    }
   };
 
   const updateGamertagInDatabase = async () => {
@@ -230,13 +223,11 @@ const CreateUserForm = () => {
       {platformOptions.map((platformOption) => (
         <div key={platformOption.value} className="checkboxConainer">
           <label>
-            <input
-              type="checkbox"
-              name={platformOption.value}
-              checked={formData.platform[platformOption.value]}
-              onChange={handleplatformChange}
-            />
             {platformOption.label}
+            <Switch
+              onChange={() => handlePlatformChange(platformOption.value)}
+              checked={formData.platform[platformOption.value]}
+            />
           </label>
         </div>
       ))}
@@ -293,10 +284,10 @@ const CreateUserForm = () => {
         onClick={() => {
           updateGamertagInDatabase();
           updateTimezoneInDatabase();
-          handleSubmit();
         }}
       >
-        Update user info
+
+        Submit{" "}
       </button>
     </form>
   );
