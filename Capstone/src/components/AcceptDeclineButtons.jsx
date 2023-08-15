@@ -72,12 +72,6 @@ const AcceptDeclineButtons = ({ friendId, loggedInUserId }) => {
         >
           Accept
         </button>
-        <button
-          className="bg-red-500 text-white px-2 py-1 rounded"
-          onClick={handleDeclineFriend}
-        >
-          Decline
-        </button>
       </div>
     );
   }
