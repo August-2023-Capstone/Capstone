@@ -22,8 +22,19 @@ const FriendsList = () => {
   }, []);
 
   useEffect(() => {
-    // Fetch friend IDs where the logged-in user is user_id
-    const fetchFriendIds = async () => {
+    // Fetch the logged-in user's ID
+    const fetchLoggedInUserId = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setLoggedInUserId(user.id);
+    };
+
+    fetchLoggedInUserId();
+  }, []);
+
+  useEffect(() => {
+    const fetchFriendAndUserIds = async () => {
       try {
         const { data: friendData, error: friendError } = await supabase
           .from("friends")
@@ -35,15 +46,6 @@ const FriendsList = () => {
           return;
         }
 
-        setFriendIds(friendData.map((friend) => friend.friend_id));
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    // Fetch friend IDs where the logged-in user is friend_id
-    const fetchUserIds = async () => {
-      try {
         const { data: userData, error: userError } = await supabase
           .from("friends")
           .select("user_id")
@@ -54,18 +56,21 @@ const FriendsList = () => {
           return;
         }
 
-        setFriendIds((prevIds) => [
-          ...prevIds,
+        const combinedIds = [
+          ...friendData.map((friend) => friend.friend_id),
           ...userData.map((user) => user.user_id),
-        ]);
+        ];
+
+        setFriendIds(combinedIds);
+
+        // Code to run after both fetch operations are complete
       } catch (error) {
         console.error("Error:", error);
       }
     };
 
     if (loggedInUserId) {
-      fetchFriendIds();
-      fetchUserIds();
+      fetchFriendAndUserIds();
     }
   }, [loggedInUserId]);
 
@@ -121,23 +126,27 @@ const FriendsList = () => {
   };
 
   return (
-    <div className="friendsListContainer">
-      <h1>Friend List</h1>
+    <div className="bg-gray-500 p-4">
+      <h1 className="text-2xl font-semibold mb-4">Friend List</h1>
       <ul>
         {friendProfiles.map((profile) => (
-          <li key={profile.id}>
-            {profile.gamertag}
-            <AcceptDeclineButtons
-              friendId={profile.id}
-              loggedInUserId={loggedInUserId}
-            />
-            <button
-              onClick={() => handleDeleteFriend(profile.id)}
-              className="ml-2 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-            >
-              {" "}
-              Delete
-            </button>
+          <li
+            key={profile.id}
+            className="bg-slate-400 rounded-md p-3 mb-2 shadow-md flex items-center justify-between"
+          >
+            <span className="text-lg text-slate-50">{profile.gamertag}</span>
+            <div className="flex items-center">
+              <AcceptDeclineButtons
+                friendId={profile.id}
+                loggedInUserId={loggedInUserId}
+              />
+              <button
+                onClick={() => handleDeleteFriend(profile.id)}
+                className="ml-2 px-1 py-1 bg-red-800 text-white rounded hover:bg-red-600"
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
