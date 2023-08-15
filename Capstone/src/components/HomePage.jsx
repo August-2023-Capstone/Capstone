@@ -1,25 +1,42 @@
-/** @format */
 import React, { useState, useEffect } from "react";
 import HomeCarouselOne from "./HomeCarouselOne";
 import HomeCarouselTwo from "./HomeCarouselTwo";
 import HomeCarouselThree from "./HomeCarouselThree";
-
+import supabase from "../../../supabase";
 import ChatBox from "./ChatBox";
 import Login from "./Login";
 
 const HomePage = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const userIsLoggedIn = false;
-      if (!userIsLoggedIn) {
-        setShowLoginModal(true);
-      }
-    }, 5000);
+    // Check if there's an existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
 
-    return () => clearTimeout(timer);
+    // Subscribe to auth state changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
+
+  useEffect(() => {
+    if (!session) {
+      const timer = setTimeout(() => {
+        setShowLoginModal(true);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [session]);
 
   return (
     <div className="HomePage">
@@ -32,7 +49,7 @@ const HomePage = () => {
         <HomeCarouselThree />
       </div>
       <ChatBox />
-      {showLoginModal && (
+      {showLoginModal && !session && (
         <div
           onClick={() => setShowLoginModal(false)}
           className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex items-center justify-center z-10"

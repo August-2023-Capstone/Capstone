@@ -28,7 +28,8 @@ const FriendList = () => {
         const { data: friendData, error: friendError } = await supabase
           .from("friends")
           .select("friend_id")
-          .eq("user_id", loggedInUserId);
+          .eq("user_id", loggedInUserId)
+          .eq("status", false);
 
         if (friendError) {
           console.error("Error fetching friend IDs:", friendError);
@@ -36,6 +37,7 @@ const FriendList = () => {
         }
 
         setFriendIds(friendData.map((friend) => friend.friend_id));
+        console.log(friendData);
       } catch (error) {
         console.error("Error:", error);
       }

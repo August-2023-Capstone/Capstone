@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect } from "react";
 import supabase from "../../../supabase";
 import AcceptDeclineButtons from "./AcceptDeclineButtons";
@@ -26,7 +28,8 @@ const FriendList = () => {
         const { data: friendData, error: friendError } = await supabase
           .from("friends")
           .select("friend_id")
-          .eq("user_id", loggedInUserId);
+          .eq("user_id", loggedInUserId)
+          .eq("status", true);
 
         if (friendError) {
           console.error("Error fetching friend IDs:", friendError);
@@ -92,6 +95,8 @@ const FriendList = () => {
     }
   }, [friendIds]);
 
+  console.log("hello");
+
   return (
     <div>
       <h1>Friend List</h1>
@@ -101,7 +106,7 @@ const FriendList = () => {
             {profile.gamertag}
             <AcceptDeclineButtons
               friendId={profile.id}
-              loggedInUserId={loggedInUserId} // Pass the logged-in user ID
+              loggedInUserId={loggedInUserId}
             />
           </li>
         ))}
