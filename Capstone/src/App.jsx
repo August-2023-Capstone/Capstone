@@ -27,6 +27,7 @@ function App() {
       <TestLogIn2 />
       <CreateUserForm /> */}
         {/* <TestProfileGames /> */}
+        <CreateUserForm />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/users" element={<UsersPage />} />
