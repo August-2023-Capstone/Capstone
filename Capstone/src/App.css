@@ -873,8 +873,9 @@ li p:nth-child(2) {
 	text-align: center;
 }
 .HomeGameCardTitle {
-	font-size: medium;
-	font-weight: 700;
+
+  font-size: small;
+  font-weight: 900;
 }
 .HomeGameCardInfo {
 	font-size: small;
@@ -898,36 +899,30 @@ li p:nth-child(2) {
 	display: flex;
 }
 .ProfileGameCardContainer {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
 
-	padding-left: 230px;
-	padding-top: 40px;
-	border: white 2px solid;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px; /* Add some space between cards */
+  padding-left: 200px;
+  margin: 0 auto; /* Center the container horizontally */
 }
-.profilePage {
-	background-color: #151515;
-	min-height: 100vh;
-}
+
 .ProfileGameCard {
-	/* Your card styling */
-	width: calc(20% - 5px); /* Adjust the width and gap to fit 5 cards in a row */
-	margin-bottom: 20px;
 
-	background-color: #202020;
-	border: 1px solid black;
-	display: block;
-
-	text-align: center;
-
-	border-radius: 10px;
-	color: white;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  /* Your card styling */
+  background-color: #202020;
+  border: 1px solid black;
+  display: block;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
 }
+
 .ProfileGameCardImage {
 	border-radius: 10px 10px 0 0;
 }
+
 .ProfileGameCardButton {
 	font-weight: bolder;
 	font-size: larger;
@@ -942,22 +937,42 @@ li p:nth-child(2) {
 	height: 30px;
 	text-align: center;
 }
+
 .ProfileGameCardTitle {
 	font-size: larger;
 	font-weight: 700;
 }
+
 .ProfileGameCardInfo {
 	font-size: small;
 }
+
+@media screen and (max-width: 480px) {
+  .ProfileGameCardContainer {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 10px; /* Adjust the space for smaller screens */
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .ProfileGameCardContainer {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 15px; /* Adjust the space for tablet screens */
+  }
+}
+
 .ProfileData {
-	display: flex;
-	align-items: center;
-	text-align: center;
-	gap: 20px;
-	padding: 20px;
-	max-width: 400px;
-	margin: 0 auto;
-	border: white 2px solid;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  border: white 2px solid;
+  margin-left: auto;
+  right: 0;
 }
 .profileDataMiddleContainer {
 	display: block;

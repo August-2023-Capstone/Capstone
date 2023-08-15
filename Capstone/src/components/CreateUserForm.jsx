@@ -218,6 +218,7 @@ const CreateUserForm = () => {
       console.error("Error updating timezone:", error);
     }
   };
+
   return (
     <form className="createUserForm form">
       {platformOptions.map((platformOption) => (
@@ -286,7 +287,6 @@ const CreateUserForm = () => {
           updateTimezoneInDatabase();
         }}
       >
-
         Submit{" "}
       </button>
     </form>

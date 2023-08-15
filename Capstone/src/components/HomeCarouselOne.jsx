@@ -5,38 +5,6 @@ import supabase from "../../supabase";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-const usersCurrentGames = [
-  {
-    name: "League Of Legends",
-    poster: "https://images.igdb.com/igdb/image/upload/t_cover_big/co49wj.png",
-    genre: "MOBA",
-    platform: "Mac or PC",
-  },
-  {
-    name: "The Legend Of Zelda",
-    poster: "https://images.igdb.com/igdb/image/upload/t_cover_big/co5vmg.png",
-    genre: "Adventure",
-    platform: "Nintendo Switch",
-  },
-  {
-    name: "Final Fantasy XVI",
-    poster: "https://images.igdb.com/igdb/image/upload/t_cover_big/co5w3k.png",
-    genre: "RPG",
-    platform: "Playstation5 or PC",
-  },
-  {
-    name: "The Outlast Trials",
-    poster: "https://images.igdb.com/igdb/image/upload/t_cover_big/co29og.png",
-    genre: "Adventure",
-    platform: "PC",
-  },
-  {
-    name: "Age Of Wonders 4",
-    poster: "https://images.igdb.com/igdb/image/upload/t_cover_big/co612o.png",
-    genre: "Strategy/TBS",
-    platform: "Playstation5,PC,Xbox",
-  },
-];
 
 const HomeCarouselOne = () => {
   const [gameArray, setGameArray] = useState([]);
