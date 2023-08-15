@@ -901,6 +901,8 @@ li p:nth-child(2) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 20px; /* Add some space between cards */
+  padding-left: 200px;
+  margin: 0 auto; /* Center the container horizontally */
 }
 
 .ProfileGameCard {
@@ -965,6 +967,8 @@ li p:nth-child(2) {
   max-width: 400px;
   margin: 0 auto;
   border: white 2px solid;
+  margin-left: auto;
+  right: 0;
 }
 .profileDataMiddleContainer {
   display: block;
