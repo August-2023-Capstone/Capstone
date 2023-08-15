@@ -9,11 +9,12 @@ import ChatUsers from "./ChatUsers";
 import supabase from "../../../supabase";
 
 function ChatMessage({ toggleChat }) {
-
 	const [chatMessages, setChatMessages] = useState([]);
 	const [showModal, setShowModal] = useState(false); // State for the modal visibility
 	const [loggedInUserData, setLoggedInUserData] = useState({}); // State for storing users data
+	const [loggedInUserId, setLoggedInUserId] = useState(null);
 	const [usersData, setUsersData] = useState([]);
+	const [friendIds, setFriendIds] = useState([]);
 	const [session, setSession] = useState(null);
 	const [showCloseButton, setShowCloseButton] = useState(true);
 	const [newMessage, setNewMessage] = useState("");
@@ -31,6 +32,8 @@ function ChatMessage({ toggleChat }) {
 	useEffect(() => {
 		fetchChatData();
 		fetchUsersData();
+		// fetchFriendSenderMessage();
+		// fetchFriendRecieverMessage();
 	}, [usersData]);
 
 	// Function to scroll to the bottom of the page on page load or component re-render
@@ -187,10 +190,10 @@ function ChatMessage({ toggleChat }) {
 			const { data, error } = await supabase
 				.from("chatmessages")
 				.select("*")
-				.or(
-					`sender_id.eq.${session.user.id},receiver_id.eq.${session.user.id}`
-				);
-
+				// .or(
+				// 	`sender_id.eq.${session.user.id},receiver_id.eq.${session.user.id},sender_id.eq.${usersData.id},receiver_id.eq.${usersData.id}`
+				// );
+				.in("sender_id", [session.user.id, usersData.id]);
 			if (error) {
 				console.error("Error fetching Chat Data:", error);
 			} else {
@@ -215,9 +218,44 @@ function ChatMessage({ toggleChat }) {
 		}
 	};
 
-	// if (chatMessages.length === 0) {
-	// 	return <div>No Messages Found..</div>;
-	// }
+	useEffect(() => {
+		const fetchFriendIds = async () => {
+			try {
+				const { data: friendData, error: friendError } = await supabase
+					.from("friends")
+					.select("friend_id")
+					.eq("user_id", loggedInUserId)
+					.eq("status", true);
+
+				console.log("Friend Data:", friendData); // Log friendData
+				console.log("Friend Error:", friendError); // Log friendError
+
+				if (friendError) {
+					console.error("Error fetching friend IDs:", friendError);
+					return;
+				}
+
+				setFriendIds(friendData.map((friend) => friend.friend_id));
+			} catch (error) {
+				console.error("Error:", error);
+			}
+		};
+		if (loggedInUserId) {
+			fetchFriendIds();
+		}
+	}, [loggedInUserId]);
+
+	useEffect(() => {
+		const fetchLoggedInUserId = async () => {
+			const {
+				data: { user },
+			} = await supabase.auth.getUser();
+			setLoggedInUserId(user.id);
+		};
+		fetchLoggedInUserId();
+	}, []);
+
+	// console.log("Friend IDs with status true:", friendIds);
 
 	// Function to scroll to the input field
 	const scrollToInputField = () => {
@@ -230,7 +268,14 @@ function ChatMessage({ toggleChat }) {
 		<>
 			<div className='chat-container'>
 				<div className='chat-users'>
-					<ChatUsers usersData={usersData} setUsersData={setUsersData} />
+					<ChatUsers
+						usersData={usersData}
+						setUsersData={setUsersData}
+						friendIds={friendIds}
+						setFriendIds={setFriendIds}
+						setChatMessages={setChatMessages}
+						chatMessages={chatMessages}
+					/>
 				</div>
 				<div className='chat-messages'>
 					<ul ref={inputRef}>
