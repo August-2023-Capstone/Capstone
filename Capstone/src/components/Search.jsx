@@ -5,7 +5,7 @@ import x from "../assets/icons/x.png";
 import supabase from "../../../supabase";
 import AddGameButton from "./AddGameButton";
 
-const Search = () => {
+const Search = ({ session }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -54,9 +54,15 @@ const Search = () => {
     };
   }, [searchTerm]);
 
-  const handleGameImageClick = (game) => {
-    // Navigate to the FriendSearchPage with the clicked game's name as parameter
-    navigate(`/friend_search?gameName=${encodeURIComponent(game.name)}`);
+  const handleGameImageClick = (game, e) => {
+    if (!session) {
+      // Handle not logged in state, e.g., show a login modal
+      e.preventDefault();
+      setShowLoginModal(true);
+    } else {
+      // Navigate to the FriendSearchPage with the clicked game's name as parameter
+      navigate(`/friend_search?gameName=${encodeURIComponent(game.name)}`);
+    }
   };
 
   const handleSearchChange = (event) => {
@@ -135,7 +141,7 @@ const Search = () => {
                 </p>
               </div>
 
-              <AddGameButton game={game} />
+              {session && <AddGameButton game={game} />}
             </div>
           ))}
         </div>
