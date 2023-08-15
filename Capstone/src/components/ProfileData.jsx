@@ -32,6 +32,7 @@ const ProfileData = () => {
     fetchProfileData();
   }, []);
   const handleEditIconClick = () => {
+    console.log("Edit icon clicked");
     setShowCreateUserForm(true);
   };
 
@@ -56,9 +57,9 @@ const ProfileData = () => {
             className="editProfileIcon"
             onClick={handleEditIconClick}
           />
-          {/* Add other profile properties as needed */}
         </div>
       ))}
+
       {profileData.length > 0 && profileData[0].gamertag === null && (
         <div className="modalBackground">
           <div className="modalContent">

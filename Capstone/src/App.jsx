@@ -15,6 +15,7 @@ import TestLogIn2 from "./components/TestLogIn2";
 import CreateUserForm from "./components/CreateUserForm";
 import TestPlatformToggle from "./components/TestPlatformToggle";
 import TestProfileGames from "./components/TestProfileGames";
+import HomeGameCard from "./components/HomeGameCard";
 
 // import { useState, useEffect } from "react";
 
@@ -27,6 +28,7 @@ function App() {
       <TestLogIn2 />
       <CreateUserForm /> */}
         {/* <TestProfileGames /> */}
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/users" element={<UsersPage />} />

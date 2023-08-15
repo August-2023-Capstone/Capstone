@@ -873,8 +873,8 @@ li p:nth-child(2) {
   text-align: center;
 }
 .HomeGameCardTitle {
-  font-size: medium;
-  font-weight: 700;
+  font-size: small;
+  font-weight: 900;
 }
 .HomeGameCardInfo {
   font-size: small;

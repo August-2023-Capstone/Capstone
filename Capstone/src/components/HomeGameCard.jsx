@@ -85,6 +85,7 @@ const HomeGameCard = ({ game }) => {
     Android: Android,
     macOS: macOS,
   };
+
   return (
     <div className="HomeGameCard">
       <img
@@ -92,6 +93,7 @@ const HomeGameCard = ({ game }) => {
         src={game.background_image}
         alt={game.name}
       />
+
       <div className="PlatformLogosContainer">
         {game.platforms.map((platform) => (
           <img
@@ -103,7 +105,6 @@ const HomeGameCard = ({ game }) => {
         ))}
       </div>
       <h2 className="HomeGameCardTitle">{game.name}</h2>
-
       <div className="HomeGameCardInfo">
         <br />
         <p>

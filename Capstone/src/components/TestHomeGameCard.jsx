@@ -4,6 +4,10 @@ import Windows from "../assets/Logos/WindowsLogo.png";
 import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
 import NintendoDS from "../assets/Logos/nintendoDS.png";
+import Android from "../assets/Logos/android.png";
+import Linux from "../assets/Logos/linux.png";
+import macOS from "../assets/Logos/macOS.png";
+import wiiU from "../assets/Logos/wiiU.png";
 import supabase from "../../supabase";
 import { useNavigate } from "react-router-dom";
 import AddGameButton from "./AddGameButton";
@@ -79,11 +83,17 @@ const HomeGameCard = ({ game, session }) => {
     Xbox: Xbox,
     "Xbox One": Xbox,
     "Xbox Series S/X": Xbox,
+    "Xbox 360": Xbox,
     Playstation: Playstation,
+    "PlayStation 3": Playstation,
     "PlayStation 4": Playstation,
     "PlayStation 5": Playstation,
     "Nintendo Switch": NintendoSwitch,
     iOS: iOS,
+    Android: Android,
+    Linux: Linux,
+    macOS: macOS,
+    "Wii U": wiiU,
   };
 
   return (
@@ -117,10 +127,10 @@ const HomeGameCard = ({ game, session }) => {
           />
         ))}
       </div>
-      <h2 className="HomeGameCardTitle">{game.name}</h2>
+
+      <h3 className="HomeGameCardTitle">{game.name}</h3>
 
       <div className="HomeGameCardInfo">
-        <br />
         <p>
           {game.genres.map((genre) => (
             <span key={genre.id}>{genre.name}, </span>
