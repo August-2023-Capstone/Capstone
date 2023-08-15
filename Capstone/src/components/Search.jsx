@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import magnify from "../assets/icons/magnify.png";
 import x from "../assets/icons/x.png";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 import AddGameButton from "./AddGameButton";
 
 const Search = ({ session }) => {

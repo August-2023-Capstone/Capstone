@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 import RemoveGameButton from "./RemoveGameButton";
 import { useNavigate } from "react-router-dom";
 import NintendoSwitch from "../assets/Logos/NintendoSwitchLogo.png";

@@ -1,7 +1,8 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
+import AcceptDeclineButtons from "./AcceptDeclineButtons";
 
 const FriendList = () => {
   const [friendIds, setFriendIds] = useState([]);
@@ -27,8 +28,7 @@ const FriendList = () => {
         const { data: friendData, error: friendError } = await supabase
           .from("friends")
           .select("friend_id")
-          .eq("user_id", loggedInUserId)
-          .eq("status", false);
+          .eq("user_id", loggedInUserId);
 
         if (friendError) {
           console.error("Error fetching friend IDs:", friendError);
@@ -36,7 +36,6 @@ const FriendList = () => {
         }
 
         setFriendIds(friendData.map((friend) => friend.friend_id));
-        console.log(friendData);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -95,17 +94,22 @@ const FriendList = () => {
     }
   }, [friendIds]);
 
-	return (
-		<div>
-			<h1>Friend List</h1>
-			<ul>
-				{friendProfiles.map((profile) => (
-					<li key={profile.id}>{profile.gamertag}</li>
-				))}
-			</ul>
-		</div>
-	);
-  
+  return (
+    <div>
+      <h1>Friend List</h1>
+      <ul>
+        {friendProfiles.map((profile) => (
+          <li key={profile.id}>
+            {profile.gamertag}
+            <AcceptDeclineButtons
+              friendId={profile.id}
+              loggedInUserId={loggedInUserId}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default FriendList;

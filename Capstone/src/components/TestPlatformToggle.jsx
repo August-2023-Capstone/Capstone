@@ -1,5 +1,5 @@
 import React from "react";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 
 const TestPlatformToggle = () => {
   // Replace with the actual user UUID
