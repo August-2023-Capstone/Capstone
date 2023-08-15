@@ -11,7 +11,7 @@ import Avatar9 from "../assets/Avatars/Avatar9.png";
 import Avatar10 from "../assets/Avatars/Avatar10.png";
 import Avatar11 from "../assets/Avatars/Avatar11.png";
 import Avatar12 from "../assets/Avatars/Avatar12.png";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 
 const avatarOptions = [
   { value: "Avatar1", label: "option 1", image: Avatar1 },

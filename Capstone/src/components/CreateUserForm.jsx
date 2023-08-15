@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Select from "react-select";
 import Switch from "react-switch";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 import AvatarModal from "./AvatarModal";
 import AddGameModal from "./AddGameModal";
 

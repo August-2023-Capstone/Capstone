@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TestHomeGameCard from "./TestHomeGameCard";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

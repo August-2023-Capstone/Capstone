@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 
 const RemoveGameButton = ({ game }) => {
   const handleRemoveFromDatabase = async () => {

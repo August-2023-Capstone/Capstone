@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 
 const AcceptDeclineButtons = ({ friendId, loggedInUserId }) => {
   const [showButtons, setShowButtons] = useState(false);

@@ -5,7 +5,7 @@ import placeholderAvatar from "../assets/icons/image0copy.png";
 import speechBubbleIcon from "../assets/icons/speechbubble.png";
 import Login from "./Login";
 import Logout from "./Logout";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 import Search from "./Search";
 import Avatar1 from "../assets/Avatars/Avatar1.png";
 import Avatar2 from "../assets/Avatars/Avatar2.png";

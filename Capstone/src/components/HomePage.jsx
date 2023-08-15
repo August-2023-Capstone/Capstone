@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import HomeCarouselOne from "./HomeCarouselOne";
 import HomeCarouselTwo from "./HomeCarouselTwo";
 import HomeCarouselThree from "./HomeCarouselThree";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 import ChatBox from "./ChatBox";
 import Login from "./Login";
 
