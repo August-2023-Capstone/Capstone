@@ -2,11 +2,6 @@ import { useEffect, useState } from "react";
 import supabase from "../../supabase";
 import RemoveGameButton from "./RemoveGameButton";
 import { useNavigate } from "react-router-dom";
-import NintendoSwitch from "../assets/Logos/NintendoSwitchLogo.png";
-import Playstation from "../assets/Logos/PlaystationLogo.png";
-import Windows from "../assets/Logos/WindowsLogo.png";
-import Xbox from "../assets/Logos/XboxLogo.png";
-import iOS from "../assets/Logos/AppleLogo.png";
 
 const TestProfileGames = () => {
   const [profileGames, setProfileGames] = useState([]);
