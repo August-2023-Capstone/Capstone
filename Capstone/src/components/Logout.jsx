@@ -9,8 +9,7 @@ const Logout = () => {
         console.error("Error signing out:", error.message);
       } else {
         console.log("User signed out successfully");
-        // Optionally, you can redirect the user to a different page after successful sign-out.
-        // Example: window.location.href = '/login';
+        window.location.href = "/";
       }
     } catch (error) {
       console.error("Error signing out:", error.message);
