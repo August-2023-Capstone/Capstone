@@ -12,6 +12,69 @@ const FriendSearchPage = () => {
   console.log(gameName);
 
   const [linkedUsersProfiles, setLinkedUsersProfiles] = useState([]);
+  const [friendIds, setFriendIds] = useState([]);
+  const [loggedInUserId, setLoggedInUserId] = useState(null);
+
+  useEffect(() => {
+    // Fetch the logged-in user's ID
+    const fetchLoggedInUserId = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setLoggedInUserId(user.id);
+    };
+
+    fetchLoggedInUserId();
+  }, []);
+
+  useEffect(() => {
+    // Fetch friend IDs where the logged-in user is user_id
+    const fetchFriendIds = async () => {
+      try {
+        const { data: friendData, error: friendError } = await supabase
+          .from("friends")
+          .select("friend_id")
+          .eq("user_id", loggedInUserId);
+
+        if (friendError) {
+          console.error("Error fetching friend IDs:", friendError);
+          return;
+        }
+
+        setFriendIds(friendData.map((friend) => friend.friend_id));
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    // Fetch friend IDs where the logged-in user is friend_id
+    const fetchUserIds = async () => {
+      try {
+        const { data: userData, error: userError } = await supabase
+          .from("friends")
+          .select("user_id")
+          .eq("friend_id", loggedInUserId);
+
+        if (userError) {
+          console.error("Error fetching user IDs:", userError);
+          return;
+        }
+
+        setFriendIds((prevIds) => [
+          ...prevIds,
+          ...userData.map((user) => user.user_id),
+        ]);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    if (loggedInUserId) {
+      fetchFriendIds();
+      fetchUserIds();
+    }
+  }, [loggedInUserId]);
+
   useEffect(() => {
     const fetchLinkedUsersProfiles = async () => {
       try {
@@ -76,6 +139,8 @@ const FriendSearchPage = () => {
         <GamePlayers
           linkedUsersProfiles={linkedUsersProfiles}
           gameName={gameName}
+          friendIds={friendIds}
+          loggedInUserId={loggedInUserId}
         />
       </div>
     </div>
