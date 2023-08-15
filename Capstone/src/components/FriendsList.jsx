@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import supabase from "../../../supabase";
-import AcceptDeclineButtons from "./AcceptDeclineButtons";
 
 const FriendList = () => {
   const [friendIds, setFriendIds] = useState([]);
@@ -94,22 +93,17 @@ const FriendList = () => {
     }
   }, [friendIds]);
 
-  return (
-    <div>
-      <h1>Friend List</h1>
-      <ul>
-        {friendProfiles.map((profile) => (
-          <li key={profile.id}>
-            {profile.gamertag}
-            <AcceptDeclineButtons
-              friendId={profile.id}
-              loggedInUserId={loggedInUserId}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+	return (
+		<div>
+			<h1>Friend List</h1>
+			<ul>
+				{friendProfiles.map((profile) => (
+					<li key={profile.id}>{profile.gamertag}</li>
+				))}
+			</ul>
+		</div>
+	);
+  
 };
 
 export default FriendList;
