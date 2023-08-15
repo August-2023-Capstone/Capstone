@@ -1,13 +1,20 @@
-/** @format */
-
 import React, { useState, useEffect } from "react";
 import supabase from "../../supabase";
-import AcceptDeclineButtons from "./AcceptDeclineButtons";
+import "../App.css";
 
-const FriendsList = () => {
+import FriendsList from "./FriendsList";
+import ProfileData from "./ProfileData";
+
+import ProfileGameCards from "./ProfileGameCards";
+import TestProfileGames from "./TestProfileGames";
+
+const TestOtherProfilePage = () => {
   const [friendIds, setFriendIds] = useState([]);
   const [loggedInUserId, setLoggedInUserId] = useState(null);
   const [friendProfiles, setFriendProfiles] = useState([]);
+  const [profileGames, setProfileGames] = useState([]);
+
+  const [profileData, setProfileData] = useState([]);
 
   useEffect(() => {
     // Fetch the logged-in user's ID
@@ -94,55 +101,79 @@ const FriendsList = () => {
     }
   }, [friendIds]);
 
-  const handleDeleteFriend = async (friendId) => {
-    try {
+  useEffect(() => {
+    const fetchProfileGames = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
 
-      // Delete the friend relationship from the friends table
-      const { error: deleteError } = await supabase
-        .from("friends")
-        .delete()
-        .eq("user_id", user.id)
-        .eq("friend_id", friendId);
+      console.log(user.id);
+      const { data, error } = await supabase
+        .from("linked_games")
+        .select(
+          `
+          games (
+            id,
+            name,
+            genre,
+            art,
+            platform
+          )
+          `
+        )
+        .eq("user_id", user.id);
 
-      if (deleteError) {
-        console.error("Error deleting friend:", deleteError);
+      console.log(data);
+
+      if (error) {
+        console.error("Error fetching data:", error);
       } else {
-        // After successfully deleting, update the friend profiles list
-        setFriendProfiles((prevProfiles) =>
-          prevProfiles.filter((profile) => profile.id !== friendId)
-        );
+        // The 'games' property within each object contains an array of game data
+        const gamesData = data.map((item) => item.games);
+        setProfileGames(gamesData);
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+    };
+
+    fetchProfileGames();
+  }, []);
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      console.log(user.id);
+      const { data, error } = await supabase
+        .from("profiles")
+        .select()
+        .eq("id", user.id);
+
+      if (error) {
+        console.error("Error fetching data:", error);
+      } else {
+        setProfileData(data);
+        if (data.length > 0 && data[0].gamertag === null) {
+          setShowCreateUserForm(true);
+        }
+      }
+    };
+
+    fetchProfileData();
+  }, []);
 
   return (
-    <div className="friendsListContainer">
-      <h1>Friend List</h1>
-      <ul>
-        {friendProfiles.map((profile) => (
-          <li key={profile.id}>
-            {profile.gamertag}
-            <AcceptDeclineButtons
-              friendId={profile.id}
-              loggedInUserId={loggedInUserId}
-            />
-            <button
-              onClick={() => handleDeleteFriend(profile.id)}
-              className="ml-2 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-            >
-              {" "}
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div className="profilePage">
+      <div>
+        <ProfileData profileData={profileData} />
+        <div className="content">
+          <div>
+            <TestProfileGames profileGames={profileGames} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default FriendsList;
+export default TestOtherProfilePage;
