@@ -286,6 +286,7 @@ const CreateUserForm = () => {
           updateTimezoneInDatabase();
         }}
       >
+
         Submit{" "}
       </button>
     </form>

@@ -4,6 +4,9 @@ import Playstation from "../assets/Logos/PlaystationLogo.png";
 import Windows from "../assets/Logos/WindowsLogo.png";
 import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
+import Android from "../assets/Logos/android.png";
+import Linux from "../assets/Logos/linux.png";
+import macOS from "../assets/Logos/macOS.png";
 import supabase from "../../../supabase";
 
 const HomeGameCard = ({ game }) => {
@@ -78,6 +81,9 @@ const HomeGameCard = ({ game }) => {
     "PlayStation 5": Playstation,
     "Nintendo Switch": NintendoSwitch,
     iOS: iOS,
+    Linux: Linux,
+    Android: Android,
+    macOS: macOS,
   };
   return (
     <div className="HomeGameCard">
