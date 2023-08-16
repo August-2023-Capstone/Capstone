@@ -68,9 +68,9 @@ function ChatUsers({
   }
 
   return (
-    <div className="text-white mx-auto text-center flex flex-col items-center justify-start min-h-screen">
-      <h1 className="text-2xl font-semibold mb-4 pt-8 ">Friends</h1>
-      <div className="chat-users-container max-h-[500px] overflow-y-auto">
+    <div className="text-white">
+      <h1 className="text-2xl font-semibold mb-4">Friends</h1>
+      <div className="chat-users-container">
         {profileData &&
           profileData.map(
             (user) =>
@@ -78,8 +78,7 @@ function ChatUsers({
                 <div
                   onClick={() => filterMessages(user, usersData)}
                   key={user.id}
-                  className={`bg-[#373737] rounded-md p-3 mb-2 shadow-md hover:cursor-pointer hover:bg-gray-400 flex items-center justify-between max-w-screen-md mx-auto`}
-                  style={{ width: "400px" }}
+                  className={`bg-[#373737] rounded-md p-3 mb-2 shadow-md hover:cursor-pointer flex items-center justify-between max-w-screen-md mx-auto`}
                 >
                   <div className="user-container flex items-center">
                     <img

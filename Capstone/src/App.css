@@ -689,7 +689,6 @@ li p:nth-child(2) {
 
 .modal-buttons button {
   margin-left: 10px;
-
   background: #355e3b;
   hover: #008800;
 }
@@ -900,7 +899,6 @@ li p:nth-child(2) {
   display: flex;
 }
 
-
 .ProfileGameCardContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
@@ -936,7 +934,6 @@ li p:nth-child(2) {
 
 .ProfileGameCardImage {
   border-radius: 10px 10px 0 0;
-
   height: 150px;
   object-fit: cover;
 }
@@ -944,14 +941,12 @@ li p:nth-child(2) {
 .ProfileGameCardButton {
   font-weight: bolder;
   font-size: larger;
-
   margin-left: auto;
   cursor: pointer;
   background-color: #373737;
   color: white;
   border: none;
   border-radius: 10%;
-
   width: auto;
   height: 30px;
   text-align: center;
@@ -1107,23 +1102,16 @@ li p:nth-child(2) {
   display: flex;
   flex-direction: column;
   height: 100vh !important;
-  width: 100vw !important;
-  background-color: #151515 !important;
-
+  background-color: #373737 !important;
 }
 
 .chat-messages {
   flex: 0 0 70% !important;
   border: #151515 5px solid;
   background-color: #888;
-  height: 100vh;
-
-  flex: 1;
-  overflow-y: auto;
-}
-.MessagesScrollbar {
-  margin-left: 100px;
-
+  height: 80vh;
+  /* flex: 1; Expand the messages section to fill available space */
+  /* overflow-y: auto; Add scrollbars when necessary */
 }
 
 .messagesInput {
@@ -1132,14 +1120,11 @@ li p:nth-child(2) {
   border: 1px solid #ccc;
   border-radius: 20px;
   align-self: flex-end;
-  margin-top: 80px;
+  margin-top: 380px;
 }
-.input-container {
-  margin-bottom: 60px;
-}
-.send-button {
-  background-color: #007bff !important;
 
+.sendMessageButton {
+  background-color: black !important;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -1148,20 +1133,6 @@ li p:nth-child(2) {
   transition: background-color 0.1s ease;
 }
 
-.send-button:hover {
+.sendMessageButton:hover {
   background-color: mediumslateblue !important;
-}
-.chat-users {
-  background-color: #151515 !important;
-}
-@media (max-width: 767px) {
-  .FriendsList {
-    width: 100px;
-  }
-}
-
-/* For medium screens (tablets) */
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* Add your tablet-specific styles here */
-
 }
