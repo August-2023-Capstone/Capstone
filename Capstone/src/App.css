@@ -689,7 +689,9 @@ li p:nth-child(2) {
 
 .modal-buttons button {
   margin-left: 10px;
-  background-color: purple;
+
+  background: #355e3b;
+  hover: #008800;
 }
 
 .createUserForm {
@@ -897,28 +899,35 @@ li p:nth-child(2) {
 .PlatformLogosContainer {
   display: flex;
 }
-/* .ProfileGameCardWrapper {
-  margin-left: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-} */
+
 
 .ProfileGameCardContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+  grid-auto-rows: 1fr !important;
   grid-gap: 10px;
-  border: white solid 3px;
-  justify-content: center;
-  margin-left: 30px; /* Apply margin to the left */
+  border: none;
+  background-color: #373737;
+  border-radius: 10px;
+  padding: 10px;
+  overflow: hidden;
 }
+
+.ProfileGameCardEmpty {
+  font-size: larger;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .ProfileGameCard {
-  /* Your card styling */
   background-color: #202020;
   border: 1px solid black;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   text-align: center;
   border-radius: 10px;
   color: white;
@@ -927,21 +936,31 @@ li p:nth-child(2) {
 
 .ProfileGameCardImage {
   border-radius: 10px 10px 0 0;
+
+  height: 150px;
+  object-fit: cover;
 }
 
 .ProfileGameCardButton {
   font-weight: bolder;
   font-size: larger;
-  margin-left: 120px;
-  margin-bottom: 10px;
+
+  margin-left: auto;
   cursor: pointer;
   background-color: #373737;
   color: white;
   border: none;
   border-radius: 10%;
-  width: 30px;
+
+  width: auto;
   height: 30px;
   text-align: center;
+  align-self: flex-end;
+  padding: 5px 10px;
+}
+
+.ProfileGameCardButtonContainer {
+  align-self: center;
 }
 
 .ProfileGameCardTitle {
@@ -956,26 +975,24 @@ li p:nth-child(2) {
 @media screen and (max-width: 480px) {
   .ProfileGameCardContainer {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    grid-gap: 10px; /* Adjust the space for smaller screens */
+    grid-gap: 10px;
   }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .ProfileGameCardContainer {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 15px; /* Adjust the space for tablet screens */
+    grid-gap: 15px;
   }
 }
 
 .ProfileData {
   display: inline-flex;
-
   align-items: center;
   text-align: center;
   justify-content: space-between;
   gap: 20px;
   padding: 20px;
-  /* max-width: 400px; */
   margin: 0 auto;
   margin-right: 0;
   padding-left: 300px;
@@ -1092,6 +1109,7 @@ li p:nth-child(2) {
   height: 100vh !important;
   width: 100vw !important;
   background-color: #151515 !important;
+
 }
 
 .chat-messages {
@@ -1105,6 +1123,7 @@ li p:nth-child(2) {
 }
 .MessagesScrollbar {
   margin-left: 100px;
+
 }
 
 .messagesInput {
@@ -1120,6 +1139,7 @@ li p:nth-child(2) {
 }
 .send-button {
   background-color: #007bff !important;
+
   color: white;
   padding: 10px 20px;
   border: none;
@@ -1143,4 +1163,5 @@ li p:nth-child(2) {
 /* For medium screens (tablets) */
 @media (min-width: 768px) and (max-width: 1023px) {
   /* Add your tablet-specific styles here */
+
 }

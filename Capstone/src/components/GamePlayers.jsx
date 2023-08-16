@@ -35,10 +35,6 @@ const GamePlayers = ({
   friendIds,
   loggedInUserId,
 }) => {
-  console.log(linkedUsersProfiles);
-  console.log(friendIds);
-  console.log(loggedInUserId);
-
   const isFriend = (profileId) => friendIds.includes(profileId);
 
   const [requestSentMap, setRequestSentMap] = useState({});
@@ -80,6 +76,8 @@ const GamePlayers = ({
       console.error("Error:", error);
     }
   };
+  console.log(loggedInUserId);
+  console.log(friendIds);
   console.log(linkedUsersProfiles);
 
   return (
@@ -88,55 +86,65 @@ const GamePlayers = ({
         <h1 className="text-3xl font-semibold mb-4 text-center">
           {gameName} Players
         </h1>
-        <div className="flex justify-center">
-          <ul className="max-w-4xl">
-            {linkedUsersProfiles.map(
-              (profile) =>
-                profile.id !== loggedInUserId && (
-                  <li
-                    key={profile.id}
-                    className="bg-[#373737] rounded p-4 flex items-center justify-between mb-2"
-                  >
-                    {/* Display the user's avatar */}
-                    <img
-                      key={profile.avatar}
-                      src={avatarOptions[profile.avatar]}
-                      alt="User Avatar"
-                      className="w-16 h-16 rounded-full"
-                    />
-                    <div className="flex-grow ml-6">
-                      <p className="text-white text-lg">
-                        <span className="text-white">{profile.gamertag}</span>
-                        <span className="text-white text-lg ml-4 mr-4">|</span>
-                        <span className="text-white">{profile.timezone}</span>
-                        <span className="text-white text-lg ml-4 mr-4">|</span>
-                        <span className="text-white">{profile.platform}</span>
-                      </p>
-                    </div>
-                    {isFriend(profile.id) ? (
-                      <span className="mt-2 px-2 py-1 rounded text-white bg-[#444444]">
-                        Already Friends!
-                      </span>
-                    ) : (
-                      <button
-                        onClick={() => handleAddFriend(profile.id)}
-                        className={`mt-2 ${
-                          requestSentMap[profile.id]
-                            ? "bg-[#151515]"
-                            : "bg-[#151515]"
-                        } text-white px-2 py-1 rounded`}
-                        disabled={requestSentMap[profile.id]}
-                      >
-                        {requestSentMap[profile.id]
-                          ? "Friend Request Sent"
-                          : "Add Friend"}
-                      </button>
-                    )}
-                  </li>
-                )
-            )}
-          </ul>
-        </div>
+        {linkedUsersProfiles.length === 0 || // Check if linkedUsersProfiles is empty
+        (linkedUsersProfiles.length === 1 &&
+          linkedUsersProfiles[0].id === loggedInUserId) ? (
+          <p className="text-center text-lg">No Users Found</p>
+        ) : (
+          <div className="flex justify-center">
+            <ul className="max-w-4xl">
+              {linkedUsersProfiles.map(
+                (profile) =>
+                  profile.id !== loggedInUserId && (
+                    <li
+                      key={profile.id}
+                      className="bg-[#373737] rounded p-4 flex items-center justify-between mb-2"
+                    >
+                      {/* Display the user's avatar */}
+                      <img
+                        key={profile.avatar}
+                        src={avatarOptions[profile.avatar]}
+                        alt="User Avatar"
+                        className="w-16 h-16 rounded-full"
+                      />
+                      <div className="flex-grow ml-6">
+                        <p className="text-white text-lg">
+                          <span className="text-white">{profile.gamertag}</span>
+                          <span className="text-white text-lg ml-4 mr-4">
+                            |
+                          </span>
+                          <span className="text-white">{profile.timezone}</span>
+                          <span className="text-white text-lg ml-4 mr-4">
+                            |
+                          </span>
+                          <span className="text-white">{profile.platform}</span>
+                        </p>
+                      </div>
+                      {isFriend(profile.id) ? (
+                        <span className="mt-2 px-2 py-1 rounded text-white bg-[#444444]">
+                          Already Friends!
+                        </span>
+                      ) : (
+                        <button
+                          onClick={() => handleAddFriend(profile.id)}
+                          className={`mt-2 ${
+                            requestSentMap[profile.id]
+                              ? "bg-[#151515]"
+                              : "bg-[#151515]"
+                          } text-white px-2 py-1 rounded`}
+                          disabled={requestSentMap[profile.id]}
+                        >
+                          {requestSentMap[profile.id]
+                            ? "Friend Request Sent"
+                            : "Add Friend"}
+                        </button>
+                      )}
+                    </li>
+                  )
+              )}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
