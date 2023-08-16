@@ -132,8 +132,11 @@ const HomeGameCard = ({ game, session }) => {
 
       <div className="HomeGameCardInfo">
         <p>
-          {game.genres.map((genre) => (
-            <span key={genre.id}>{genre.name}, </span>
+          {game.genres.map((genre, index) => (
+            <span key={genre.id}>
+              {genre.name}
+              {index < game.genres.length - 1 && ", "}
+            </span>
           ))}
         </p>
       </div>
