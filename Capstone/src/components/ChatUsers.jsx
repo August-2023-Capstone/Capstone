@@ -70,7 +70,7 @@ function ChatUsers({
   return (
     <div className="text-white mx-auto text-center flex flex-col items-center justify-start min-h-screen">
       <h1 className="text-2xl font-semibold mb-4 pt-8 ">Friends</h1>
-      <div className="chat-users-container max-h-[500px] overflow-y-auto">
+      <div className="chat-users-container  overflow-y-auto sm:max-h-[300px] md:max-h-[500px] lg:max-h-[1000px] xl:max-h-[1200px]">
         {profileData &&
           profileData.map(
             (user) =>

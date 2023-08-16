@@ -160,7 +160,7 @@ const FriendsList = () => {
         {friendProfiles.map((profile) => (
           <div
             key={profile.id}
-            className="bg-[#373737] rounded-md p-3 mb-2 shadow-md flex items-center justify-between max-w-screen-md mx-auto"
+            className="bg-[#373737] rounded-md p-3 mb-2 shadow-md flex items-center justify-between max-w-screen-md  mx-auto"
           >
             <img
               key={profile.avatar}
