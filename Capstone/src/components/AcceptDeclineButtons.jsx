@@ -67,7 +67,7 @@ const AcceptDeclineButtons = ({ friendId, loggedInUserId }) => {
     return (
       <div className="flex space-x-2">
         <button
-          className="bg-green-500 text-white px-2 py-1 rounded"
+          className="ml-2 px-1 py-1 bg-green-800 text-white rounded hover:bg-green-600"
           onClick={handleAcceptFriend}
         >
           Accept

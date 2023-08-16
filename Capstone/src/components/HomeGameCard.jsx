@@ -7,7 +7,7 @@ import iOS from "../assets/Logos/AppleLogo.png";
 import Android from "../assets/Logos/android.png";
 import Linux from "../assets/Logos/linux.png";
 import macOS from "../assets/Logos/macOS.png";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 
 const HomeGameCard = ({ game }) => {
   const handleAddToDatabase = async () => {
