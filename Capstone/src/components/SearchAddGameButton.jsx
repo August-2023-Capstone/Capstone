@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import supabase from "../../supabase";
 
-const AddGameButton = ({ game }) => {
+const SearchAddGameButton = ({ game }) => {
   const [buttonText, setButtonText] = useState("Add to Favorites"); // Initialize button text state
 
   const handleAddToDatabase = async () => {
@@ -62,6 +62,7 @@ const AddGameButton = ({ game }) => {
           setButtonText("Game Already Added");
         } else {
           console.log("Linked game data inserted successfully");
+
           // Update the button text to "Game Added"
           setButtonText("Game Added");
         }
@@ -72,18 +73,19 @@ const AddGameButton = ({ game }) => {
   return (
     <button
       onClick={handleAddToDatabase}
-      className="bg-[#444444] hover:bg-[#373737] text-white font-bold py-1 px-3 rounded-sm text-xs mb-2"
+      className="mr-4 px-4 py-2 rounded-md bg-[#151515] text-white hover:bg-[#373737] focus:outline-none"
       disabled={
         buttonText === "Game Added" || buttonText === "Game Already Added"
       }
+      // Disable the button when the text is "Game Added"
     >
       {buttonText}
     </button>
   );
 };
 
-AddGameButton.propTypes = {
+SearchAddGameButton.propTypes = {
   game: PropTypes.object.isRequired,
 };
 
-export default AddGameButton;
+export default SearchAddGameButton;

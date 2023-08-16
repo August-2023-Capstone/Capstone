@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import magnify from "../assets/icons/magnify.png";
 import x from "../assets/icons/x.png";
 import supabase from "../../supabase";
-import AddGameButton from "./AddGameButton";
+import SearchAddGameButton from "./SearchAddGameButton";
 
 const Search = ({ session }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -145,14 +145,7 @@ const Search = ({ session }) => {
                 </div>
               </div>
 
-              {session && (
-                <button
-                  onClick={() => handleAddGame(game)}
-                  className="mr-4 px-4 py-2 rounded-md bg-[#151515] text-white hover:bg-[#373737] focus:outline-none"
-                >
-                  Add to Favorites
-                </button>
-              )}
+              {session && <SearchAddGameButton game={game} />}
             </div>
           ))}
         </div>
