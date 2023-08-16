@@ -275,7 +275,7 @@ const CreateUserForm = () => {
         </div>
 
         <button
-          className="hover:bg-[#008800] text-white font-semibold py-2 px-4 rounded mb-2"
+          className="bg-[#8A9A5B] hover:bg-[#008800] text-white font-semibold py-2 px-4 rounded mb-2"
           type="button"
           onClick={handleOpenModal}
         >
@@ -289,7 +289,7 @@ const CreateUserForm = () => {
         )}
 
         <button
-          className="hover:bg-[#008800] text-white font-semibold py-2 px-4 rounded"
+          className="bg-[#355E3B] hover:bg-[#008800] text-white font-semibold py-2 px-4 rounded"
           type="button"
           onClick={() => {
             updateGamertagInDatabase();
