@@ -27,16 +27,36 @@ const Login = () => {
         <Auth
           supabaseClient={supabase}
           appearance={{
-            theme: ThemeSupa,
             variables: {
               default: {
                 colors: {
-                  brand: "green",
-                  brandAccent: "darkgreen",
+                  brand: "black",
+                  brandAccent: "#333333",
+                  brandButtonText: "white",
+                  defaultButtonBackground: "white",
+                  defaultButtonBorder: "lightgray",
+                  defaultButtonText: "gray",
+                  dividerBackground: "#eaeaea",
+                  inputBackground: "transparent",
+                  inputBorder: "lightgray",
+                  inputText: "black",
+                  inputPlaceholder: "darkgray",
+                },
+                space: {
+                  spaceSmall: "4px",
+                  spaceMedium: "8px",
+                  spaceLarge: "16px",
+                  labelBottomMargin: "8px",
+                  anchorBottomMargin: "30px",
+                  emailInputSpacing: "4px",
+                  socialAuthSpacing: "4px",
+                  buttonPadding: "10px 15px",
+                  inputPadding: "10px 70px",
                 },
               },
             },
           }}
+          theme="default"
           providers={[]}
         />
       </div>
