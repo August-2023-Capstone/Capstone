@@ -19,6 +19,8 @@ const GameDetails = ({ gameName }) => {
     iOS: iOS,
   };
   const [gameData, setGameData] = useState(null);
+  const [gameDescription, setGameDescription] = useState(null);
+  const [gameId, setGameId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,15 +34,34 @@ const GameDetails = ({ gameName }) => {
         const jsonData = await response.json();
 
         setGameData(jsonData.results[0]); // Assuming you expect only one result
+        setGameId(jsonData.results[0].slug);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    fetchData(); // Call the fetchData function
-  }, [gameName]);
+    const fetchDescription = async () => {
+      try {
+        const response = await fetch(
+          `https://api.rawg.io/api/games/${encodeURIComponent(
+            gameId
+          )}?key=708a4757c9d748448c87455a3ecd365c`
+        );
+        const jsonData = await response.json();
+
+        setGameDescription(jsonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+    fetchDescription(); // Call the fetchData function
+  }, [gameName, gameId]);
 
   console.log(gameData);
+  console.log(gameId);
+  console.log(gameDescription);
 
   return (
     <div className="text-white mb-4 text-center">
@@ -68,6 +89,12 @@ const GameDetails = ({ gameName }) => {
               />
             ))}
           </div>
+          {gameDescription && (
+            <div className="mt-4">
+              <h3 className="text-xl font-semibold">Description</h3>
+              <p>{gameDescription.description}</p>
+            </div>
+          )}
         </>
       ) : (
         <div>Loading...</div>
