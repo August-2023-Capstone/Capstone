@@ -126,13 +126,13 @@ const FriendsList = () => {
   };
 
   return (
-    <div className="bg-gray-500 p-4">
-      <h1 className="text-2xl font-semibold mb-4">Friend List</h1>
+    <div className="text-white">
+      <h1 className="text-2xl font-semibold mb-4">Friends</h1>
       <ul>
         {friendProfiles.map((profile) => (
           <li
             key={profile.id}
-            className="bg-slate-400 rounded-md p-3 mb-2 shadow-md flex items-center justify-between"
+            className="bg-[#373737] rounded-md p-3 mb-2 shadow-md flex items-center justify-between max-w-xs mx-auto"
           >
             <span className="text-lg text-slate-50">{profile.gamertag}</span>
             <div className="flex items-center">
@@ -153,5 +153,4 @@ const FriendsList = () => {
     </div>
   );
 };
-
 export default FriendsList;

@@ -220,74 +220,95 @@ const CreateUserForm = () => {
   };
 
   return (
-    <form className="createUserForm form">
+    <form className="p-4 bg-gray-900 rounded-lg shadow-md">
       {platformOptions.map((platformOption) => (
-        <div key={platformOption.value} className="checkboxConainer">
-          <label>
-            {platformOption.label}
-            <Switch
-              onChange={() => handlePlatformChange(platformOption.value)}
-              checked={formData.platform[platformOption.value]}
-            />
-          </label>
+        <div
+          key={platformOption.value}
+          className="flex justify-between items-center text-white mb-2"
+        >
+          <label>{platformOption.label}</label>
+          <Switch
+            onChange={() => handlePlatformChange(platformOption.value)}
+            checked={formData.platform[platformOption.value]}
+          />
         </div>
       ))}
 
-      <br />
-      <label>Gamertag:</label>
-      <input
-        type="text"
-        name="gamertag"
-        value={formData.gamertag}
-        onChange={handleChange}
-        placeholder="Enter your gamertag"
-      />
-      <label>Timezone:</label>
-      <select name="timezone" value={formData.timezone} onChange={handleChange}>
-        <option value="">Choose your timezone</option>
-        {timezones.map((timezone) => (
-          <option key={timezone} value={timezone}>
-            {timezone}
-          </option>
-        ))}
-      </select>
-      <button className="OpenModalButton" type="button" onClick={openModal}>
-        Add games
+      <div className="mb-4">
+        <label className="text-white">Gamertag:</label>
+        <input
+          type="text"
+          name="gamertag"
+          value={formData.gamertag}
+          onChange={handleChange}
+          placeholder="Enter your gamertag"
+          className="w-full px-2 py-1 rounded bg-gray-700 text-white"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="text-white">Timezone:</label>
+        <select
+          name="timezone"
+          value={formData.timezone}
+          onChange={handleChange}
+          className="w-full px-2 py-1 rounded bg-gray-700 text-white"
+        >
+          <option value="">Choose your timezone</option>
+          {timezones.map((timezone) => (
+            <option key={timezone} value={timezone}>
+              {timezone}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+        type="button"
+        onClick={openModal}
+      >
+        Add Games
       </button>
 
-      {/* Show the AddGameModal when showModal is true  */}
       {showGameModal && <AddGameModal closeModal={closeModal} />}
       <br />
-      <label>Choose your avatar:</label>
+
+      <label className="text-white">Choose your avatar:</label>
       <div className="selected-avatar">
         {selectedAvatar && (
           <img
             src={selectedAvatar.image}
             alt={selectedAvatar.label}
-            style={{ width: "100px", height: "100px", objectFit: "cover" }}
+            className="w-24 h-24 object-cover"
           />
         )}
       </div>
 
-      <button className="AvatarButton" type="button" onClick={handleOpenModal}>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+        type="button"
+        onClick={handleOpenModal}
+      >
         Select Avatar
       </button>
-      {/* Show the AvatarModal when showModal is true */}
+
       {showModal && (
         <div className="modal-overlay">
           <AvatarModal onClose={handleCloseModal} onSave={handleSaveAvatar} />
         </div>
       )}
       <br />
+
       <button
-        className="CreateAccountButton"
+        className="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded"
         type="button"
         onClick={() => {
           updateGamertagInDatabase();
           updateTimezoneInDatabase();
         }}
       >
-        Submit{" "}
+        Submit
       </button>
     </form>
   );
