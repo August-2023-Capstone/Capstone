@@ -49,16 +49,6 @@ const HomePage = () => {
         <HomeCarouselThree />
       </div>
       <ChatBox />
-      {showLoginModal && !session && (
-        <div
-          onClick={() => setShowLoginModal(false)}
-          className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex items-center justify-center z-10"
-        >
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <Login />
-          </div>
-        </div>
-      )}
     </div>
   );
 };

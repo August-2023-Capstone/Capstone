@@ -969,6 +969,7 @@ li p:nth-child(2) {
 
 .ProfileData {
   display: inline-flex;
+
   align-items: center;
   text-align: center;
   justify-content: space-between;
@@ -1059,7 +1060,7 @@ li p:nth-child(2) {
   grid-column: 4;
   height: 100vh !important;
   border: 2px solid white;
-  margin-right: 50px;
+  margin-right: 0;
 }
 
 .friendsList h2 {
@@ -1091,13 +1092,7 @@ li p:nth-child(2) {
   height: 100vh !important;
   background-color: #373737 !important;
 }
-.chat-users {
-  flex: 0 0 30% !important; /* 30% width, don't grow or shrink */
-  height: 80vh !important;
-  background-color: #007bff !important; /* Example background color */
-  /* padding: 10px; */
-  /* Add any other styling you need */
-}
+
 .chat-messages {
   flex: 0 0 70% !important;
   border: #151515 5px solid;

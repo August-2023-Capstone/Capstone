@@ -103,6 +103,12 @@ const ProfileData = () => {
   const handleCloseModal = () => {
     setShowCreateUserForm(false);
   };
+  const handleCloseModalOutside = (event) => {
+    if (event.target.classList.contains("modalBackground")) {
+      setShowCreateUserForm(false);
+    }
+  };
+  console.log(profileData);
   return (
     <div>
       {/* <h1>Profiles List</h1> */}
@@ -115,8 +121,17 @@ const ProfileData = () => {
           <div className="profileDataMiddleContainer">
             <p className="ProfileGamertag">Gamertag: {profile.gamertag}</p>
             <p className="ProfileTimezone">Timezone: {profile.timezone}</p>
-
-            <p className="ProfilePlatform">Platform: {profile.platform}</p>
+            <p className="ProfilePlatform">
+              {profile.pc && "PC"}
+              {profile.playstation &&
+                (profile.pc ? ", PlayStation" : "PlayStation")}
+              {profile.xbox &&
+                (profile.pc || profile.playstation ? ", Xbox" : "Xbox")}
+              {profile.switch &&
+                (profile.pc || profile.playstation || profile.xbox
+                  ? ", Switch"
+                  : "Switch")}
+            </p>
           </div>
           <img
             src={edit}
@@ -132,7 +147,14 @@ const ProfileData = () => {
         <div className="modalBackground">
           <div className="modalContent">
             <CreateUserForm />
-            <button onClick={handleCloseModal}>Close</button>
+            <div className="flex justify-center items-center">
+              <button
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={handleCloseModal}
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}

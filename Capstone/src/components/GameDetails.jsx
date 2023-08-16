@@ -43,22 +43,22 @@ const GameDetails = ({ gameName }) => {
   console.log(gameData);
 
   return (
-    <div className="text-white text-2xl font-semibold mb-4 text-center">
+    <div className="text-white mb-4 text-center">
       {gameData ? (
         <>
-          <div>Game Details</div>
-          <div>Name: {gameName}</div>
-          <p>
+          <div className="mb-4 text-3xl font-semibold ">Game Details</div>
+          <img
+            className="w-3/4 h-auto mb-2 mx-auto"
+            src={gameData.background_image}
+            alt={gameData.name}
+          />
+          <div className="mb-2 text-3xl font-semibold ">{gameName}</div>
+          <p className="mb-2">
             {gameData.genres.map((genre) => (
               <span key={genre.id}>{genre.name}, </span>
             ))}
-          </p>{" "}
-          <img
-            className="HomeGameCardImage"
-            src={gameData.background_image}
-            alt={gameData.name}
-          />{" "}
-          <div className="PlatformLogosContainer">
+          </p>
+          <div className="flex justify-center space-x-4">
             {gameData.platforms.map((platform) => (
               <img
                 className="PlatformLogos"
@@ -67,7 +67,7 @@ const GameDetails = ({ gameName }) => {
                 alt={platform.platform.name}
               />
             ))}
-          </div>{" "}
+          </div>
         </>
       ) : (
         <div>Loading...</div>

@@ -1,24 +1,24 @@
-import React from "react";
-import NintendoSwitch from "../assets/Logos/NintendoSwitchLogo.png";
-import Playstation from "../assets/Logos/PlaystationLogo.png";
-import Windows from "../assets/Logos/WindowsLogo.png";
-import Xbox from "../assets/Logos/XboxLogo.png";
-import iOS from "../assets/Logos/AppleLogo.png";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import supabase from "../../supabase";
-import AddGameButton from "./AddGameButton";
 
-const HomeGameCard = ({ game }) => {
+const SearchAddGameButton = ({ game }) => {
+  const [buttonText, setButtonText] = useState("Add to Favorites"); // Initialize button text state
+
   const handleAddToDatabase = async () => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
+    const platformNames = game.platforms.map(
+      (platform) => platform.platform.name
+    );
 
     // Prepare the data for insertion into the games table
     const gameData = {
       name: game.name,
-      genre: game.genres,
+      genre: game.genres.map((genre) => genre.name), // Extract genre names
       art: game.background_image,
-      platform: game.platforms,
+      platform: platformNames,
       // Other properties as needed
     };
 
@@ -59,54 +59,33 @@ const HomeGameCard = ({ game }) => {
             "Error inserting linked game data:",
             linkedGameInsertError
           );
+          setButtonText("Game Already Added");
         } else {
           console.log("Linked game data inserted successfully");
+
+          // Update the button text to "Game Added"
+          setButtonText("Game Added");
         }
       }
     }
   };
 
-  const platformImages = {
-    PC: Windows,
-    Xbox: Xbox,
-    "Xbox One": Xbox,
-    "Xbox Series S/X": Xbox,
-    Playstation: Playstation,
-    "PlayStation 4": Playstation,
-    "PlayStation 5": Playstation,
-    "Nintendo Switch": NintendoSwitch,
-    iOS: iOS,
-  };
   return (
-    <div className="HomeGameCard">
-      <img
-        className=" HomeGameCardImage w-full h-full object-cover"
-        src={game.background_image}
-        alt={game.name}
-      />
-      <div className="PlatformLogosContainer">
-        {game.platforms.map((platform) => (
-          <img
-            className="PlatformLogos"
-            key={platform.platform.id}
-            src={`${platformImages[platform.platform.name]}`}
-            alt={platform.platform.name}
-          />
-        ))}
-      </div>
-      <h2 className="HomeGameCardTitle">{game.name}</h2>
-
-      <div className="HomeGameCardInfo mb-2">
-        <br />
-        <p>
-          {game.genres.map((genre) => (
-            <span key={genre.id}>{genre.name}, </span>
-          ))}
-        </p>
-      </div>
-      <AddGameButton game={game} />
-    </div>
+    <button
+      onClick={handleAddToDatabase}
+      className="mr-4 px-4 py-2 rounded-md bg-[#151515] text-white hover:bg-[#373737] focus:outline-none"
+      disabled={
+        buttonText === "Game Added" || buttonText === "Game Already Added"
+      }
+      // Disable the button when the text is "Game Added"
+    >
+      {buttonText}
+    </button>
   );
 };
 
-export default HomeGameCard;
+SearchAddGameButton.propTypes = {
+  game: PropTypes.object.isRequired,
+};
+
+export default SearchAddGameButton;

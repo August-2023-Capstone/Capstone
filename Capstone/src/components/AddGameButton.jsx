@@ -1,8 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import supabase from "../../supabase";
 
 const AddGameButton = ({ game }) => {
+  const [buttonText, setButtonText] = useState("Add to Favorites"); // Initialize button text state
+
   const handleAddToDatabase = async () => {
     const {
       data: { user },
@@ -57,8 +59,11 @@ const AddGameButton = ({ game }) => {
             "Error inserting linked game data:",
             linkedGameInsertError
           );
+          setButtonText("Game Already Added");
         } else {
           console.log("Linked game data inserted successfully");
+          // Update the button text to "Game Added"
+          setButtonText("Game Added");
         }
       }
     }
@@ -68,8 +73,11 @@ const AddGameButton = ({ game }) => {
     <button
       onClick={handleAddToDatabase}
       className="bg-[#444444] hover:bg-[#373737] text-white font-bold py-1 px-3 rounded-sm text-xs mb-2"
+      disabled={
+        buttonText === "Game Added" || buttonText === "Game Already Added"
+      }
     >
-      Add to Database
+      {buttonText}
     </button>
   );
 };

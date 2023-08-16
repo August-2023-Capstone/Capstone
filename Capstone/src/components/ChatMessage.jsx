@@ -142,11 +142,20 @@ function ChatMessage({ toggleChat }) {
 		console.log("Sending new message...");
 
 		try {
+			const currentTime = new Date();
+			const formattedTime = currentTime.toLocaleTimeString([], {
+				hour: "2-digit",
+				minute: "2-digit",
+				second: "2-digit",
+			});
+
 			const message = {
-				senderID: loggedInUserData[0]?.id,
-				content: newMessage,
-				recievetime: new Date().toISOString(),
-				sendtime: new Date().toISOString(),
+				sender_id: loggedInUserData[0]?.id,
+				receiver_id: usersData.id,
+				sender_gamertag: loggedInUserData[0]?.gamertag,
+				receiver_gamertag: usersData.gamertag,
+				message: newMessage,
+				recievetime: formattedTime,
 			};
 
 			console.log("Message to be sent:", message);
@@ -162,21 +171,17 @@ function ChatMessage({ toggleChat }) {
 			console.log("Logged in user data:", loggedInUserData[0]?.id);
 			console.log("Users data:", usersData.id);
 
-			const { data, error } = await supabase.from("chatmessages").insert([
-				{
-					sender_id: loggedInUserData[0]?.id,
-					receiver_id: usersData.id,
-					sender_gamertag: loggedInUserData[0]?.gamertag,
-					receiver_gamertag: usersData.gamertag,
-					message: newMessage,
-					recievetime: new Date().toISOString(),
-				},
-			]);
+			const { data, error } = await supabase
+				.from("chatmessages")
+				.insert([message]);
 
 			if (error) {
 				console.error("Error inserting message:", error);
 			} else {
 				console.log("Inserted Message Data:", data);
+				// Update chatMessages state with the new message
+				setChatMessages((prevMessages) => [...prevMessages, message]);
+				setNewMessage(""); // Clear the input field
 			}
 		} catch (error) {
 			console.error("Error sending message:", error);
@@ -293,25 +298,36 @@ function ChatMessage({ toggleChat }) {
 					<ul ref={inputRef}>
 						{/* Add the ref here */}
 						{chatMessages.map((chatMessage) => (
-							<li key={chatMessage.id}>
-								<p>Receiver: {chatMessage.receiver_gamertag}</p>
+							<li
+								key={chatMessage.id}
+								className={`Chat-bubbles ${
+									chatMessage.sender_gamertag === loggedInUserData[0]?.gamertag
+										? "sender-bubble"
+										: "receiver-bubble"
+								}`}>
+								<p> Reciever:{chatMessage.receiver_gamertag}</p>
 								<p>Sender: {chatMessage.sender_gamertag}</p>
-								<p>Message: {chatMessage.message}</p>
+								<p>{chatMessage.message}</p>
 								<p>Receive Time: {chatMessage.recievetime}</p>
 							</li>
 						))}
 					</ul>
+
 					<div>
 						{showModal && <div className='modal'>Please enter a message!</div>}
-						<div>
+						<div className='input-container'>
 							<input
 								type='text'
 								value={newMessage}
 								onChange={(e) => setNewMessage(e.target.value)}
-								onKeyDown={handleKeyDown} // Add the onKeyDown event listener
+								onKeyDown={handleKeyDown}
 								placeholder='Type your message...'
+								className='message-input'
 							/>
-							<button type='button' onClick={handleSendMessage}>
+							<button
+								type='button'
+								onClick={handleSendMessage}
+								className='send-button'>
 								Send Message
 							</button>
 						</div>

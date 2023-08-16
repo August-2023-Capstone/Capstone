@@ -110,7 +110,7 @@ const Navbar = () => {
             onClick={() => setShowLoginModal(true)}
             className="text-white hover:bg-[#444444] px-6 py-2 rounded"
           >
-            Login
+            Log In | Sign Up
           </button>
         )}
         {showLoginModal && (
