@@ -74,12 +74,11 @@ const GameDetails = ({ gameName }) => {
   }, [gameName, gameId]);
 
   return (
-    <div className="text-white mb-4 text-center bg-[#373737] rounded p-4">
+    <div className="relative text-white mb-4 text-center bg-[#373737] rounded p-4">
       {gameData ? (
         <>
-          <div className="mb-4 text-3xl font-semibold ">Game Details</div>
           <img
-            className="w-3/4 h-auto mb-2 mx-auto"
+            className="object-cover w-110% h-full mb-2 mx-auto inset-x-0"
             src={gameData.background_image}
             alt={gameData.name}
           />
