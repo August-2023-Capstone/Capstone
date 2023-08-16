@@ -62,8 +62,8 @@ const AvatarModal = ({ onClose, onSave }) => {
   };
 
   return (
-    <div className="avatar-modal">
-      <h2>Choose Your Avatar</h2>
+    <div className="avatar-modal bg-[#373737] text-white">
+      <h2 className="text-center pb-2">Choose Your Avatar</h2>
       <div className="avatar-options">
         {avatarOptions.map((option) => (
           <div
@@ -74,13 +74,21 @@ const AvatarModal = ({ onClose, onSave }) => {
             onClick={() => handleAvatarChange(option)}
           >
             <img src={option.image} alt={option.label} />
-            <span>{option.label}</span>
           </div>
         ))}
       </div>
-      <div className="modal-buttons">
-        <button onClick={onClose}>Cancel</button>
-        <button disabled={!selectedAvatar} onClick={handleSaveAvatar}>
+      <div className="flex justify-center modal-buttons">
+        <button
+          onClick={onClose}
+          className="mr-2 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Cancel
+        </button>
+        <button
+          disabled={!selectedAvatar}
+          onClick={handleSaveAvatar}
+          className="ml-2 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
           Save
         </button>
       </div>
