@@ -3,6 +3,33 @@
 import React, { useState, useEffect } from "react";
 import supabase from "../../supabase";
 import AcceptDeclineButtons from "./AcceptDeclineButtons";
+import Avatar1 from "../assets/Avatars/Avatar1.png";
+import Avatar2 from "../assets/Avatars/Avatar2.png";
+import Avatar3 from "../assets/Avatars/Avatar3.png";
+import Avatar4 from "../assets/Avatars/Avatar4.png";
+import Avatar5 from "../assets/Avatars/Avatar5.png";
+import Avatar6 from "../assets/Avatars/Avatar6.png";
+import Avatar7 from "../assets/Avatars/Avatar7.png";
+import Avatar8 from "../assets/Avatars/Avatar8.png";
+import Avatar9 from "../assets/Avatars/Avatar9.png";
+import Avatar10 from "../assets/Avatars/Avatar10.png";
+import Avatar11 from "../assets/Avatars/Avatar11.png";
+import Avatar12 from "../assets/Avatars/Avatar12.png";
+
+const avatarOptions = {
+  Avatar1,
+  Avatar2,
+  Avatar3,
+  Avatar4,
+  Avatar5,
+  Avatar6,
+  Avatar7,
+  Avatar8,
+  Avatar9,
+  Avatar10,
+  Avatar11,
+  Avatar12,
+};
 
 const FriendsList = () => {
   const [friendIds, setFriendIds] = useState([]);
@@ -80,7 +107,7 @@ const FriendsList = () => {
       try {
         const { data: profileData, error: profileError } = await supabase
           .from("profiles")
-          .select("id, gamertag")
+          .select()
           .in("id", friendIds);
 
         if (profileError) {
@@ -124,17 +151,32 @@ const FriendsList = () => {
       console.error("Error:", error);
     }
   };
+  console.log(friendProfiles);
 
   return (
     <div className="text-white">
       <h1 className="text-2xl font-semibold mb-4">Friends</h1>
-      <ul>
+      <div>
         {friendProfiles.map((profile) => (
-          <li
+          <div
             key={profile.id}
-            className="bg-[#373737] rounded-md p-3 mb-2 shadow-md flex items-center justify-between max-w-xs mx-auto"
+            className="bg-[#373737] rounded-md p-3 mb-2 shadow-md flex items-center justify-between max-w-screen-md mx-auto"
           >
-            <span className="text-lg text-slate-50">{profile.gamertag}</span>
+            <img
+              key={profile.avatar}
+              src={avatarOptions[profile.avatar]}
+              alt="User Avatar"
+              className="w-16 h-16 rounded-full"
+            />
+            <div className="flex-grow ml-6">
+              <p className="text-white text-md">
+                <span className="text-white text-lg">{profile.gamertag}</span>
+                <span className="text-white text-xs ml-4 mr-4">|</span>
+                <span className="text-white text-md">{profile.timezone}</span>
+                <span className="text-white text-xs ml-4 mr-4">|</span>
+                <span className="text-white text-md">{profile.platform}</span>
+              </p>
+            </div>{" "}
             <div className="flex items-center">
               <AcceptDeclineButtons
                 friendId={profile.id}
@@ -147,9 +189,9 @@ const FriendsList = () => {
                 Delete
               </button>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
