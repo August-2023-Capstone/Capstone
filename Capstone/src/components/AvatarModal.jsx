@@ -63,7 +63,7 @@ const AvatarModal = ({ onClose, onSave }) => {
 
   return (
     <div className="avatar-modal bg-[#373737] text-white">
-      <h2 className="text-center pb-2">Choose Your Avatar</h2>
+      <h2 className="text-center pb-4">Choose Your Avatar</h2>
       <div className="avatar-options">
         {avatarOptions.map((option) => (
           <div
@@ -77,17 +77,17 @@ const AvatarModal = ({ onClose, onSave }) => {
           </div>
         ))}
       </div>
-      <div className="flex justify-center modal-buttons">
+      <div className="flex justify-center pt-4">
         <button
           onClick={onClose}
-          className="mr-2 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-red-800 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2"
         >
           Cancel
         </button>
         <button
           disabled={!selectedAvatar}
           onClick={handleSaveAvatar}
-          className="ml-2 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-[#205295] hover:bg-[#5B8FB9] text-white font-bold py-2 px-4 rounded ml-2"
         >
           Save
         </button>

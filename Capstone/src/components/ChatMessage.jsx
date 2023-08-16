@@ -160,15 +160,12 @@ function ChatMessage({ toggleChat }) {
 
       console.log("Message to be sent:", message);
 
-      const socket = new WebSocket("wss://gamernet.netlify.app/");
+      const socket = new WebSocket("ws://localhost:3000");
 
       socket.onopen = () => {
         console.log("WebSocket connection opened.");
         socket.send(JSON.stringify(message));
-      };
-
-      socket.onclose = () => {
-        console.log("WebSocket connection closed.");
+        socket.close();
       };
 
       console.log("Logged in user data:", loggedInUserData[0]?.id);
@@ -189,21 +186,6 @@ function ChatMessage({ toggleChat }) {
     } catch (error) {
       console.error("Error sending message:", error);
     }
-  };
-
-  // Establish WebSocket connection for receiving messages
-  const receiveSocket = new WebSocket("wss://gamernet.netlify.app/");
-
-  receiveSocket.onmessage = (event) => {
-    const receivedMessage = JSON.parse(event.data);
-    console.log("Received message:", receivedMessage);
-
-    // Update chatMessages state with the received message
-    setChatMessages((prevMessages) => [...prevMessages, receivedMessage]);
-  };
-
-  receiveSocket.onclose = () => {
-    console.log("WebSocket connection for receiving messages closed.");
   };
 
   const fetchChatData = async () => {
@@ -301,7 +283,7 @@ function ChatMessage({ toggleChat }) {
 
   return (
     <>
-      <div className="chat-container">
+      <div className="chat-container ">
         <div className="chat-users">
           <ChatUsers
             usersData={usersData}
@@ -312,17 +294,18 @@ function ChatMessage({ toggleChat }) {
             chatMessages={chatMessages}
           />
         </div>
-        <div className="chat-messages">
-          <ul ref={inputRef}>
+        <div className="chat-messages ">
+          <div ref={inputRef} className="MessagesScrollbar">
             {/* Add the ref here */}
             {chatMessages.map((chatMessage) => (
               <li
                 key={chatMessage.id}
                 className={`Chat-bubbles ${
                   chatMessage.sender_gamertag === loggedInUserData[0]?.gamertag
-                    ? "sender-bubble"
-                    : "receiver-bubble"
-                }`}
+                    ? "text-center bg-blue-500 text-white  w-full ml-96"
+                    : "text-center  w-full "
+                } w-full`}
+                style={{ width: "400px" }}
               >
                 <p> Reciever:{chatMessage.receiver_gamertag}</p>
                 <p>Sender: {chatMessage.sender_gamertag}</p>
@@ -330,7 +313,7 @@ function ChatMessage({ toggleChat }) {
                 <p>Receive Time: {chatMessage.recievetime}</p>
               </li>
             ))}
-          </ul>
+          </div>
 
           <div>
             {showModal && <div className="modal">Please enter a message!</div>}
@@ -356,6 +339,7 @@ function ChatMessage({ toggleChat }) {
       </div>
     </>
   );
+
 }
 
 export default ChatMessage;

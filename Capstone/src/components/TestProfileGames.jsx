@@ -74,6 +74,7 @@ const TestProfileGames = () => {
   };
 
   return (
+
     <div className="ProfileGameCardContainer">
       {profileGames.length > 0 ? (
         profileGames.map((game) => (
@@ -89,6 +90,7 @@ const TestProfileGames = () => {
                 alt={game.name}
               />
             </a>
+
             <div className="ProfileGameCardContent">
               <h2 className="ProfileGameCardTitle">{game.name}</h2>
               <p className="ProfileGameCardInfo">
