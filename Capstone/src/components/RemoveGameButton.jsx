@@ -1,8 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import supabase from "../../supabase";
 
 const RemoveGameButton = ({ game }) => {
+  const [buttonText, setButtonText] = useState("Remove from Favorites"); // Initialize button text state
+
   const handleRemoveFromDatabase = async () => {
     const {
       data: { user },
@@ -38,6 +40,7 @@ const RemoveGameButton = ({ game }) => {
         );
       } else {
         console.log("Linked game data removed successfully");
+        setButtonText("Game Removed");
       }
     }
   };
@@ -46,8 +49,11 @@ const RemoveGameButton = ({ game }) => {
     <button
       onClick={handleRemoveFromDatabase}
       className="bg-[#444444] hover:bg-[#373737] text-white font-bold py-1 px-3 rounded-sm text-xs mb-2"
+      disabled={
+        buttonText === "Game Added" || buttonText === "Game Already Added"
+      }
     >
-      Remove from Database
+      {buttonText}
     </button>
   );
 };
