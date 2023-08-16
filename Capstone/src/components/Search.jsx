@@ -60,7 +60,9 @@ const Search = ({ session }) => {
       e.preventDefault();
       setShowLoginModal(true);
     } else {
-      // Navigate to the FriendSearchPage with the clicked game's name as parameter
+      // Close the dropdown, clear search term, and navigate to the FriendSearchPage
+      setDropdownOpen(false);
+      setSearchTerm(""); // Clear the search term
       navigate(`/friend_search?gameName=${encodeURIComponent(game.name)}`);
     }
   };
@@ -100,7 +102,7 @@ const Search = ({ session }) => {
       {searchResults.length > 0 && isDropdownOpen && (
         <div
           ref={dropdownRef}
-          className="absolute bg-[#373737] rounded-md w-[1000px] mt-2 top-full right-0 left-0 mx-auto text-white"
+          className="absolute bg-[#373737] rounded-lg w-[1000px] mt-2 top-full right-0 left-0 mx-auto text-white"
           style={{ zIndex: 10 }}
         >
           {searchResults.map((game) => (
@@ -109,39 +111,48 @@ const Search = ({ session }) => {
               className="block p-2 hover:bg-[#444444] flex items-center"
             >
               <a
-                href="#" // Replace with the appropriate link if needed
-                className="w-20 h-20 object-cover mr-4"
+                href="#"
+                className="w-20 h-20 relative mr-4 overflow-hidden rounded-md"
                 onClick={(e) => {
                   e.preventDefault();
                   handleGameImageClick(game);
                 }}
               >
                 <img
-                  className="w-full h-full"
+                  className="absolute inset-0 w-full h-full object-cover"
                   src={game.background_image}
                   alt={game.name}
                 />
               </a>
 
-              <div>
-                <h2 className="text-lg font-semibold">{game.name}</h2>
-                <p>
-                  Genre:{" "}
-                  {game.genres.map((genre) => (
-                    <span key={genre.id}>{genre.name}, </span>
-                  ))}
-                </p>
-                <p>
-                  Platform:{" "}
-                  {game.platforms.map((platform) => (
-                    <span key={platform.platform.id}>
-                      {platform.platform.name},{" "}
-                    </span>
-                  ))}
-                </p>
+              <div className="flex-grow">
+                <div>
+                  <h2 className="text-lg font-semibold">{game.name}</h2>
+                  <p>
+                    Genre:{" "}
+                    {game.genres.map((genre) => (
+                      <span key={genre.id}>{genre.name}, </span>
+                    ))}
+                  </p>
+                  <p>
+                    Platform:{" "}
+                    {game.platforms.map((platform) => (
+                      <span key={platform.platform.id}>
+                        {platform.platform.name},{" "}
+                      </span>
+                    ))}
+                  </p>
+                </div>
               </div>
 
-              {session && <AddGameButton game={game} />}
+              {session && (
+                <button
+                  onClick={() => handleAddGame(game)}
+                  className="mr-4 px-4 py-2 rounded-md bg-[#151515] text-white hover:bg-[#373737] focus:outline-none"
+                >
+                  Add to Favorites
+                </button>
+              )}
             </div>
           ))}
         </div>
