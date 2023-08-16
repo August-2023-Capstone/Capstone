@@ -142,13 +142,20 @@ function ChatMessage({ toggleChat }) {
 		console.log("Sending new message...");
 
 		try {
+			const currentTime = new Date();
+			const formattedTime = currentTime.toLocaleTimeString([], {
+				hour: "2-digit",
+				minute: "2-digit",
+				second: "2-digit",
+			});
+
 			const message = {
 				sender_id: loggedInUserData[0]?.id,
 				receiver_id: usersData.id,
 				sender_gamertag: loggedInUserData[0]?.gamertag,
 				receiver_gamertag: usersData.gamertag,
 				message: newMessage,
-				recievetime: new Date().toISOString(),
+				recievetime: formattedTime,
 			};
 
 			console.log("Message to be sent:", message);
