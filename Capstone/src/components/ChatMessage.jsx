@@ -33,8 +33,41 @@ function ChatMessage({ toggleChat }) {
 		fetchChatData();
 		fetchUsersData();
 	}, [usersData]);
+	useEffect(() => {
+		// If the user was actively scrolling and chat messages updated,
+		// we need to scroll to bottom after a small delay to prevent
+		// auto-scrolling down while the user is still scrolling up
+		if (isScrollingRef.current) {
+			setTimeout(() => {
+				scrollToBottom();
+				isScrollingRef.current = false; // Reset isScrollingRef after the delay
+			}, 200);
+		}
+	}, [chatMessages]);
 
-	// Function to scroll to the bottom of the page on page load or component re-render
+	useEffect(() => {
+		const fetchChatData = async () => {
+			try {
+				const { data, error } = await supabase
+					.from("chatmessages")
+					.select("*")
+					.in("sender_id", [session.user.id, usersData.id])
+					.in("receiver_id", [session.user.id, usersData.id]);
+
+				if (error) {
+					console.error("Error fetching Chat Data:", error);
+				} else {
+					console.log("Fetched Chat Data:", data);
+					setChatMessages(data);
+				}
+			} catch (error) {
+				console.error("Error fetching Chat Data:", error);
+			}
+		};
+		const interval = setInterval(fetchChatData, 5000);
+		return () => clearInterval(interval);
+	});
+
 	useEffect(() => {
 		scrollToBottomOnce(); // Call the function only once
 
@@ -109,7 +142,7 @@ function ChatMessage({ toggleChat }) {
 		const interval = setInterval(fetchChatData, 5000);
 		return () => clearInterval(interval);
 	});
-	
+
 	// Move the scrollToBottom function outside the component
 	const scrollToBottom = () => {
 		if (inputRef.current) {
