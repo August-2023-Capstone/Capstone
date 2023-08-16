@@ -149,7 +149,7 @@ const ProfileData = () => {
             <CreateUserForm />
             <div className="flex justify-center items-center">
               <button
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-red-800 hover:bg-red-600 text-white font-bold mt-2 py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                 onClick={handleCloseModal}
               >
                 Close

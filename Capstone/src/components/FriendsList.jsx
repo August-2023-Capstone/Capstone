@@ -157,44 +157,49 @@ const FriendsList = () => {
     <div className="text-white">
       <h1 className="text-2xl font-semibold mb-4">Friends</h1>
       <div>
-        {friendProfiles.map((profile) => (
-          <div
-            key={profile.id}
-            className="bg-[#373737] rounded-md p-3 mb-2 shadow-md flex items-center justify-between max-w-screen-md  mx-auto"
-          >
-            <img
-              key={profile.avatar}
-              src={avatarOptions[profile.avatar]}
-              alt="User Avatar"
-              className="w-16 h-16 rounded-full"
-            />
-            <div className="flex-grow ml-6">
-              <div className="text-white">
-                <p className="text-white text-lg">{profile.gamertag}</p>
-              </div>
-              <div className="text-white">
-                <p className="text-white text-md">{profile.timezone}</p>
-              </div>
-              <div className="text-white">
-                <p className="text-white text-md">{profile.platform}</p>
-              </div>
-            </div>{" "}
-            <div className="flex items-center">
-              <AcceptDeclineButtons
-                friendId={profile.id}
-                loggedInUserId={loggedInUserId}
+        {friendProfiles.length === 0 ? (
+          <p className="text-white text-xl">Your friend list is empty!</p>
+        ) : (
+          friendProfiles.map((profile) => (
+            <div
+              key={profile.id}
+              className="bg-[#373737] rounded-md p-3 mb-2 shadow-md flex items-center justify-between max-w-screen-md mx-auto"
+            >
+              <img
+                key={profile.avatar}
+                src={avatarOptions[profile.avatar]}
+                alt="User Avatar"
+                className="w-16 h-16 rounded-full"
               />
-              <button
-                onClick={() => handleDeleteFriend(profile.id)}
-                className="ml-2 px-1 py-1 bg-red-800 text-white rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
+              <div className="flex-grow ml-6">
+                <div className="text-white">
+                  <p className="text-white text-lg">{profile.gamertag}</p>
+                </div>
+                <div className="text-white">
+                  <p className="text-white text-md">{profile.timezone}</p>
+                </div>
+                <div className="text-white">
+                  <p className="text-white text-md">{profile.platform}</p>
+                </div>
+              </div>{" "}
+              <div className="flex items-center">
+                <AcceptDeclineButtons
+                  friendId={profile.id}
+                  loggedInUserId={loggedInUserId}
+                />
+                <button
+                  onClick={() => handleDeleteFriend(profile.id)}
+                  className="ml-2 px-1 py-1 bg-red-800 text-white rounded hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
 };
+
 export default FriendsList;

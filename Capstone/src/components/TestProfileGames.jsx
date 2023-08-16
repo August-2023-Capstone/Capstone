@@ -74,12 +74,13 @@ const TestProfileGames = () => {
   };
 
   return (
-    <div className="ProfileGameCardWrapper">
-      <div className="ProfileGameCardContainer">
-        {profileGames.map((game) => (
+
+    <div className="ProfileGameCardContainer">
+      {profileGames.length > 0 ? (
+        profileGames.map((game) => (
           <div key={game.id} className="ProfileGameCard">
             <a
-              href="#" // Replace with the appropriate link if needed
+              href="#"
               className="ProfileGameCardImageAnchor"
               onClick={() => handleImageClick(game)}
             >
@@ -89,17 +90,24 @@ const TestProfileGames = () => {
                 alt={game.name}
               />
             </a>
-            <h2 className="ProfileGameCardTitle">{game.name}</h2>
-            <p className="ProfileGameCardInfo">
-              Genre: {extractArrayFromString(game.genre).join(", ")}
-            </p>
-            <p className="ProfileGameCardInfo">
-              Platform: {extractArrayFromString(game.platform).join(", ")}
-            </p>
-            <RemoveGameButton game={game} />
+
+            <div className="ProfileGameCardContent">
+              <h2 className="ProfileGameCardTitle">{game.name}</h2>
+              <p className="ProfileGameCardInfo">
+                Genre: {extractArrayFromString(game.genre).join(", ")}
+              </p>
+              <p className="ProfileGameCardInfo">
+                Platform: {extractArrayFromString(game.platform).join(", ")}
+              </p>
+            </div>
+            <div className="ProfileGameCardButtonContainer">
+              <RemoveGameButton game={game} />
+            </div>
           </div>
-        ))}
-      </div>
+        ))
+      ) : (
+        <div className="ProfileGameCardEmpty">No games to display.</div>
+      )}
     </div>
   );
 };
