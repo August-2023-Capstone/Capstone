@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setProfileData } from "../reducers/profileSlice";
+
 import supabase from "../../supabase";
 import CreateUserForm from "./CreateUserForm";
-
 import edit from "../assets/icons/edit.png";
 import Avatar1 from "../assets/Avatars/Avatar1.png";
 import Avatar2 from "../assets/Avatars/Avatar2.png";
@@ -32,7 +34,9 @@ const avatarOptions = {
 };
 
 const ProfileData = () => {
-  const [profileData, setProfileData] = useState([]);
+  const dispatch = useDispatch();
+
+  const profileData = useSelector((state) => state.profile.profileData);
   const [showCreateUserForm, setShowCreateUserForm] = useState(false);
   const [session, setSession] = useState(null);
   const [userAvatar, setUserAvatar] = useState(null); // State to store user's avatar image
@@ -86,7 +90,7 @@ const ProfileData = () => {
       if (error) {
         console.error("Error fetching data:", error);
       } else {
-        setProfileData(data);
+        dispatch(setProfileData(data)); // Dispatch action to update profileData
         if (data.length > 0 && data[0].gamertag === null) {
           setShowCreateUserForm(true);
         }
@@ -136,7 +140,7 @@ const ProfileData = () => {
           <img
             src={edit}
             alt=""
-            className="editProfileIcon cursor-pointer ml-8"
+            className="cursor-pointer"
             onClick={handleEditIconClick}
           />
         </div>

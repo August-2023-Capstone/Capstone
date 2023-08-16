@@ -305,7 +305,7 @@ function ChatMessage({ toggleChat }) {
                     ? "text-center bg-blue-500 text-white  w-full ml-96"
                     : "text-center  w-full "
                 } w-full`}
-                style={{ width: "400px" }}
+                style={{ width: "600px" }}
               >
                 <p> Reciever:{chatMessage.receiver_gamertag}</p>
                 <p>Sender: {chatMessage.sender_gamertag}</p>
@@ -339,7 +339,6 @@ function ChatMessage({ toggleChat }) {
       </div>
     </>
   );
-
 }
 
 export default ChatMessage;
