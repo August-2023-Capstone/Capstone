@@ -220,7 +220,7 @@ const CreateUserForm = () => {
   };
 
   return (
-    <form className="p-4 bg-gray-900 rounded-lg shadow-md">
+    <form className="p-4 bg-[#373737] rounded-lg text-lg">
       {platformOptions.map((platformOption) => (
         <div
           key={platformOption.value}
@@ -234,7 +234,7 @@ const CreateUserForm = () => {
         </div>
       ))}
 
-      <div className="mb-4">
+      <div className="mb-2">
         <label className="text-white">Gamertag:</label>
         <input
           type="text"
@@ -242,7 +242,7 @@ const CreateUserForm = () => {
           value={formData.gamertag}
           onChange={handleChange}
           placeholder="Enter your gamertag"
-          className="w-full px-2 py-1 rounded bg-gray-700 text-white"
+          className="w-full px-2 py-1 rounded bg-[#545454] text-white"
         />
       </div>
 
@@ -252,7 +252,7 @@ const CreateUserForm = () => {
           name="timezone"
           value={formData.timezone}
           onChange={handleChange}
-          className="w-full px-2 py-1 rounded bg-gray-700 text-white"
+          className="w-full px-2 py-1 rounded bg-[#545454] text-white"
         >
           <option value="">Choose your timezone</option>
           {timezones.map((timezone) => (
@@ -263,53 +263,42 @@ const CreateUserForm = () => {
         </select>
       </div>
 
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
-        type="button"
-        onClick={openModal}
-      >
-        Add Games
-      </button>
-
-      {showGameModal && <AddGameModal closeModal={closeModal} />}
-      <br />
-
-      <label className="text-white">Choose your avatar:</label>
-      <div className="selected-avatar">
-        {selectedAvatar && (
-          <img
-            src={selectedAvatar.image}
-            alt={selectedAvatar.label}
-            className="w-24 h-24 object-cover"
-          />
-        )}
-      </div>
-
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
-        type="button"
-        onClick={handleOpenModal}
-      >
-        Select Avatar
-      </button>
-
-      {showModal && (
-        <div className="modal-overlay">
-          <AvatarModal onClose={handleCloseModal} onSave={handleSaveAvatar} />
+      <div className="flex flex-col items-center">
+        <div className="selected-avatar">
+          {selectedAvatar && (
+            <img
+              src={selectedAvatar.image}
+              alt={selectedAvatar.label}
+              className="w-24 h-24 object-cover"
+            />
+          )}
         </div>
-      )}
-      <br />
 
-      <button
-        className="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded"
-        type="button"
-        onClick={() => {
-          updateGamertagInDatabase();
-          updateTimezoneInDatabase();
-        }}
-      >
-        Submit
-      </button>
+        <button
+          className="hover:bg-[#008800] text-white font-semibold py-2 px-4 rounded mb-2"
+          type="button"
+          onClick={handleOpenModal}
+        >
+          Select Avatar
+        </button>
+
+        {showModal && (
+          <div className="modal-overlay">
+            <AvatarModal onClose={handleCloseModal} onSave={handleSaveAvatar} />
+          </div>
+        )}
+
+        <button
+          className="hover:bg-[#008800] text-white font-semibold py-2 px-4 rounded"
+          type="button"
+          onClick={() => {
+            updateGamertagInDatabase();
+            updateTimezoneInDatabase();
+          }}
+        >
+          Submit
+        </button>
+      </div>
     </form>
   );
 };
