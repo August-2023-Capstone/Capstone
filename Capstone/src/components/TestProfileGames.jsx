@@ -74,30 +74,32 @@ const TestProfileGames = () => {
   };
 
   return (
-    <div className="ProfileGameCardContainer">
-      {profileGames.map((game) => (
-        <div key={game.id} className="ProfileGameCard">
-          <a
-            href="#" // Replace with the appropriate link if needed
-            className="ProfileGameCardImageAnchor"
-            onClick={() => handleImageClick(game)}
-          >
-            <img
-              className="ProfileGameCardImage"
-              src={game.art}
-              alt={game.name}
-            />
-          </a>
-          <h2 className="ProfileGameCardTitle">{game.name}</h2>
-          <p className="ProfileGameCardInfo">
-            Genre: {extractArrayFromString(game.genre).join(", ")}
-          </p>
-          <p className="ProfileGameCardInfo">
-            Platform: {extractArrayFromString(game.platform).join(", ")}
-          </p>
-          <RemoveGameButton game={game} />
-        </div>
-      ))}
+    <div className="ProfileGameCardWrapper">
+      <div className="ProfileGameCardContainer">
+        {profileGames.map((game) => (
+          <div key={game.id} className="ProfileGameCard">
+            <a
+              href="#" // Replace with the appropriate link if needed
+              className="ProfileGameCardImageAnchor"
+              onClick={() => handleImageClick(game)}
+            >
+              <img
+                className="ProfileGameCardImage"
+                src={game.art}
+                alt={game.name}
+              />
+            </a>
+            <h2 className="ProfileGameCardTitle">{game.name}</h2>
+            <p className="ProfileGameCardInfo">
+              Genre: {extractArrayFromString(game.genre).join(", ")}
+            </p>
+            <p className="ProfileGameCardInfo">
+              Platform: {extractArrayFromString(game.platform).join(", ")}
+            </p>
+            <RemoveGameButton game={game} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
