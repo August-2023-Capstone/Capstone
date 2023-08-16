@@ -6,6 +6,7 @@ import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
 import NintendoDS from "../assets/Logos/nintendoDS.png";
 import DOMPurify from "dompurify";
+import GameDetailsAddGameButton from "../components/GameDetailsAddGameButton";
 
 const GameDetails = ({ gameName }) => {
   const platformImages = {
@@ -72,10 +73,6 @@ const GameDetails = ({ gameName }) => {
     fetchDescription(); // Call the fetchData function
   }, [gameName, gameId]);
 
-  console.log(gameData);
-  console.log(gameId);
-  console.log(gameDescription);
-
   return (
     <div className="text-white mb-4 text-center bg-[#373737] rounded p-4">
       {gameData ? (
@@ -87,6 +84,7 @@ const GameDetails = ({ gameName }) => {
             alt={gameData.name}
           />
           <div className="mb-2 text-3xl font-semibold ">{gameName}</div>
+          <GameDetailsAddGameButton game={gameData} />
           <p>
             {gameData.genres.map((genre, index) => (
               <span key={genre.id}>
