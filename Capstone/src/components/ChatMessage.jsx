@@ -35,73 +35,94 @@ function ChatMessage({ toggleChat }) {
   }, [usersData]);
 
   // Function to scroll to the bottom of the page on page load or component re-render
-  useEffect(() => {
-    scrollToBottomOnce(); // Call the function only once
+  //   useEffect(() => {
+  //     scrollToBottomOnce(); // Call the function only once
 
-    const handleScroll = () => {
-      const chatContainer = inputRef.current;
-      if (chatContainer) {
-        const isScrolledToBottom =
-          chatContainer.scrollTop + chatContainer.clientHeight ===
-          chatContainer.scrollHeight;
+  //     const handleScroll = () => {
+  //       const chatContainer = inputRef.current;
+  //       if (chatContainer) {
+  //         const isScrolledToBottom =
+  //           chatContainer.scrollTop + chatContainer.clientHeight ===
+  //           chatContainer.scrollHeight;
 
-        if (isScrolledToBottom) {
-          scrolledToBottomRef.current = true; // Update scrolledToBottomRef when the user scrolls to the bottom
-        } else {
-          scrolledToBottomRef.current = false; // User is actively scrolling, set it to false
-          isScrollingRef.current = true; // Set isScrollingRef to true when the user starts scrolling
-        }
-      }
-    };
+  //         if (isScrolledToBottom) {
+  //           scrolledToBottomRef.current = true; // Update scrolledToBottomRef when the user scrolls to the bottom
+  //         } else {
+  //           scrolledToBottomRef.current = false; // User is actively scrolling, set it to false
+  //           isScrollingRef.current = true; // Set isScrollingRef to true when the user starts scrolling
+  //         }
+  //       }
+  //     };
 
-    setShowCloseButton(false);
+  //     setShowCloseButton(false);
 
-    // Attach the scroll event listener to the chat container
-    if (inputRef.current) {
-      inputRef.current.addEventListener("scroll", handleScroll);
-    }
+  //     // Attach the scroll event listener to the chat container
+  //     if (inputRef.current) {
+  //       inputRef.current.addEventListener("scroll", handleScroll);
+  //     }
 
-    return () => {
-      // Clean up the event listener on unmount
-      if (inputRef.current) {
-        inputRef.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
+  //     return () => {
+  //       // Clean up the event listener on unmount
+  //       if (inputRef.current) {
+  //         inputRef.current.removeEventListener("scroll", handleScroll);
+  //       }
+  //     };
+  //   }, []);
 
-  useEffect(() => {
-    // Scroll to the bottom when chatMessages state is updated
-    if (!isScrollingRef.current) {
-      scrollToBottom();
-    }
-  }, [chatMessages]);
+  //   useEffect(() => {
+  //     // Scroll to the bottom when chatMessages state is updated
+  //     if (!isScrollingRef.current) {
+  //       scrollToBottom();
+  //     }
+  //   }, [chatMessages]);
 
-  useEffect(() => {
-    // If the user was actively scrolling and chat messages updated,
-    // we need to scroll to bottom after a small delay to prevent
-    // auto-scrolling down while the user is still scrolling up
-    if (isScrollingRef.current) {
-      setTimeout(() => {
-        scrollToBottom();
-        isScrollingRef.current = false; // Reset isScrollingRef after the delay
-      }, 200);
-    }
-  }, [chatMessages]);
+  //   useEffect(() => {
+  //     // If the user was actively scrolling and chat messages updated,
+  //     // we need to scroll to bottom after a small delay to prevent
+  //     // auto-scrolling down while the user is still scrolling up
+  //     if (isScrollingRef.current) {
+  //       setTimeout(() => {
+  //         scrollToBottom();
+  //         isScrollingRef.current = false; // Reset isScrollingRef after the delay
+  //       }, 200);
+  //     }
+  //   }, [chatMessages]);
 
   // Move the scrollToBottom function outside the component
-  const scrollToBottom = () => {
-    if (inputRef.current) {
-      inputRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
-  };
+  //   const scrollToBottom = () => {
+  //     if (inputRef.current) {
+  //       inputRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+  //     }
+  //   };
 
   // Function to scroll to the bottom of the chat container once
-  const scrollToBottomOnce = () => {
-    if (inputRef.current) {
-      inputRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
-  };
+  //   const scrollToBottomOnce = () => {
+  //     if (inputRef.current) {
+  //       inputRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+  //     }
+  //   };
+  useEffect(() => {
+    const fetchChatData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("chatmessages")
+          .select("*")
+          .in("sender_id", [session.user.id, usersData.id])
+          .in("receiver_id", [session.user.id, usersData.id]);
 
+        if (error) {
+          console.error("Error fetching Chat Data:", error);
+        } else {
+          console.log("Fetched Chat Data:", data);
+          setChatMessages(data);
+        }
+      } catch (error) {
+        console.error("Error fetching Chat Data:", error);
+      }
+    };
+    const interval = setInterval(fetchChatData, 5000);
+    return () => clearInterval(interval);
+  });
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -302,10 +323,10 @@ function ChatMessage({ toggleChat }) {
                 key={chatMessage.id}
                 className={`Chat-bubbles ${
                   chatMessage.sender_gamertag === loggedInUserData[0]?.gamertag
-                    ? "text-center bg-blue-500 text-white  w-full ml-96"
+                    ? "text-center bg-blue-500 text-white  w-full ml-96 "
                     : "text-center  w-full "
                 } w-full`}
-                style={{ width: "400px" }}
+                style={{ width: "600px" }}
               >
                 <p> Reciever:{chatMessage.receiver_gamertag}</p>
                 <p>Sender: {chatMessage.sender_gamertag}</p>
