@@ -87,7 +87,29 @@ function ChatMessage({ toggleChat }) {
 			}, 200);
 		}
 	}, [chatMessages]);
+	useEffect(() => {
+		const fetchChatData = async () => {
+			try {
+				const { data, error } = await supabase
+					.from("chatmessages")
+					.select("*")
+					.in("sender_id", [session.user.id, usersData.id])
+					.in("receiver_id", [session.user.id, usersData.id]);
 
+				if (error) {
+					console.error("Error fetching Chat Data:", error);
+				} else {
+					console.log("Fetched Chat Data:", data);
+					setChatMessages(data);
+				}
+			} catch (error) {
+				console.error("Error fetching Chat Data:", error);
+			}
+		};
+		const interval = setInterval(fetchChatData, 5000);
+		return () => clearInterval(interval);
+	});
+	
 	// Move the scrollToBottom function outside the component
 	const scrollToBottom = () => {
 		if (inputRef.current) {
