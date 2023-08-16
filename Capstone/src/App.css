@@ -82,8 +82,9 @@
   border-radius: 8px;
 } */
 .content {
-	display: grid;
-	grid-template-columns: 3fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
 
 	padding-top: 10px;
 }
@@ -901,10 +902,10 @@ li p:nth-child(2) {
 .ProfileGameCardContainer {
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 20px; /* Add some space between cards */
-  padding-left: 200px;
-  margin: 0 auto; /* Center the container horizontally */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+  grid-auto-rows: 1fr !important;
+  grid-gap: 10px; /* Add some space between cards */
+  border: white solid 3px;
 }
 
 .ProfileGameCard {
@@ -962,36 +963,64 @@ li p:nth-child(2) {
 }
 
 .ProfileData {
+  display: inline-flex;
 
-  display: flex;
   align-items: center;
   text-align: center;
+  justify-content: space-between;
   gap: 20px;
   padding: 20px;
-  max-width: 400px;
+  /* max-width: 400px; */
   margin: 0 auto;
-  border: white 2px solid;
-  margin-left: auto;
-  right: 0;
+  margin-right: 0;
+  padding-left: 300px;
 }
+@media screen and (max-width: 768px) {
+  .ProfileData {
+    padding-left: 5px; /* Adjust this value as needed for tablet view */
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .ProfileData {
+    padding-left: 5px; /* Adjust this value as needed for mobile view */
+  }
+}
+
 .profileDataMiddleContainer {
-	display: block;
+  display: flex;
+  gap: 50px;
+}
+@media screen and (max-width: 768px) {
+  .profileDataMiddleContainer {
+    gap: 10px; /* Adjust the gap value for tablet view */
+    display: block;
+  }
+}
+@media screen and (max-width: 480px) {
+  .profileDataMiddleContainer {
+    gap: 5px; /* Adjust the gap value for mobile view */
+    display: block;
+    margin: 10px;
+  }
+
 }
 .ProfileGamertag,
 .ProfileTimezone,
 .ProfilePlatform {
-	display: flex; /* Use flex to align items horizontally */
-	align-items: center; /* Center items vertically */
-	background-color: #202020;
-	color: white;
-	padding: 20px;
-	border-radius: 8px;
-	margin-bottom: 20px;
-	max-width: 300px;
+  /* display: flex; Use flex to align items horizontally */
+  /* align-items: center; Center items vertically */
+  background-color: #202020;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  /* margin-bottom: 20px; */
+  /* max-width: 300px; */
+  display: inline-flex;
+
 }
-.editProfileIcon {
-	padding-top: 170px;
-}
+
 .profileAvatar {
 	width: 100px;
 	height: 100px; /* Set the desired height for the avatar */
@@ -1022,12 +1051,14 @@ li p:nth-child(2) {
 }
 
 .friendsList {
-	background-color: #202020;
-	padding: 10px;
-	border-radius: 8px;
-	grid-column: 4;
-	height: 100vh !important;
-	border: 2px solid white;
+  background-color: #202020;
+  padding: 10px;
+  border-radius: 8px;
+  grid-column: 4;
+  height: 100vh !important;
+  border: 2px solid white;
+  margin-right: 0;
+
 }
 
 .friendsList h2 {
