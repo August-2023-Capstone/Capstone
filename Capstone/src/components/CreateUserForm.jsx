@@ -217,6 +217,7 @@ const CreateUserForm = () => {
     } catch (error) {
       console.error("Error updating timezone:", error);
     }
+    window.location.reload(); // Refresh the page
   };
 
   return (

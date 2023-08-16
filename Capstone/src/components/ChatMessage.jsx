@@ -360,7 +360,6 @@ function ChatMessage({ toggleChat }) {
       </div>
     </>
   );
-
 }
 
 export default ChatMessage;
