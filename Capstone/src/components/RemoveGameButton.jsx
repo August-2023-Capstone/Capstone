@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import supabase from "../../supabase";
 
 const RemoveGameButton = ({ game }) => {
-  const [buttonText, setButtonText] = useState("Remove from Favorites"); // Initialize button text state
+  const [buttonText, setButtonText] = useState("Remove Game"); // Initialize button text state
 
   const handleRemoveFromDatabase = async () => {
     const {

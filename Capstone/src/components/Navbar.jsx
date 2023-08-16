@@ -76,6 +76,10 @@ const Navbar = () => {
     fetchUserProfile();
   }, [session]);
 
+  const closeModal = () => {
+    setShowLoginModal(false);
+  };
+
   return (
     <nav className="bg-[#151515] p-4 flex items-center justify-between">
       <div className="flex items-center">
@@ -113,9 +117,9 @@ const Navbar = () => {
             Log In | Sign Up
           </button>
         )}
-        {showLoginModal && (
+        {showLoginModal && !session && (
           <div
-            onClick={() => setShowLoginModal(false)}
+            onClick={closeModal}
             className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex items-center justify-center z-10"
           >
             <div className="bg-white p-6 rounded-lg shadow-md">

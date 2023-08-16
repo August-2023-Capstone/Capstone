@@ -5,6 +5,8 @@ import Windows from "../assets/Logos/WindowsLogo.png";
 import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
 import NintendoDS from "../assets/Logos/nintendoDS.png";
+import DOMPurify from "dompurify";
+import GameDetailsAddGameButton from "../components/GameDetailsAddGameButton";
 
 const GameDetails = ({ gameName }) => {
   const platformImages = {
@@ -49,7 +51,19 @@ const GameDetails = ({ gameName }) => {
         );
         const jsonData = await response.json();
 
-        setGameDescription(jsonData);
+        // Replace <p> tags with an empty string
+        const descriptionWithoutPTags = jsonData.description.replace(
+          /<\/?p>/g,
+          ""
+        );
+
+        // Replace <h3> tags with a custom marker
+        const descriptionWithPreservedH3Tags = descriptionWithoutPTags.replace(
+          /<\/?h3>/g,
+          "__H3_TAG__"
+        );
+
+        setGameDescription(descriptionWithPreservedH3Tags);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -59,12 +73,8 @@ const GameDetails = ({ gameName }) => {
     fetchDescription(); // Call the fetchData function
   }, [gameName, gameId]);
 
-  console.log(gameData);
-  console.log(gameId);
-  console.log(gameDescription);
-
   return (
-    <div className="text-white mb-4 text-center">
+    <div className="text-white mb-4 text-center bg-[#373737] rounded p-4">
       {gameData ? (
         <>
           <div className="mb-4 text-3xl font-semibold ">Game Details</div>
@@ -74,9 +84,14 @@ const GameDetails = ({ gameName }) => {
             alt={gameData.name}
           />
           <div className="mb-2 text-3xl font-semibold ">{gameName}</div>
-          <p className="mb-2">
-            {gameData.genres.map((genre) => (
-              <span key={genre.id}>{genre.name}, </span>
+          <GameDetailsAddGameButton game={gameData} />
+          <p>
+            {gameData.genres.map((genre, index) => (
+              <span key={genre.id}>
+                {genre.name}
+                {index !== gameData.genres.length - 1 && ", "}{" "}
+                {/* Add comma if not the last genre */}
+              </span>
             ))}
           </p>
           <div className="flex justify-center space-x-4">
@@ -92,7 +107,12 @@ const GameDetails = ({ gameName }) => {
           {gameDescription && (
             <div className="mt-4">
               <h3 className="text-xl font-semibold">Description</h3>
-              <p>{gameDescription.description}</p>
+              <div
+                className="text-justify"
+                dangerouslySetInnerHTML={{
+                  __html: gameDescription.replace(/__H3_TAG__/g, "<h3>"),
+                }}
+              />
             </div>
           )}
         </>
