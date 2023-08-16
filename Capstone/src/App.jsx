@@ -2,6 +2,7 @@
 
 import "./App.css";
 import React from "react";
+import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
@@ -24,12 +25,15 @@ function App() {
   return (
     <Router>
       <div className="bg-[#151515] min-h-screen">
+        <Helmet>
+          <title>GamerNet</title>
+          <link rel="icon" href="/icons/mario2.png" />
+        </Helmet>
         <Navbar />
         {/* <TestPlatformToggle />
       <TestLogIn2 />
       <CreateUserForm /> */}
         {/* <TestProfileGames /> */}
-
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/users" element={<UsersPage />} />
