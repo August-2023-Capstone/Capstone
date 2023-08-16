@@ -105,7 +105,7 @@ const HomeCarouselOne = () => {
     className: "HomeCarouselContainer",
     infinite: true,
     slidesToShow: slidesToShow,
-    slidesToScroll: 2, // Scroll one card at a time
+    slidesToScroll: 1, // Scroll one card at a time
     speed: 500,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,

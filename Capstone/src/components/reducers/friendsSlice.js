@@ -2,7 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import supabaseConfig from "../supabase";
+import supabaseConfig from "../../supabase";
 
 const initialState = {
   value: [],
