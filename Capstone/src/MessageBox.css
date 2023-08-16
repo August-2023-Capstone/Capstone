@@ -14,6 +14,11 @@
 .chat-users-container {
 	flex: 1;
 }
+.chat-messages-container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
 
 .chat-users {
 	flex: 1;
@@ -26,11 +31,12 @@
 /* Styling for the chat messages */
 .chat-messages {
 	flex: 1;
-	max-width: 75%;
 	display: flex;
 	flex-direction: column;
-	padding: 20px;
 	overflow-y: auto;
+	background-color: white;
+	height: 100vh;
+	justify-content: space-between;
 }
 
 ul {
@@ -56,12 +62,57 @@ li p {
 	margin: 0;
 }
 
-li p:nth-child(1) {
-	font-weight: bold;
-	color: #7289da; /* Discord Blue color */
-}
-
 li p:nth-child(2) {
 	font-size: 12px;
-	color: #888;
+	color: #060606;
+}
+
+/* Styling for sender's chat bubbles */
+.sender-bubble {
+	background-color: #007bff;
+	color: white;
+	align-self: flex-end; /* Align sender's bubbles to the right */
+	border-radius: 15px;
+	padding: 10px 15px;
+	margin-bottom: 10px;
+}
+
+/* Styling for receiver's chat bubbles */
+.receiver-bubble {
+	background-color: #e4e4e4;
+	color: black;
+	align-self: flex-start; /* Align receiver's bubbles to the left */
+	border-radius: 15px;
+	padding: 10px 15px;
+	margin-bottom: 10px;
+}
+
+.input-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+	background-color: #d9d8dc;
+	border-top: 1px solid #f6f2f2;
+}
+
+.message-input {
+	flex: 1;
+	padding: 8px;
+	border: none;
+	border-radius: 5px;
+}
+
+.send-button {
+	margin-left: 10px;
+	padding: 8px 15px;
+	background-color: #007bff;
+	color: rgb(33, 33, 33);
+	border: #060606;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.send-button:hover {
+	background-color: #0056b3;
 }

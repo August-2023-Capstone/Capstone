@@ -112,7 +112,7 @@ const FriendSearchPage = () => {
         // Query the profiles table to get gamertags based on user_id's
         const { data: profilesData, error: profilesError } = await supabase
           .from("profiles")
-          .select("gamertag, id, timezone, platform")
+          .select("gamertag, id, timezone, platform, avatar")
           .in("id", linkedUserIds);
 
         if (profilesError) {
@@ -131,11 +131,11 @@ const FriendSearchPage = () => {
   }, [gameName]);
 
   return (
-    <div className="bg-[#151515] flex">
-      <div className="w-1/4">
+    <div className="flex m-4">
+      <div className="w-1/2">
         <GameDetails gameName={gameName} />
       </div>
-      <div className="flex-grow flex">
+      <div className="w-1/2 justify-center">
         <GamePlayers
           linkedUsersProfiles={linkedUsersProfiles}
           gameName={gameName}
