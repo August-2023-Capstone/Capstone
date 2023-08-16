@@ -681,7 +681,7 @@ li p:nth-child(2) {
   border-radius: 50%;
 }
 
-.modal-buttons {
+/* .modal-buttons {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
@@ -689,10 +689,8 @@ li p:nth-child(2) {
 
 .modal-buttons button {
   margin-left: 10px;
-
-  background: #355e3b;
-  hover: #008800;
-}
+  background: #205295;
+} */
 
 .createUserForm {
   max-width: 400px;
@@ -1121,6 +1119,7 @@ li p:nth-child(2) {
 }
 .MessagesScrollbar {
   margin-left: 10px;
+
 }
 
 .messagesInput {
