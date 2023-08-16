@@ -119,7 +119,11 @@ const ProfileData = () => {
       {profileData.map((profile) => (
         <div key={profile.id} className="ProfileData">
           {session && (
-            <img src={userAvatar} alt="Avatar" className="profileAvatar" />
+            <img
+              src={userAvatar}
+              alt="Avatar"
+              className="profileAvatar w-16 h-16"
+            />
           )}
 
           <div className="profileDataMiddleContainer">
@@ -151,7 +155,7 @@ const ProfileData = () => {
         <div className="modalBackground">
           <div className="modalContent">
             <CreateUserForm />
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center md:justify-end items-center">
               <button
                 className="bg-red-800 hover:bg-red-600 text-white font-bold mt-2 py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                 onClick={handleCloseModal}
