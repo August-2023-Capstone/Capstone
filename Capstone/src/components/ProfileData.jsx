@@ -136,7 +136,7 @@ const ProfileData = () => {
           <img
             src={edit}
             alt=""
-            className="editProfileIcon"
+            className="editProfileIcon cursor-pointer ml-8"
             onClick={handleEditIconClick}
           />
         </div>
