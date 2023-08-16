@@ -1097,9 +1097,12 @@ li p:nth-child(2) {
   flex: 0 0 70% !important;
   border: #151515 5px solid;
   background-color: #888;
-  height: 80vh;
-  /* flex: 1; Expand the messages section to fill available space */
-  /* overflow-y: auto; Add scrollbars when necessary */
+  height: 100vh;
+  /* flex: 1;
+  overflow-y: auto; */
+}
+.MessagesScrollbar {
+  margin-left: 230px;
 }
 
 .messagesInput {
@@ -1108,11 +1111,13 @@ li p:nth-child(2) {
   border: 1px solid #ccc;
   border-radius: 20px;
   align-self: flex-end;
-  margin-top: 380px;
+  margin-top: 100px;
 }
-
-.sendMessageButton {
-  background-color: black !important;
+.input-container {
+  margin-bottom: 100px;
+}
+.send-button {
+  background-color: #007bff !important;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -1121,6 +1126,6 @@ li p:nth-child(2) {
   transition: background-color 0.1s ease;
 }
 
-.sendMessageButton:hover {
+.send-button:hover {
   background-color: mediumslateblue !important;
 }
