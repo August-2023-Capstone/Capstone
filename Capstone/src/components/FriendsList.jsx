@@ -169,13 +169,15 @@ const FriendsList = () => {
               className="w-16 h-16 rounded-full"
             />
             <div className="flex-grow ml-6">
-              <p className="text-white text-md">
-                <span className="text-white text-lg">{profile.gamertag}</span>
-                <span className="text-white text-xs ml-4 mr-4">|</span>
-                <span className="text-white text-md">{profile.timezone}</span>
-                <span className="text-white text-xs ml-4 mr-4">|</span>
-                <span className="text-white text-md">{profile.platform}</span>
-              </p>
+              <div className="text-white">
+                <p className="text-white text-lg">{profile.gamertag}</p>
+              </div>
+              <div className="text-white">
+                <p className="text-white text-md">{profile.timezone}</p>
+              </div>
+              <div className="text-white">
+                <p className="text-white text-md">{profile.platform}</p>
+              </div>
             </div>{" "}
             <div className="flex items-center">
               <AcceptDeclineButtons
