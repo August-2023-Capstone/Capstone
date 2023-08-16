@@ -11,12 +11,12 @@ import TestProfileGames from "./TestProfileGames";
 const ProfilePage = () => {
   return (
     <div className="profilePage">
-      <div className="flex">
-        <div className="w-3/4 pl-8 pr-4">
+      <div className="flex flex-col md:flex-row">
+        <div className="w-full md:w-3/4 pl-4 pr-4 text-center md:text-left">
           <ProfileData />
           <TestProfileGames />
         </div>
-        <div className="w-1/4 pl-4 pr-8 flex flex-col justify-center text-center">
+        <div className="w-full md:w-1/4 pl-4 pr-4 mt-4 md:mt-0 text-center md:text-left">
           <FriendsList />
         </div>
       </div>

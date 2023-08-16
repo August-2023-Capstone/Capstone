@@ -75,7 +75,7 @@ const TestProfileGames = () => {
 
   return (
 
-    <div className="ProfileGameCardContainer">
+    <div className="ProfileGameCardContainer grid grid-cols-1 md:grid-cols-2 gap-4">
       {profileGames.length > 0 ? (
         profileGames.map((game) => (
           <div key={game.id} className="ProfileGameCard">
