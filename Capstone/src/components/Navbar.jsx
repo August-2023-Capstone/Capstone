@@ -84,7 +84,7 @@ const Navbar = () => {
     <nav className="bg-[#151515] p-4 flex items-center justify-between">
       <div className="flex items-center">
         <Link to="/" className="text-white text-3xl font-bold flex-grow-0 mr-4">
-          SQUAD FINDER
+          GAMERNET
         </Link>
         <Search session={session} />
       </div>
