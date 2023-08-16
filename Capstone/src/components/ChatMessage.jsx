@@ -160,7 +160,7 @@ function ChatMessage({ toggleChat }) {
 
 			console.log("Message to be sent:", message);
 
-			const socket = new WebSocket("ws://gamernet.netlify.app/");
+			const socket = new WebSocket("wss://gamernet.netlify.app/");
 
 			socket.onopen = () => {
 				console.log("WebSocket connection opened.");
