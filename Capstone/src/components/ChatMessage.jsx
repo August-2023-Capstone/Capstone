@@ -160,12 +160,15 @@ function ChatMessage({ toggleChat }) {
 
 			console.log("Message to be sent:", message);
 
-			const socket = new WebSocket("ws://localhost:3000");
+			const socket = new WebSocket("ws://gamernet.netlify.app/");
 
 			socket.onopen = () => {
 				console.log("WebSocket connection opened.");
 				socket.send(JSON.stringify(message));
-				socket.close();
+			};
+
+			socket.onclose = () => {
+				console.log("WebSocket connection closed.");
 			};
 
 			console.log("Logged in user data:", loggedInUserData[0]?.id);
@@ -186,6 +189,21 @@ function ChatMessage({ toggleChat }) {
 		} catch (error) {
 			console.error("Error sending message:", error);
 		}
+	};
+
+	// Establish WebSocket connection for receiving messages
+	const receiveSocket = new WebSocket("ws://gamernet.netlify.app/");
+
+	receiveSocket.onmessage = (event) => {
+		const receivedMessage = JSON.parse(event.data);
+		console.log("Received message:", receivedMessage);
+
+		// Update chatMessages state with the received message
+		setChatMessages((prevMessages) => [...prevMessages, receivedMessage]);
+	};
+
+	receiveSocket.onclose = () => {
+		console.log("WebSocket connection for receiving messages closed.");
 	};
 
 	const fetchChatData = async () => {
