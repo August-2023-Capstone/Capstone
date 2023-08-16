@@ -1090,7 +1090,8 @@ li p:nth-child(2) {
   display: flex;
   flex-direction: column;
   height: 100vh !important;
-  background-color: #373737 !important;
+  width: 100vw !important;
+  background-color: #151515 !important;
 }
 
 .chat-messages {
@@ -1098,11 +1099,12 @@ li p:nth-child(2) {
   border: #151515 5px solid;
   background-color: #888;
   height: 100vh;
-  /* flex: 1;
-  overflow-y: auto; */
+
+  flex: 1;
+  overflow-y: auto;
 }
 .MessagesScrollbar {
-  margin-left: 230px;
+  margin-left: 100px;
 }
 
 .messagesInput {
@@ -1111,10 +1113,10 @@ li p:nth-child(2) {
   border: 1px solid #ccc;
   border-radius: 20px;
   align-self: flex-end;
-  margin-top: 100px;
+  margin-top: 80px;
 }
 .input-container {
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 }
 .send-button {
   background-color: #007bff !important;
@@ -1128,4 +1130,17 @@ li p:nth-child(2) {
 
 .send-button:hover {
   background-color: mediumslateblue !important;
+}
+.chat-users {
+  background-color: #151515 !important;
+}
+@media (max-width: 767px) {
+  .FriendsList {
+    width: 100px;
+  }
+}
+
+/* For medium screens (tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Add your tablet-specific styles here */
 }

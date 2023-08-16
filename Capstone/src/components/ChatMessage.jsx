@@ -283,7 +283,7 @@ function ChatMessage({ toggleChat }) {
 
   return (
     <>
-      <div className="chat-container">
+      <div className="chat-container ">
         <div className="chat-users">
           <ChatUsers
             usersData={usersData}
@@ -294,17 +294,18 @@ function ChatMessage({ toggleChat }) {
             chatMessages={chatMessages}
           />
         </div>
-        <div className="chat-messages">
-          <ul ref={inputRef} className="MessagesScrollbar">
+        <div className="chat-messages ">
+          <div ref={inputRef} className="MessagesScrollbar">
             {/* Add the ref here */}
             {chatMessages.map((chatMessage) => (
               <li
                 key={chatMessage.id}
                 className={`Chat-bubbles ${
                   chatMessage.sender_gamertag === loggedInUserData[0]?.gamertag
-                    ? "sender-bubble"
-                    : "receiver-bubble"
-                }`}
+                    ? "text-center bg-blue-500 text-white  w-full ml-96"
+                    : "text-center  w-full "
+                } w-full`}
+                style={{ width: "400px" }}
               >
                 <p> Reciever:{chatMessage.receiver_gamertag}</p>
                 <p>Sender: {chatMessage.sender_gamertag}</p>
@@ -312,7 +313,7 @@ function ChatMessage({ toggleChat }) {
                 <p>Receive Time: {chatMessage.recievetime}</p>
               </li>
             ))}
-          </ul>
+          </div>
 
           <div>
             {showModal && <div className="modal">Please enter a message!</div>}
