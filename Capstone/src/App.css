@@ -1090,13 +1090,7 @@ li p:nth-child(2) {
 	height: 100vh !important;
 	background-color: #373737 !important;
 }
-.chat-users {
-	flex: 0 0 30% !important; /* 30% width, don't grow or shrink */
-	height: 100vh !important;
-	width: auto;
-	/* padding: 10px; */
-	/* Add any other styling you need */
-}
+
 .chat-messages {
 	flex: 0 0 70% !important;
 	border: #151515 5px solid;

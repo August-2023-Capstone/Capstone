@@ -25,7 +25,7 @@
 .chat-users {
 	flex: 1;
 	padding: 10px;
-	background-color: #f1f1f1;
+	background-color: #151515;
 	border-right: 3px solid #ccc;
 	overflow-y: auto;
 	align-self: flex-start; /* Align to the top */

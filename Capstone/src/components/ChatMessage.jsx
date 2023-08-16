@@ -143,10 +143,12 @@ function ChatMessage({ toggleChat }) {
 
 		try {
 			const message = {
-				senderID: loggedInUserData[0]?.id,
-				content: newMessage,
+				sender_id: loggedInUserData[0]?.id,
+				receiver_id: usersData.id,
+				sender_gamertag: loggedInUserData[0]?.gamertag,
+				receiver_gamertag: usersData.gamertag,
+				message: newMessage,
 				recievetime: new Date().toISOString(),
-				sendtime: new Date().toISOString(),
 			};
 
 			console.log("Message to be sent:", message);
@@ -162,21 +164,17 @@ function ChatMessage({ toggleChat }) {
 			console.log("Logged in user data:", loggedInUserData[0]?.id);
 			console.log("Users data:", usersData.id);
 
-			const { data, error } = await supabase.from("chatmessages").insert([
-				{
-					sender_id: loggedInUserData[0]?.id,
-					receiver_id: usersData.id,
-					sender_gamertag: loggedInUserData[0]?.gamertag,
-					receiver_gamertag: usersData.gamertag,
-					message: newMessage,
-					recievetime: new Date().toISOString(),
-				},
-			]);
+			const { data, error } = await supabase
+				.from("chatmessages")
+				.insert([message]);
 
 			if (error) {
 				console.error("Error inserting message:", error);
 			} else {
 				console.log("Inserted Message Data:", data);
+				// Update chatMessages state with the new message
+				setChatMessages((prevMessages) => [...prevMessages, message]);
+				setNewMessage(""); // Clear the input field
 			}
 		} catch (error) {
 			console.error("Error sending message:", error);
