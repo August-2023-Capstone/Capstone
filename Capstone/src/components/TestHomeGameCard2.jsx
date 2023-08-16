@@ -4,7 +4,7 @@ import Playstation from "../assets/Logos/PlaystationLogo.png";
 import Windows from "../assets/Logos/WindowsLogo.png";
 import Xbox from "../assets/Logos/XboxLogo.png";
 import iOS from "../assets/Logos/AppleLogo.png";
-import supabase from "../../../supabase";
+import supabase from "../../supabase";
 import AddGameButton from "./AddGameButton";
 
 const HomeGameCard = ({ game }) => {
