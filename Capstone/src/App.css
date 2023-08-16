@@ -681,7 +681,7 @@ li p:nth-child(2) {
   border-radius: 50%;
 }
 
-.modal-buttons {
+/* .modal-buttons {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
@@ -689,10 +689,8 @@ li p:nth-child(2) {
 
 .modal-buttons button {
   margin-left: 10px;
-
-  background: #355e3b;
-  hover: #008800;
-}
+  background: #205295;
+} */
 
 .createUserForm {
   max-width: 400px;
@@ -899,7 +897,6 @@ li p:nth-child(2) {
 .PlatformLogosContainer {
   display: flex;
 }
-
 
 .ProfileGameCardContainer {
   display: grid;
@@ -1109,7 +1106,6 @@ li p:nth-child(2) {
   height: 100vh !important;
   width: 100vw !important;
   background-color: #151515 !important;
-
 }
 
 .chat-messages {
@@ -1123,7 +1119,6 @@ li p:nth-child(2) {
 }
 .MessagesScrollbar {
   margin-left: 100px;
-
 }
 
 .messagesInput {
@@ -1163,5 +1158,4 @@ li p:nth-child(2) {
 /* For medium screens (tablets) */
 @media (min-width: 768px) and (max-width: 1023px) {
   /* Add your tablet-specific styles here */
-
 }
