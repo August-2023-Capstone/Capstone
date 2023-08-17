@@ -1,6 +1,6 @@
 # Capstone
 ## Live demo 
-live demo video link will go here 
+https://www.youtube.com/watch?v=4U2yuWLhxrc
 
 ## Contents
 * What it is
@@ -42,7 +42,6 @@ This is an example of our chat messages page allowing users to collaborate and c
 
 
 ![Screenshot 2023-08-16 193705](https://github.com/August-2023-Capstone/Capstone/assets/130780040/73eb54bf-f071-4e63-a328-da485fdbc805)
-## Code examples
 
 
 
