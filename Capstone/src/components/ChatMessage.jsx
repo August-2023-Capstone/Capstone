@@ -328,8 +328,6 @@ function ChatMessage({ toggleChat }) {
                 } w-full`}
                 style={{ width: "600px" }}
               >
-                <p> Reciever:{chatMessage.receiver_gamertag}</p>
-                <p>Sender: {chatMessage.sender_gamertag}</p>
                 <p>{chatMessage.message}</p>
                 <p>Receive Time: {chatMessage.recievetime}</p>
               </li>
