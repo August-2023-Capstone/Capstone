@@ -151,7 +151,6 @@ const FriendsList = () => {
       console.error("Error:", error);
     }
   };
-  console.log(friendProfiles);
 
   return (
     <div className="text-white">

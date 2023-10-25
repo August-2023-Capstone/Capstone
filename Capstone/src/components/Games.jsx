@@ -13,8 +13,6 @@ function Games() {
   useEffect(() => {
     const fetchGameData = async () => {
       const { data, error } = await supabase.from("games").select();
-      console.log(data);
-      console.log(error);
 
       if (error) {
         // Handle the error if needed

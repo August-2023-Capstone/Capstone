@@ -107,7 +107,6 @@ const TestOtherProfilePage = () => {
         data: { user },
       } = await supabase.auth.getUser();
 
-      console.log(user.id);
       const { data, error } = await supabase
         .from("linked_games")
         .select(
@@ -122,8 +121,6 @@ const TestOtherProfilePage = () => {
           `
         )
         .eq("user_id", user.id);
-
-      console.log(data);
 
       if (error) {
         console.error("Error fetching data:", error);
@@ -143,7 +140,6 @@ const TestOtherProfilePage = () => {
         data: { user },
       } = await supabase.auth.getUser();
 
-      console.log(user.id);
       const { data, error } = await supabase
         .from("profiles")
         .select()

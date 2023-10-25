@@ -18,7 +18,6 @@ const TestProfileGames = () => {
         data: { user },
       } = await supabase.auth.getUser();
 
-      console.log(user.id);
       const { data, error } = await supabase
         .from("linked_games")
         .select(
@@ -34,8 +33,6 @@ const TestProfileGames = () => {
         )
         .eq("user_id", user.id);
 
-      console.log(data);
-
       if (error) {
         console.error("Error fetching data:", error);
       } else {
@@ -47,7 +44,6 @@ const TestProfileGames = () => {
 
     fetchProfileGames();
   }, []);
-  console.log(profileGames);
 
   const extractArrayFromString = (stringWithArray) => {
     try {
@@ -74,7 +70,6 @@ const TestProfileGames = () => {
   };
 
   return (
-
     <div className="ProfileGameCardContainer grid grid-cols-1 md:grid-cols-2 gap-4">
       {profileGames.length > 0 ? (
         profileGames.map((game) => (
