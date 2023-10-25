@@ -81,7 +81,6 @@ const ProfileData = () => {
         data: { user },
       } = await supabase.auth.getUser();
 
-      console.log(user.id);
       const { data, error } = await supabase
         .from("profiles")
         .select()
@@ -112,7 +111,6 @@ const ProfileData = () => {
       setShowCreateUserForm(false);
     }
   };
-  console.log(profileData);
   return (
     <div>
       {/* <h1>Profiles List</h1> */}

@@ -13,8 +13,6 @@ function LinkedGames() {
   useEffect(() => {
     const fetchLinkedGameData = async () => {
       const { data, error } = await supabase.from("games").select();
-      console.log(data);
-      console.log(error);
 
       if (error) {
         // Handle the error if needed

@@ -76,9 +76,6 @@ const GamePlayers = ({
       console.error("Error:", error);
     }
   };
-  console.log(loggedInUserId);
-  console.log(friendIds);
-  console.log(linkedUsersProfiles);
 
   return (
     <div className="text-white">

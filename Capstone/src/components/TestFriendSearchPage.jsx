@@ -7,7 +7,6 @@ const TestFriendSearchPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const gameName = searchParams.get("gameName");
-  console.log(gameName);
 
   const [linkedUsersProfiles, setLinkedUsersProfiles] = useState([]);
   useEffect(() => {
@@ -42,8 +41,6 @@ const TestFriendSearchPage = () => {
           (linkedGame) => linkedGame.user_id
         );
 
-        console.log(linkedUserIds);
-
         // Query the profiles table to get gamertags based on user_id's
         const { data: profilesData, error: profilesError } = await supabase
           .from("profiles")
@@ -56,7 +53,6 @@ const TestFriendSearchPage = () => {
         }
 
         setLinkedUsersProfiles(profilesData);
-        console.log(linkedUsersProfiles);
       } catch (error) {
         console.error("Error:", error);
       }

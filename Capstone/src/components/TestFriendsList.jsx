@@ -95,8 +95,6 @@ const FriendList = () => {
     }
   }, [friendIds]);
 
-  console.log("hello");
-
   return (
     <div>
       <h1>Friend List</h1>

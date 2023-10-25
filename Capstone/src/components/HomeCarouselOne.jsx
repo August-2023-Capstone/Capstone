@@ -10,7 +10,6 @@ const HomeCarouselOne = () => {
   const [gameArray, setGameArray] = useState([]);
   const [slidesToShow, setSlidesToShow] = useState(6);
   const [session, setSession] = useState(null);
-  console.log({ session });
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
